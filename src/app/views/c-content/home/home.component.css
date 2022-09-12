@@ -1,0 +1,51 @@
+.bg-hero {
+  background: url("../../../../assets/images/ce-travel1980.jpg") no-repeat top left;
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 70%;
+  margin-top: 5%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bp-hero-body {
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bp-hero-body .margin--top--lg {
+  margin-top: 0 !important;
+}
+
+.bp-hero-body .padding--bottom--lg {
+  padding-bottom: 0 !important;
+}
+
+.bp-hero-body p {
+  font-size: 1.05rem !important;
+}
+
+.bp-hero-body h1 {
+  font-size: 1.7rem !important;
+}
+
+.bp-hero-body .display {
+  line-height: 1.7 !important;
+}
+
+.bp-hero-body .ma {
+  margin-bottom: 0 !important;
+}
+
+.home-header {
+  text-transform: uppercase !important;
+  font-size: 30px;
+}
+
+.header-container {
+  margin-bottom: 160px;
+}
