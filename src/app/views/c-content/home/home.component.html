@@ -7,40 +7,26 @@
             <span>Welcome to Trippify!</span>
           </b>
         </h1>
-        <h2>
+        <h3>
           <span>A personal travelling application designed for planning vacations & road trips</span>
-        </h2>
+        </h3>
       </div>
     </div>
   </section>
-  <!-- <section id="key-highlights" class="bp-section is-paddingless">
-    <div>
-      <div class="row is-gapless has-text-centered grid-display">
-        <div class="col submission-border">
-          <a class="is-highlight">
-            <div class="key-highlights-text center-submission-headings enlarge-submission-headings-button break-word">
-              <p class="has-text-weight-semibold has-text-white key-highlight-title">
-                <span id="LID0000210" class="ehc-submission-header">Create New Trip</span>
-              </p>
-            </div>
-          </a>
-        </div>
-        <div class="col">
-          <a class="is-highlight">
-            <div class="key-highlights-text center-submission-headings enlarge-submission-headings-button break-word">
-              <p class="ehc-landing-desktop-only">
-                <span>&nbsp;</span>
-              </p>
-              <p class="has-text-weight-semibold has-text-white key-highlight-title padding--bottom--sm">
-                <span id="LID0000209" class="ehc-submission-header">Manage Trip</span>
-              </p>
-              <p class="ehc-landing-desktop-only">
-                <span>&nbsp;</span>
-              </p>
-            </div>
-          </a>
-        </div>
+  <section class="bp-section">
+    <div class="bp-hero-buttons">
+      <div class="col-6 ">
+        <button type="button" class="btn-block create-btn" (click)="submitTripClicked('createtrip')">
+          <p class="has-text-white"><b>Create New Trip</b></p>
+          <p class="has-text-white"><u>Click here</u> to create a new trip plan.</p>
+        </button>
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn-block" (click)="submitTripClicked('managetrip')">
+          <p class="has-text-white"><b>Manage Trip</b></p>
+          <p class="has-text-white"><u>Click here</u> to update or delete an existing trip plan.</p>
+        </button>
       </div>
     </div>
-  </section> -->
+  </section>
 </div>

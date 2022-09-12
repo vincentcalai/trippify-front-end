@@ -12,4 +12,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  submitTripClicked(action: string){
+    console.log("action: " + action);
+  }
 }
