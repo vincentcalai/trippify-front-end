@@ -1,0 +1,59 @@
+<div class="create-trip-container">
+
+  <div class="create-trip-sidenav">
+    <app-side-nav></app-side-nav>
+  </div>
+
+  <div class="create-trip-content">
+
+    <form [formGroup]="createTripForm" novalidate>
+      <div class="form_title">
+        <span id="">Traveller 1 Particulars</span>
+      </div>
+
+      <div class="form-group form-row required">
+        <div class="col-md-8">
+          <label id="STATIC_QN_LABEL_1" for="qn1Input_0_Label" class="control-label">
+            <span id="STATIC_QN_1">Are you a registered user of this app?</span>
+            <span class="mandatory-label"></span>&nbsp;
+          </label>
+        </div>
+        <br>
+        <div class="col-md-4 col-md-8-offset top-padding selectContainer">
+          <ng-select id="qn1Input_0" labelForId="qn1Input_0_Label" [clearable]="false"
+            [items]="sharedVar.ynListSource.getValue()" [placeholder]="sharedVar.PLACE_HOLD_DESC"
+            aria-labelledby="STATIC_QN_LABEL_1" formControlName="staticQn1">
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="form-group form-row required">
+        <div class="form-group required">
+          <label id="name_label_0" class="control-label mandatory-label" for="name_0">
+            <span id="">Traveller's Name: </span>
+          </label>
+          <input id="name_0" type="text" class="form-control allCaps" formControlName="name" name="name"
+            [disabled]="isUserRegistered">
+        </div>
+
+        <div class="form-group required">
+          <label id="email_label_0" class="control-label mandatory-label" for="email_0">
+            <span id="">Traveller's Email Address</span>
+          </label>
+          <input id="email_0" type="text" class="form-control allCaps" formControlName="email" name="email"
+            [disabled]="isUserRegistered">
+        </div>
+      </div>
+
+      <div class="text-right">
+        <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"><span
+            id="confirm">Confirm</span>
+        </button>
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>

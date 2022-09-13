@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedMethods } from 'src/app/services/shared-methods.service';
+import { SharedVar } from 'src/app/services/shared-var.service';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public sharedVar: SharedVar,
+    public sharedMethods: SharedMethods) { }
 
   ngOnInit(): void {
   }
 
   submitTripClicked(action: string){
     console.log("action: " + action);
+    this.sharedMethods.showForm(action);
   }
 }
