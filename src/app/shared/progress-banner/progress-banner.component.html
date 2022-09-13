@@ -1,0 +1,16 @@
+<div id="header-progress" class="mtop_10">
+  <div class="article_title progress1 align-center">
+    <h4>
+      <span id="create-trip-title">Create New Trip</span>
+    </h4>
+  </div>
+  <div class="wizard_steps progress1 align-center">
+    <ul>
+      <li><span [ngClass]="{'current_progress':currentProgress==='particulars'}">Traveller Particulars</span><i
+          class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i></li>
+      <li><span [ngClass]="{'current_progress':currentProgress==='budget'}">Travel Budget</span><i
+          class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-down" aria-hidden="true"></i></li>
+      <li><span [ngClass]="{'current_progress':currentProgress==='details'}">Trip Details</span></li>
+    </ul>
+  </div>
+</div>

@@ -3,10 +3,12 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { SideNavComponent } from "./side-nav/side-nav.component";
+import { ProgressBannerComponent } from './progress-banner/progress-banner.component';
 
 @NgModule({
   declarations: [
-    SideNavComponent
+    SideNavComponent,
+    ProgressBannerComponent
   ],
   imports: [
     NgSelectModule,
@@ -16,6 +18,7 @@ import { SideNavComponent } from "./side-nav/side-nav.component";
   ],
   exports: [
     NgSelectModule,
+    ProgressBannerComponent,
     SideNavComponent,
     FormsModule,
     ReactiveFormsModule,

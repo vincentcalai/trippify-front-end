@@ -76,3 +76,55 @@ form div.text-right {
   text-align: right;
   margin-top: 32px;
 }
+
+.align-center {
+  text-align: center;
+}
+
+.article_title h4 {
+  font-weight: 300;
+  font-size: 32px;
+  letter-spacing: 0.05em;
+  margin-top: 30px;
+  margin-bottom: 27px;
+  font-weight: bold;
+  color: white;
+}
+
+.wizard_steps {
+  background-color: #1a5978;
+  overflow: hidden;
+  width: 100%;
+}
+
+.wizard_steps li {
+  padding: 15px 9px;
+  font-weight: 300;
+  font-size: 1.15em;
+  letter-spacing: 0.05em;
+  background-color: #1a5978;
+  margin-right: 15px;
+  z-index: 1;
+  position: relative;
+  width: auto;
+  margin-left: 15px;
+  text-align: center;
+  min-height: 50px;
+  max-height: 50px;
+  vertical-align: middle;
+  display: inline-block;
+  list-style-type: none;
+  color: #fff;
+}
+
+.wizard_steps {
+  line-height: 1.3em;
+  min-height: 84px;
+}
+
+.current_progress {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding-bottom: 5px;
+  border-bottom: 5px solid #1a5978;
+}

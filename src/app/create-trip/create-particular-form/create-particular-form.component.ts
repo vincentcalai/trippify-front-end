@@ -23,13 +23,11 @@ export class CreateParticularFormComponent implements OnInit {
     public sharedMethods: SharedMethods,) { }
 
   ngOnInit(): void {
-
     this.createTripForm = this.initializeCreateTripForm();
+
     this.subscriptions.add(
       this.createTripForm.get('staticQn1')!.valueChanges.subscribe(val => {
         this.isUserRegistered = this.sharedVar.STATIC_QN_1_VAL_MAP.get(val);
-        console.log("this.isUserRegistered: " + this.isUserRegistered);
-        console.log("staticQn1: " + this.createTripForm.get('staticQn1')?.value );
           this.clearForm();
       })
     )
@@ -61,7 +59,7 @@ export class CreateParticularFormComponent implements OnInit {
   }
 
   confirmClicked(){
-    console.log("confirm clicked!");
+    console.log("confirm clicked!" + " is form valid? : " + this.createTripForm.valid);
     console.log(this.createTripForm);
   }
 
