@@ -27,21 +27,26 @@
         </div>
       </div>
 
-      <div class="form-group form-row required">
+      <div class="form-group form-row required" *ngIf="createTripForm.get('staticQn1')?.value">
         <div class="form-group required">
           <label id="name_label_0" class="control-label mandatory-label" for="name_0">
             <span id="">Traveller's Name: </span>
           </label>
           <input id="name_0" type="text" class="form-control allCaps" formControlName="name" name="name"
-            [disabled]="isUserRegistered">
+            *ngIf="!isUserRegistered">
+          <div class="col-md-4 col-md-8-offset top-padding selectContainer" *ngIf="isUserRegistered">
+            <ng-select id="nameInput_0" labelForId="nameInput_0_Label" [clearable]="false"
+              [items]="username"
+              aria-labelledby="NAME_LABEL_1" formControlName="name">
+            </ng-select>
+          </div>
         </div>
 
         <div class="form-group required">
           <label id="email_label_0" class="control-label mandatory-label" for="email_0">
             <span id="">Traveller's Email Address</span>
           </label>
-          <input id="email_0" type="text" class="form-control allCaps" formControlName="email" name="email"
-            [disabled]="isUserRegistered">
+          <input id="email_0" type="text" class="form-control allCaps" formControlName="email" name="email">
         </div>
       </div>
 

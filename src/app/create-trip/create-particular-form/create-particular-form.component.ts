@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
@@ -11,39 +12,47 @@ import { SharedVar } from 'src/app/services/shared-var.service';
 })
 export class CreateParticularFormComponent implements OnInit {
 
+  subscriptions = new Subscription();
   public createTripForm: FormGroup;
-  public isUserRegistered: boolean;
+  public isUserRegistered: any = null;
+  public username = ["VINCENT"];
+
 
   constructor(public reactiveFormService: ReactiveFormService,
     public sharedVar: SharedVar,
     public sharedMethods: SharedMethods,) { }
 
   ngOnInit(): void {
-    this.isUserRegistered = true;
 
     this.createTripForm = this.initializeCreateTripForm();
-    console.log("this.isUserRegistered : " + this.isUserRegistered);
-    console.log("this.createTripForm : " + this.createTripForm);
+    this.subscriptions.add(
+      this.createTripForm.get('staticQn1')!.valueChanges.subscribe(val => {
+        this.isUserRegistered = this.sharedVar.STATIC_QN_1_VAL_MAP.get(val);
+        console.log("this.isUserRegistered: " + this.isUserRegistered);
+        console.log("staticQn1: " + this.createTripForm.get('staticQn1')?.value );
+          this.clearForm();
+      })
+    )
 
-    this.onChanges();
-
+    this.subscriptions.add(
+      this.createTripForm.get('name')!.valueChanges.subscribe(val => {
+        if(this.isUserRegistered){
+          this.retrieveUserEmail();
+        }
+      })
+    )
   }
 
-  fieldIsInvalid(name: string){
-
+  clearForm() {
+    this.name?.setValue(null);
+    this.email?.setValue(null);
   }
 
-  onChanges(): void {
-    this.createTripForm.get('staticQn1')!.valueChanges.subscribe(val => {
-      console.log(val);
-      if(this.sharedVar.STATIC_QN_1_VAL_MAP.get(val)){
-        this.createTripForm.controls['name'].disable();
-        this.createTripForm.controls['email'].disable();
-      } else{
-        this.createTripForm.controls['name'].enable()
-        this.createTripForm.controls['email'].enable();
-      }
-    });
+  retrieveUserEmail(){
+    console.log(this.createTripForm.get('name')!.value);
+    if(this.createTripForm.get('name')!.value){
+      this.email?.setValue("VINCENTCALAI@GMAIL.COM");
+    }
   }
 
   initializeCreateTripForm(): FormGroup {
@@ -54,6 +63,22 @@ export class CreateParticularFormComponent implements OnInit {
   confirmClicked(){
     console.log("confirm clicked!");
     console.log(this.createTripForm);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  get staticQn1() {
+    return this.createTripForm.get('staticQn1');
+  }
+
+  get name() {
+    return this.createTripForm.get('name');
+  }
+
+  get email() {
+    return this.createTripForm.get('email');
   }
 
 }

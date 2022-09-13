@@ -71,3 +71,8 @@ h6 {
   width: auto !important;
   border-bottom: 0px !important;
 }
+
+form div.text-right {
+  text-align: right;
+  margin-top: 32px;
+}
