@@ -128,3 +128,10 @@ form div.text-right {
   padding-bottom: 5px;
   border-bottom: 5px solid #1a5978;
 }
+
+.error-text {
+  color: #ee0000;
+  margin-top: 10px;
+  float: left;
+  width: 100%;
+}

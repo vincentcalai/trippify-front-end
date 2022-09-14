@@ -28,9 +28,10 @@
         </div>
       </div>
 
-      <div class="form-group form-row required" *ngIf="createTripForm.get('staticQn1')?.value">
+      <div class="form-group form-row required" *ngIf="staticQn1 && staticQn1.value">
         <div class="form-group required">
-          <label id="name_label_0" class="control-label mandatory-label" for="name_0">
+          <label id="name_label_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(name)}" class="control-label mandatory-label"
+            for="name_0">
             <span id="">Traveller's Name: </span>
           </label>
           <input id="name_0" type="text" class="form-control allCaps" formControlName="name" name="name"
@@ -41,13 +42,27 @@
               aria-labelledby="NAME_LABEL_1" formControlName="name">
             </ng-select>
           </div>
+          <label id="name_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(name)}" class="error-text" for="name_0">
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence(name) == 'pattern'">Please enter only alphabets or
+              spaces</span>
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence(name) == 'maxlength'">Maximum length is 66 characters</span>
+            <span *ngIf="name.hasError('required') && !name.value && !name.pristine">This field is required</span>
+          </label>
         </div>
 
+        <br>
+
         <div class="form-group required">
-          <label id="email_label_0" class="control-label mandatory-label" for="email_0">
+          <label id="email_label_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(email)}" class="control-label mandatory-label"
+            for="email_0">
             <span id="">Traveller's Email Address</span>
           </label>
           <input id="email_0" type="text" class="form-control allCaps" formControlName="email" name="email">
+          <label id="email_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(email)}" class="error-text" for="email_0">
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence(email) == 'pattern'">Please enter a valid email address</span>
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence(email) == 'maxlength'">Maximum length is 100 characters</span>
+            <span *ngIf="email.hasError('required') && !email.value && !email.pristine">This field is required</span>
+          </label>
         </div>
       </div>
 

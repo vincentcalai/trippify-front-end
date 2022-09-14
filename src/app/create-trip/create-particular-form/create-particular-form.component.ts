@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
@@ -28,7 +28,6 @@ export class CreateParticularFormComponent implements OnInit {
     this.subscriptions.add(
       this.createTripForm.get('staticQn1')!.valueChanges.subscribe(val => {
         this.isUserRegistered = this.sharedVar.STATIC_QN_1_VAL_MAP.get(val);
-          this.clearForm();
       })
     )
 
@@ -41,11 +40,6 @@ export class CreateParticularFormComponent implements OnInit {
     )
   }
 
-  clearForm() {
-    this.name?.setValue(null);
-    this.email?.setValue(null);
-  }
-
   retrieveUserEmail(){
     console.log(this.createTripForm.get('name')!.value);
     if(this.createTripForm.get('name')!.value){
@@ -56,6 +50,10 @@ export class CreateParticularFormComponent implements OnInit {
   initializeCreateTripForm(): FormGroup {
     const rfg =  this.reactiveFormService.initializeCreateTripForm();
     return rfg;
+  }
+
+  fieldIsInvalid(field: AbstractControl): boolean {
+    return this.reactiveFormService.fieldIsInvalid(field);
   }
 
   confirmClicked(){
