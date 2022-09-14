@@ -22,8 +22,8 @@
   padding: 19px;
 }
 
-.ttp_button_o {
-  margin: 2px 2px;
+.button_o:disabled {
+  background: #dddddd;
 }
 
 .btn_text_hover:hover {

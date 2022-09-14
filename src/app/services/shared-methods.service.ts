@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CreateTripModel } from '../model/create-trip.model';
+import { ParticularsModel } from '../model/particulars.model';
+import { SharedVar } from './shared-var.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +11,13 @@ export class SharedMethods {
 
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public sharedVar: SharedVar) { }
 
+
+  initializeIndSubmission() {
+    this.sharedVar.createTripModel = new CreateTripModel();
+    this.sharedVar.createTripModel.particulars = new ParticularsModel();
+  }
 
   showForm(form: string) {
     let route: string[] = [];

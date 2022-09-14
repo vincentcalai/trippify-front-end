@@ -56,7 +56,6 @@ export class ReactiveFormService {
   }
 
   fieldIsInvalid(field: AbstractControl): boolean {
-    console.log(field);
     return field.invalid && !field.pristine && field.status !== 'PENDING' && field.errors != null;
   }
 }

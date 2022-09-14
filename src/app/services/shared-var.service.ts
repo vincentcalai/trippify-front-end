@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { CreateTripModel } from '../model/create-trip.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class SharedVar{
     ["YES", true],
     ["NO", false]
   ]);
+
+  public createTripModel: CreateTripModel = new CreateTripModel();
 
   public ynListSource = new BehaviorSubject(null);
   ynListSourceList = this.ynListSource.asObservable();

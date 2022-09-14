@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
@@ -20,7 +21,8 @@ export class CreateParticularFormComponent implements OnInit {
 
   constructor(public reactiveFormService: ReactiveFormService,
     public sharedVar: SharedVar,
-    public sharedMethods: SharedMethods,) { }
+    public sharedMethods: SharedMethods,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createTripForm = this.initializeCreateTripForm();
@@ -69,6 +71,25 @@ export class CreateParticularFormComponent implements OnInit {
   confirmClicked(){
     console.log("confirm clicked!" + " is form valid? : " + this.createTripForm.valid);
     console.log(this.createTripForm);
+    if(this.createTripForm.valid){
+      console.log("form is valid!");
+      const particulars = this.sharedVar.createTripModel.particulars;
+
+      console.log(this.name?.value);
+      console.log(this.email?.value);
+
+      particulars.name = this.name?.value;
+      particulars.email = this.email?.value;
+
+      console.log("logging particulars");
+      console.log(particulars);
+      console.log(this.sharedVar.createTripModel.particulars);
+
+      this.navigateToBudgetPage();
+    }
+  }
+  navigateToBudgetPage() {
+    this.router.navigate(['/create-trip/create-budget'], { skipLocationChange: true });
   }
 
   ngOnDestroy() {

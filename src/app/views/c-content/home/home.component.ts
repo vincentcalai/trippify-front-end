@@ -13,10 +13,13 @@ export class HomeComponent implements OnInit {
     public sharedMethods: SharedMethods) { }
 
   ngOnInit(): void {
+    this.sharedMethods.initializeIndSubmission();
   }
 
   submitTripClicked(action: string){
     console.log("action: " + action);
     this.sharedMethods.showForm(action);
   }
+
+
 }
