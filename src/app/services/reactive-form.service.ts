@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,13 @@ export class ReactiveFormService {
   initializeCreateTripForm() {
     return this.fb.group(
       {
-        staticQn1: [null],
+        staticQn1: [null,
+          {
+            validators: [
+              Validators.required
+            ]
+          }
+        ],
         name: [null,
           {
             validators: [
@@ -57,5 +63,25 @@ export class ReactiveFormService {
 
   fieldIsInvalid(field: AbstractControl): boolean {
     return field.invalid && !field.pristine && field.status !== 'PENDING' && field.errors != null;
+  }
+
+  displayValidationErrors(form: AbstractControl) {
+    if (form instanceof FormControl) {
+      this.markControlAsDirtyAndTouched(form);
+    } else if (form instanceof FormGroup) {
+      Object.keys(form.controls).forEach(field => {
+        const control = form.get(field);
+        if (control instanceof FormControl) {
+          this.markControlAsDirtyAndTouched(control);
+        } else if (control instanceof FormGroup) {
+          this.displayValidationErrors(control);
+        }
+      });
+    }
+  }
+
+  markControlAsDirtyAndTouched(control: AbstractControl) {
+    control.markAsTouched({ onlySelf: true });
+    control.markAsDirty({ onlySelf: true });
   }
 }

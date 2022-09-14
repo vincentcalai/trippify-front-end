@@ -30,11 +30,10 @@ export class CreateParticularFormComponent implements OnInit {
     this.subscriptions.add(
       this.createTripForm.get('staticQn1')!.valueChanges.subscribe(val => {
         this.isUserRegistered = this.sharedVar.STATIC_QN_1_VAL_MAP.get(val);
-        if(this.isUserRegistered){
-          this.clearForm();
-        } else{
+        if(!this.isUserRegistered){
           this.createTripForm.get('email')?.enable();
         }
+        this.resetForm();
       })
     )
 
@@ -47,7 +46,9 @@ export class CreateParticularFormComponent implements OnInit {
       })
     )
   }
-  clearForm() {
+  resetForm() {
+    this.createTripForm.get('name')?.markAsPristine();
+    this.createTripForm.get('email')?.markAsPristine();
     this.name?.setValue(null);
     this.email?.setValue(null);
   }
@@ -86,6 +87,9 @@ export class CreateParticularFormComponent implements OnInit {
       console.log(this.sharedVar.createTripModel.particulars);
 
       this.navigateToBudgetPage();
+    } else{
+      console.log("form is invalid!");
+      this.reactiveFormService.displayValidationErrors(this.createTripForm);
     }
   }
   navigateToBudgetPage() {

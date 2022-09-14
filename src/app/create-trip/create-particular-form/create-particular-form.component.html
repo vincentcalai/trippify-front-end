@@ -14,7 +14,8 @@
 
       <div class="form-group form-row required">
         <div class="col-md-8">
-          <label id="STATIC_QN_LABEL_1" for="qn1Input_0_Label" class="control-label">
+          <label id="STATIC_QN_LABEL_1" for="qn1Input_0_Label" [ngClass]="{'highlightLabel' : fieldIsInvalid(staticQn1)}"
+            class="control-label">
             <span id="STATIC_QN_1">Are you a registered user of this app?</span>
             <span class="mandatory-label"></span>&nbsp;
           </label>
@@ -26,6 +27,9 @@
             aria-labelledby="STATIC_QN_LABEL_1" formControlName="staticQn1">
           </ng-select>
         </div>
+        <label id="qn1_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(staticQn1)}" class="error-text" for="qn1_0">
+          <span *ngIf="staticQn1.hasError('required') && !staticQn1.value && !staticQn1.pristine">This field is required</span>
+        </label>
       </div>
 
       <div class="form-group form-row required" *ngIf="staticQn1 && staticQn1.value">
@@ -67,9 +71,7 @@
       </div>
 
       <div class="text-right">
-        <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"
-          [disabled]="!createTripForm.valid"><span
-            id="confirm">Confirm</span>
+        <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"><span id="confirm">Confirm</span>
         </button>
       </div>
 
