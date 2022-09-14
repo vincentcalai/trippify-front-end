@@ -28,6 +28,11 @@ export class CreateParticularFormComponent implements OnInit {
     this.subscriptions.add(
       this.createTripForm.get('staticQn1')!.valueChanges.subscribe(val => {
         this.isUserRegistered = this.sharedVar.STATIC_QN_1_VAL_MAP.get(val);
+        if(this.isUserRegistered){
+          this.clearForm();
+        } else{
+          this.createTripForm.get('email')?.enable();
+        }
       })
     )
 
@@ -35,9 +40,14 @@ export class CreateParticularFormComponent implements OnInit {
       this.createTripForm.get('name')!.valueChanges.subscribe(val => {
         if(this.isUserRegistered){
           this.retrieveUserEmail();
+          this.createTripForm.get('email')?.disable();
         }
       })
     )
+  }
+  clearForm() {
+    this.name?.setValue(null);
+    this.email?.setValue(null);
   }
 
   retrieveUserEmail(){
