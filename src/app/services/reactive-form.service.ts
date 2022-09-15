@@ -45,7 +45,7 @@ export class ReactiveFormService {
     );
   }
   getBudgetFieldsControl(): FormControl {
-    return this.fb.control(null, { validators: [Validators.required, Validators.pattern(this.NUMERIC_REGEX)] });
+    return this.fb.control(null, { validators: [Validators.required, Validators.pattern(this.NUMERIC_REGEX), Validators.maxLength(9)] });
   }
 
   emailAddrValidators() {
