@@ -14,30 +14,37 @@ export class ReactiveFormService {
   initializeCreateTripForm() {
     return this.fb.group(
       {
-        staticQn1: [null,
-          {
-            validators: [
-              Validators.required
-            ]
-          }
-        ],
-        name: [null,
-          {
-            validators: [
-              Validators.required,
-              Validators.pattern(this.ALPHABET_SPACE),
-              Validators.maxLength(66)
-            ]
-          }
-        ],
-        email: [null,
-            {
-              validators: this.emailAddrValidators(),
-              updateOn: 'blur'
-            },
-          ]
+        staticQn1: this.fb.control(null, {validators: Validators.required}),
+        name: this.fb.control(null,
+                {
+                  validators: [
+                    Validators.required,
+                    Validators.pattern(this.ALPHABET_SPACE),
+                    Validators.maxLength(66)
+                  ]
+                }),
+        email: this.fb.control(null, {
+                    validators: this.emailAddrValidators(),
+                    updateOn: 'blur'
+                })
       }
     )
+  }
+
+  initializeCreateTripBudgetForm(){
+    return this.fb.group(
+      {
+        totalBudget: this.getBasicMandatoryControl(),
+        flightBudget: this.getBasicMandatoryControl(),
+        hotelBudget: this.getBasicMandatoryControl(),
+        transportBudget: this.getBasicMandatoryControl(),
+        attractionBudget: this.getBasicMandatoryControl(),
+        otherBudget: this.getBasicMandatoryControl()
+      }
+    );
+  }
+  getBasicMandatoryControl(): FormControl {
+    return this.fb.control(null, { validators: [Validators.required] });
   }
 
   emailAddrValidators() {

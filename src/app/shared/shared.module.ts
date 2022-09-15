@@ -14,7 +14,7 @@ import { ProgressBannerComponent } from './progress-banner/progress-banner.compo
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule,
+    CommonModule
   ],
   exports: [
     NgSelectModule,

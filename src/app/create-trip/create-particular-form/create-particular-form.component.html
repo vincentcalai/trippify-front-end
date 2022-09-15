@@ -7,7 +7,7 @@
 
   <div class="create-trip-content">
 
-    <form [formGroup]="createTripForm" novalidate>
+    <form [formGroup]="createTripParticularForm" novalidate>
       <div class="form_title">
         <span id="">Traveller 1 Particulars</span>
       </div>
@@ -23,7 +23,7 @@
         <br>
         <div class="col-md-4 col-md-8-offset top-padding selectContainer">
           <ng-select id="qn1Input_0" labelForId="qn1Input_0_Label" [clearable]="false"
-            [items]="sharedVar.ynListSource.getValue()" [placeholder]="sharedVar.PLACE_HOLD_DESC"
+            [items]="sharedVar.ynListSource.getValue()" [placeholder]="sharedVar.QN1_PLACEHOLDER_DESC"
             aria-labelledby="STATIC_QN_LABEL_1" formControlName="staticQn1">
           </ng-select>
         </div>
@@ -36,13 +36,13 @@
         <div class="form-group required">
           <label id="name_label_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(name)}" class="control-label mandatory-label"
             for="name_0">
-            <span id="">Traveller's Name</span>
+            <span>Traveller's Name</span>
           </label>
           <input id="name_0" type="text" class="form-control allCaps" formControlName="name" name="name"
             *ngIf="!isUserRegistered">
           <div class="col-md-4 col-md-8-offset top-padding selectContainer" *ngIf="isUserRegistered">
             <ng-select id="nameInput_0" labelForId="nameInput_0_Label" [clearable]="false"
-              [items]="username"
+              [items]="username" [placeholder]="sharedVar.NAME_PLACEHOLDER_DESC"
               aria-labelledby="NAME_LABEL_1" formControlName="name">
             </ng-select>
           </div>
@@ -59,7 +59,7 @@
         <div class="form-group required">
           <label id="email_label_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(email)}" class="control-label mandatory-label"
             for="email_0">
-            <span id="">Traveller's Email Address</span>
+            <span>Traveller's Email Address</span>
           </label>
           <input id="email_0" type="text" class="form-control allCaps" formControlName="email" name="email">
           <label id="email_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(email)}" class="error-text" for="email_0">
@@ -71,7 +71,7 @@
       </div>
 
       <div class="text-right">
-        <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"><span id="confirm">Confirm</span>
+        <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"><span id="next">Next</span>
         </button>
       </div>
 

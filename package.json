@@ -22,6 +22,8 @@
     "bootstrap": "^5.2.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.1",
+    "mdb-angular-ui-kit": "^2.3.0",
+    "mdb-ui-kit": "^5.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

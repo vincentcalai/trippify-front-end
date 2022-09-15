@@ -7,7 +7,8 @@ import { CreateTripModel } from '../model/create-trip.model';
 })
 export class SharedVar{
 
-  public readonly PLACE_HOLD_DESC = "Please Select Option";
+  public readonly QN1_PLACEHOLDER_DESC = "Please Select Option";
+  public readonly NAME_PLACEHOLDER_DESC = "Please Select A Registered User";
 
   public readonly STATIC_QN_1_VAL_MAP = new Map<string, boolean>([
     ["YES", true],

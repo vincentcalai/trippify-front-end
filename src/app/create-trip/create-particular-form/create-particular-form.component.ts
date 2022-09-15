@@ -14,7 +14,7 @@ import { SharedVar } from 'src/app/services/shared-var.service';
 export class CreateParticularFormComponent implements OnInit {
 
   subscriptions = new Subscription();
-  public createTripForm: FormGroup;
+  public createTripParticularForm: FormGroup;
   public isUserRegistered: any = null;
   public username = ["VINCENT"];
 
@@ -25,42 +25,42 @@ export class CreateParticularFormComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.createTripForm = this.initializeCreateTripForm();
+    this.createTripParticularForm = this.initializecreateTripParticularForm();
 
     this.subscriptions.add(
-      this.createTripForm.get('staticQn1')!.valueChanges.subscribe(val => {
+      this.createTripParticularForm.get('staticQn1')!.valueChanges.subscribe(val => {
         this.isUserRegistered = this.sharedVar.STATIC_QN_1_VAL_MAP.get(val);
         if(!this.isUserRegistered){
-          this.createTripForm.get('email')?.enable();
+          this.createTripParticularForm.get('email')?.enable();
         }
         this.resetForm();
       })
     )
 
     this.subscriptions.add(
-      this.createTripForm.get('name')!.valueChanges.subscribe(val => {
+      this.createTripParticularForm.get('name')!.valueChanges.subscribe(val => {
         if(this.isUserRegistered){
           this.retrieveUserEmail();
-          this.createTripForm.get('email')?.disable();
+          this.createTripParticularForm.get('email')?.disable();
         }
       })
     )
   }
   resetForm() {
-    this.createTripForm.get('name')?.markAsPristine();
-    this.createTripForm.get('email')?.markAsPristine();
+    this.createTripParticularForm.get('name')?.markAsPristine();
+    this.createTripParticularForm.get('email')?.markAsPristine();
     this.name?.setValue(null);
     this.email?.setValue(null);
   }
 
   retrieveUserEmail(){
-    console.log(this.createTripForm.get('name')!.value);
-    if(this.createTripForm.get('name')!.value){
+    console.log(this.createTripParticularForm.get('name')!.value);
+    if(this.createTripParticularForm.get('name')!.value){
       this.email?.setValue("VINCENTCALAI@GMAIL.COM");
     }
   }
 
-  initializeCreateTripForm(): FormGroup {
+  initializecreateTripParticularForm(): FormGroup {
     const rfg =  this.reactiveFormService.initializeCreateTripForm();
     return rfg;
   }
@@ -70,9 +70,9 @@ export class CreateParticularFormComponent implements OnInit {
   }
 
   confirmClicked(){
-    console.log("confirm clicked!" + " is form valid? : " + this.createTripForm.valid);
-    console.log(this.createTripForm);
-    if(this.createTripForm.valid){
+    console.log("confirm clicked!" + " is form valid? : " + this.createTripParticularForm.valid);
+    console.log(this.createTripParticularForm);
+    if(this.createTripParticularForm.valid){
       console.log("form is valid!");
       const particulars = this.sharedVar.createTripModel.particulars;
 
@@ -89,7 +89,7 @@ export class CreateParticularFormComponent implements OnInit {
       this.navigateToBudgetPage();
     } else{
       console.log("form is invalid!");
-      this.reactiveFormService.displayValidationErrors(this.createTripForm);
+      this.reactiveFormService.displayValidationErrors(this.createTripParticularForm);
     }
   }
   navigateToBudgetPage() {
@@ -101,15 +101,15 @@ export class CreateParticularFormComponent implements OnInit {
   }
 
   get staticQn1() {
-    return this.createTripForm.get('staticQn1');
+    return this.createTripParticularForm.get('staticQn1');
   }
 
   get name() {
-    return this.createTripForm.get('name');
+    return this.createTripParticularForm.get('name');
   }
 
   get email() {
-    return this.createTripForm.get('email');
+    return this.createTripParticularForm.get('email');
   }
 
 }

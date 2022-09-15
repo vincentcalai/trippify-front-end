@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 })
 export class ParticularsModel {
 
+  public id: number;
   public name: string;
   public email: string;
 
