@@ -15,7 +15,7 @@
       <!-- Default switch -->
       <div class="form-check form-switch">
         <input mdbCheckbox class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
-          [(ngModel)]="isManualCalEnabled" [ngModelOptions]="{standalone: true}" />
+          [(ngModel)]="isManualCalEnabled" [ngModelOptions]="{standalone: true}" (change)="onManualSwitchChange()"/>
         <label class="form-check-label" for="flexSwitchCheckDefault">Manually Enter Budget</label>
       </div>
 
@@ -32,6 +32,7 @@
           name="totalBudget">
         <label id="total_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(totalBudget)}" class="error-text"
           for="total_budget_0">
+          <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(totalBudget)) == 'pattern'">Please enter only number</span>
           <span *ngIf="totalBudget.hasError('required') && !totalBudget.value && !totalBudget.pristine">This field is
             required
           </span>
@@ -52,6 +53,7 @@
             name="flightBudget">
           <label id="flight_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(flightBudget)}"
             class="error-text" for="flight_budget_0">
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence(flightBudget) == 'pattern'">Please enter only number</span>
             <span *ngIf="flightBudget.hasError('required') && !flightBudget.value && !flightBudget.pristine">This field
               is
               required
@@ -72,6 +74,7 @@
             name="hotelBudget">
           <label id="hotel_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(hotelBudget)}"
             class="error-text" for="hotel_budget_0">
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence(hotelBudget) == 'pattern'">Please enter only number</span>
             <span *ngIf="hotelBudget.hasError('required') && !hotelBudget.value && !hotelBudget.pristine">This field is
               required
             </span>
@@ -91,6 +94,7 @@
             name="transportBudget">
           <label id="total_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(transportBudget)}"
             class="error-text" for="total_budget_0">
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence(transportBudget) == 'pattern'">Please enter only number</span>
             <span
               *ngIf="transportBudget.hasError('required') && !transportBudget.value && !transportBudget.pristine">This
               field is
@@ -112,6 +116,7 @@
             name="attractionBudget">
           <label id="attraction_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(attractionBudget)}"
             class="error-text" for="attraction_budget_0">
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence(attractionBudget) == 'pattern'">Please enter only number</span>
             <span
               *ngIf="attractionBudget.hasError('required') && !attractionBudget.value && !attractionBudget.pristine">This
               field is
@@ -133,6 +138,7 @@
             name="otherBudget">
           <label id="other_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(otherBudget)}"
             class="error-text" for="other_budget_0">
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence(otherBudget) == 'pattern'">Please enter only number</span>
             <span *ngIf="otherBudget.hasError('required') && !otherBudget.value && !otherBudget.pristine">This field is
               required
             </span>

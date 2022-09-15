@@ -61,7 +61,7 @@ export class CreateParticularFormComponent implements OnInit {
   }
 
   initializecreateTripParticularForm(): FormGroup {
-    const rfg =  this.reactiveFormService.initializeCreateTripForm();
+    const rfg =  this.reactiveFormService.initializeCreateTripParticularForm();
     return rfg;
   }
 

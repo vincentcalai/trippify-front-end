@@ -8,10 +8,11 @@ export class ReactiveFormService {
 
   public readonly ALPHABET_SPACE= new RegExp(/^[A-Za-z][A-Za-z ]*$/);
   public readonly EMAIL = new RegExp(/^[_A-Za-z0-9\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/);
+  public readonly NUMERIC_REGEX = new RegExp(/^[\d]+$/);
 
   constructor(public fb: FormBuilder) { }
 
-  initializeCreateTripForm() {
+  initializeCreateTripParticularForm() {
     return this.fb.group(
       {
         staticQn1: this.fb.control(null, {validators: Validators.required}),
@@ -34,17 +35,17 @@ export class ReactiveFormService {
   initializeCreateTripBudgetForm(){
     return this.fb.group(
       {
-        totalBudget: this.getBasicMandatoryControl(),
-        flightBudget: this.getBasicMandatoryControl(),
-        hotelBudget: this.getBasicMandatoryControl(),
-        transportBudget: this.getBasicMandatoryControl(),
-        attractionBudget: this.getBasicMandatoryControl(),
-        otherBudget: this.getBasicMandatoryControl()
+        totalBudget: this.getBudgetFieldsControl(),
+        flightBudget: this.getBudgetFieldsControl(),
+        hotelBudget: this.getBudgetFieldsControl(),
+        transportBudget: this.getBudgetFieldsControl(),
+        attractionBudget: this.getBudgetFieldsControl(),
+        otherBudget: this.getBudgetFieldsControl()
       }
     );
   }
-  getBasicMandatoryControl(): FormControl {
-    return this.fb.control(null, { validators: [Validators.required] });
+  getBudgetFieldsControl(): FormControl {
+    return this.fb.control(null, { validators: [Validators.required, Validators.pattern(this.NUMERIC_REGEX)] });
   }
 
   emailAddrValidators() {
