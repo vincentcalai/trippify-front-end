@@ -7,7 +7,7 @@ export class BudgetModel {
 
     public flightBudget: number;
     public hotelBudget: number;
-    public attractBudget: number;
+    public attractionBudget: number;
     public transportBudget: number;
     public otherBudget: number;
     public totalBudget: number;

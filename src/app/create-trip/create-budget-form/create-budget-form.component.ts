@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
@@ -17,7 +18,11 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   public subscriptions = new Subscription();
 
 
-  constructor(public reactiveFormService: ReactiveFormService, public sharedVar:SharedVar) { }
+  constructor(
+    public reactiveFormService: ReactiveFormService,
+    public sharedVar: SharedVar,
+    public router:Router) {
+  }
 
 
   ngOnInit(): void {
@@ -44,7 +49,30 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   }
 
   confirmClicked(){
-    console.log("isManualCalEnabled: "+ this.isManualCalEnabled);
+    if(this.createTripBudgetForm.valid){
+      console.log("form is valid!");
+      const budget = this.sharedVar.createTripModel.budget;
+
+      budget.totalBudget = this.totalBudget?.value;
+      budget.flightBudget = this.flightBudget?.value;
+      budget.hotelBudget = this.hotelBudget?.value;
+      budget.transportBudget = this.transportBudget?.value;
+      budget.attractionBudget = this.attractionBudget?.value;
+      budget.otherBudget = this.otherBudget?.value;
+
+      console.log("logging budget");
+      console.log(budget);
+      console.log(this.sharedVar.createTripModel.budget);
+
+      this.navigateToTripDetailsPage();
+    } else{
+      console.log("form is invalid!");
+      this.reactiveFormService.displayValidationErrors(this.createTripBudgetForm);
+    }
+  }
+
+  navigateToTripDetailsPage() {
+    this.router.navigate(['/create-trip/create-trip-details'], { skipLocationChange: true });
   }
 
   ngOnDestroy(): void {
