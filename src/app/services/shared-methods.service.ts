@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BudgetModel } from '../model/budget.model';
 import { CreateTripModel } from '../model/create-trip.model';
 import { ParticularsModel } from '../model/particulars.model';
 import { SharedVar } from './shared-var.service';
@@ -17,6 +18,7 @@ export class SharedMethods {
   initializeIndSubmission() {
     this.sharedVar.createTripModel = new CreateTripModel();
     this.sharedVar.createTripModel.particulars = new ParticularsModel();
+    this.sharedVar.createTripModel.budget = new BudgetModel();
   }
 
   showForm(form: string) {

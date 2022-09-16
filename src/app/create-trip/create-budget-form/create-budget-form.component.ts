@@ -35,7 +35,33 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
     this.createTripBudgetForm = this.reactiveFormService.initializeCreateTripBudgetForm();
 
     this.subscriptions.add(
+      this.flightBudget.valueChanges.subscribe(val => {
+        this.addUpTotalBudget();
+      })
+    )
 
+    this.subscriptions.add(
+      this.hotelBudget.valueChanges.subscribe(val => {
+        this.addUpTotalBudget();
+      })
+    )
+
+    this.subscriptions.add(
+      this.transportBudget.valueChanges.subscribe(val => {
+        this.addUpTotalBudget();
+      })
+    )
+
+    this.subscriptions.add(
+      this.attractionBudget.valueChanges.subscribe(val => {
+        this.addUpTotalBudget();
+      })
+    )
+
+    this.subscriptions.add(
+      this.otherBudget.valueChanges.subscribe(val => {
+        this.addUpTotalBudget();
+      })
     )
   }
 
@@ -52,6 +78,12 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
 
   fieldIsInvalid(field: AbstractControl): boolean {
     return this.reactiveFormService.fieldIsInvalid(field);
+  }
+
+  addUpTotalBudget() {
+    console.log("addUpTotalBudget called");
+    const totalAddedBudgetAmount = +this.flightBudget.value + +this.hotelBudget.value + +this.transportBudget.value + +this.attractionBudget.value + +this.otherBudget.value;
+    this.totalBudget.setValue(totalAddedBudgetAmount.toFixed(2));
   }
 
   computeBudget(){
@@ -71,6 +103,9 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
     if(this.createTripBudgetForm.valid){
       console.log("form is valid!");
       const budget = this.sharedVar.createTripModel.budget;
+
+      console.log(budget);
+      console.log(this.totalBudget?.value);
 
       budget.totalBudget = this.totalBudget?.value;
       budget.flightBudget = this.flightBudget?.value;
@@ -123,3 +158,5 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   }
 
 }
+
+
