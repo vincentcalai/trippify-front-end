@@ -72,9 +72,6 @@ export class CreateParticularFormComponent implements OnInit {
     if(this.createTripParticularForm.valid){
       const particulars = this.sharedVar.createTripModel.particulars;
 
-      console.log(this.name?.value);
-      console.log(this.email?.value);
-
       particulars.name = this.name?.value;
       particulars.email = this.email?.value;
 

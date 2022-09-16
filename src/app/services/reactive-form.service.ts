@@ -15,7 +15,7 @@ export class ReactiveFormService {
   initializeCreateTripParticularForm() {
     return this.fb.group(
       {
-        staticQn1: this.fb.control(null, {validators: Validators.required}),
+        staticQn1: this.getBasicRequiredControl(),
         name: this.fb.control(null,
                 {
                   validators: [
@@ -44,8 +44,24 @@ export class ReactiveFormService {
       }
     );
   }
+
+  initializeCreateTripDetailsForm() {
+    return this.fb.group(
+      {
+        staticQn2: this.getBasicRequiredControl(),
+        destinations: this.getBasicRequiredControl(),
+        dateFrom: this.getBasicRequiredControl(),
+        dateTo: this.getBasicRequiredControl()
+      }
+    );
+  }
+
   getBudgetFieldsControl(): FormControl {
     return this.fb.control(null, { validators: [Validators.required, Validators.pattern(this.NUMBERIC_DEC_REGEX), Validators.maxLength(9)] });
+  }
+
+  getBasicRequiredControl(): FormControl {
+    return this.fb.control(null, { validators: [Validators.required]});
   }
 
   emailAddrValidators() {

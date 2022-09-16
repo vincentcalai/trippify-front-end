@@ -8,6 +8,7 @@ import { CreateTripModel } from '../model/create-trip.model';
 export class SharedVar{
 
   public readonly QN1_PLACEHOLDER_DESC = "Please Select Option";
+  public readonly QN2_PLACEHOLDER_DESC = "Please Select Option";
   public readonly NAME_PLACEHOLDER_DESC = "Please Select A Registered User";
   public readonly FLIGHT_BUDGET_PCT = 40;
   public readonly HOTEL_BUDGET_PCT = 30;

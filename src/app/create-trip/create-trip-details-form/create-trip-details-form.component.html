@@ -1,1 +1,48 @@
-<p>create-trip-details-form works!</p>
+<app-progress-banner [currentProgress]="'details'"></app-progress-banner>
+<div class="create-trip-container">
+
+  <div class="create-trip-sidenav">
+    <app-side-nav></app-side-nav>
+  </div>
+
+  <div class="create-trip-content">
+
+    <form [formGroup]="createTripDetailsForm" novalidate>
+      <div class="form_title">
+        <span id="">Trip Details</span>
+      </div>
+
+      <div class="form-group form-row required">
+        <div class="col-md-8">
+          <label id="qn2_label_0" for="qn2_0_Label" [ngClass]="{'highlightLabel' : fieldIsInvalid(destinations)}"
+            class="control-label">
+            <span>Does the trip has multiple destinations?</span>
+            <span class="mandatory-label"></span>&nbsp;
+          </label>
+        </div>
+        <br>
+        <div class="col-md-4 col-md-8-offset top-padding selectContainer">
+          <ng-select id="qn2Input_0" labelForId="qn2Input_0_Label" [clearable]="false"
+            [items]="sharedVar.ynListSource.getValue()" [placeholder]="sharedVar.QN2_PLACEHOLDER_DESC"
+            aria-labelledby="STATIC_QN_LABEL_2" formControlName="staticQn2">
+          </ng-select>
+        </div>
+        <label id="qn2_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(staticQn2)}" class="error-text"
+          for="qn2_0">
+          <span *ngIf="staticQn2.hasError('required') && !staticQn2.value && !staticQn2.pristine">This field is
+            required</span>
+        </label>
+      </div>
+
+
+      <div class="text-right">
+        <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"><span id="next">Next</span>
+        </button>
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>

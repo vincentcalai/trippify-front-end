@@ -68,8 +68,6 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   }
 
   onManualSwitchChange(){
-    console.log("onManualSwitchChange called!");
-    console.log(this.isManualCalEnabled);
     this.totalBudget.setValue(null);
     if(this.isManualCalEnabled){
       this.showNotComputedError = false;
