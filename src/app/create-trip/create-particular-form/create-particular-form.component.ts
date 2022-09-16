@@ -54,7 +54,6 @@ export class CreateParticularFormComponent implements OnInit {
   }
 
   retrieveUserEmail(){
-    console.log(this.createTripParticularForm.get('name')!.value);
     if(this.createTripParticularForm.get('name')!.value){
       this.email?.setValue("VINCENTCALAI@GMAIL.COM");
     }
@@ -70,10 +69,7 @@ export class CreateParticularFormComponent implements OnInit {
   }
 
   confirmClicked(){
-    console.log("confirm clicked!" + " is form valid? : " + this.createTripParticularForm.valid);
-    console.log(this.createTripParticularForm);
     if(this.createTripParticularForm.valid){
-      console.log("form is valid!");
       const particulars = this.sharedVar.createTripModel.particulars;
 
       console.log(this.name?.value);
@@ -82,13 +78,8 @@ export class CreateParticularFormComponent implements OnInit {
       particulars.name = this.name?.value;
       particulars.email = this.email?.value;
 
-      console.log("logging particulars");
-      console.log(particulars);
-      console.log(this.sharedVar.createTripModel.particulars);
-
       this.navigateToBudgetPage();
     } else{
-      console.log("form is invalid!");
       this.reactiveFormService.displayValidationErrors(this.createTripParticularForm);
     }
   }

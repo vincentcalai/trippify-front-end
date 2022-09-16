@@ -28,7 +28,6 @@ export class SharedMethods {
     } else if (form == "manage") {
       route = ['manage-trip'];
     }
-    console.log('route : ' + route);
     this.router.navigate(route, { skipLocationChange: true });
   }
 

@@ -33,6 +33,7 @@
           </div>
           <div class="col-md-4">
             <input id="total_budget_0" type="text" class="form-control allCaps" formControlName="totalBudget"
+              (keyup)="showNotComputedError = false; isBudgetComputed = false"
               name="totalBudget">
           </div>
           <div class="col-md-2"></div>
@@ -52,12 +53,13 @@
           <span *ngIf="totalBudget.hasError('required') && !totalBudget.value && !totalBudget.pristine">This field is
             required
           </span>
+          <span *ngIf="showNotComputedError">Bugdet is not computed. Please compute budget before proceeding.</span>
         </label>
       </div>
       <br>
       <div class="sep-hr-line"></div>
       <br>
-      <div class="form-manual-fields" *ngIf="isManualCalEnabled || totalBudget.value">
+      <div class="form-manual-fields">
         <div class="form-group form-row required">
           <div class="col-md-4">
             <label id="flight_budget_label_0" for="flight_budget_0_Label"
@@ -77,9 +79,11 @@
             </div>
           <label id="flight_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(flightBudget)}"
             class="error-text" for="flight_budget_0">
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(flightBudget) == 'pattern'">Please enter amount in the correct
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(flightBudget)) == 'pattern'">Please enter amount in the
+              correct
               format</span>
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(flightBudget) == 'maxlength'">Maximum number is 9 digits</span>
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(flightBudget)) == 'maxlength'">Maximum number is 9
+              digits</span>
             <span *ngIf="flightBudget.hasError('required') && !flightBudget.value && !flightBudget.pristine">This field
               is
               required
@@ -107,9 +111,11 @@
           </div>
           <label id="hotel_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(hotelBudget)}"
             class="error-text" for="hotel_budget_0">
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(hotelBudget) == 'pattern'">Please enter amount in the correct
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(hotelBudget)) == 'pattern'">Please enter amount in the
+              correct
               format</span>
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(hotelBudget) == 'maxlength'">Maximum number is 9 digits</span>
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(hotelBudget)) == 'maxlength'">Maximum number is 9
+              digits</span>
             <span *ngIf="hotelBudget.hasError('required') && !hotelBudget.value && !hotelBudget.pristine">This field is
               required
             </span>
@@ -136,9 +142,11 @@
             </div>
           <label id="total_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(transportBudget)}"
             class="error-text" for="total_budget_0">
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(transportBudget) == 'pattern'">Please enter amount in the correct
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(transportBudget)) == 'pattern'">Please enter amount in the
+              correct
               format</span>
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(transportBudget) == 'maxlength'">Maximum number is 9 digits</span>
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(transportBudget)) == 'maxlength'">Maximum number is 9
+              digits</span>
             <span
               *ngIf="transportBudget.hasError('required') && !transportBudget.value && !transportBudget.pristine">This
               field is
@@ -167,9 +175,10 @@
             </div>
           <label id="attraction_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(attractionBudget)}"
             class="error-text" for="attraction_budget_0">
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(attractionBudget) == 'pattern'">Please enter amount in the correct
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(attractionBudget)) == 'pattern'">Please enter amount in the
+              correct
               format</span>
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(attractionBudget) == 'maxlength'">Maximum number is 9
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(attractionBudget)) == 'maxlength'">Maximum number is 9
               digits</span>
             <span
               *ngIf="attractionBudget.hasError('required') && !attractionBudget.value && !attractionBudget.pristine">This
@@ -199,9 +208,11 @@
           </div>
           <label id="other_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(otherBudget)}"
             class="error-text" for="other_budget_0">
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(otherBudget) == 'pattern'">Please enter amount in the correct
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(otherBudget)) == 'pattern'">Please enter amount in the
+              correct
               format</span>
-            <span *ngIf="reactiveFormService.fieldErrorPrecedence(otherBudget) == 'maxlength'">Maximum number is 9 digits</span>
+            <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(otherBudget)) == 'maxlength'">Maximum number is 9
+              digits</span>
             <span *ngIf="otherBudget.hasError('required') && !otherBudget.value && !otherBudget.pristine">This field is
               required
             </span>

@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   }
 
   submitTripClicked(action: string){
-    console.log("action: " + action);
     this.sharedMethods.showForm(action);
   }
 

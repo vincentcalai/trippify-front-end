@@ -14,6 +14,8 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
 
   public createTripBudgetForm: FormGroup;
   public isManualCalEnabled: boolean;
+  public isBudgetComputed: boolean = false;
+  public showNotComputedError: boolean = false;
 
   subscriptions = new Subscription();
 
@@ -70,6 +72,8 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
     console.log(this.isManualCalEnabled);
     this.totalBudget.setValue(null);
     if(this.isManualCalEnabled){
+      this.showNotComputedError = false;
+      this.addUpTotalBudget();
       this.totalBudget.disable();
     } else{
       this.totalBudget.enable();
@@ -81,13 +85,14 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   }
 
   addUpTotalBudget() {
-    console.log("addUpTotalBudget called");
     const totalAddedBudgetAmount = +this.flightBudget.value + +this.hotelBudget.value + +this.transportBudget.value + +this.attractionBudget.value + +this.otherBudget.value;
     this.totalBudget.setValue(totalAddedBudgetAmount.toFixed(2));
   }
 
   computeBudget(){
     if(this.totalBudget.valid){
+      this.isBudgetComputed = true;
+      this.showNotComputedError = false;
       const totalBudgetCompute = this.totalBudget.value;
       this.flightBudget.setValue((totalBudgetCompute * this.flightBudgetPct).toFixed(2));
       this.hotelBudget.setValue((totalBudgetCompute * this.hotelBudgetPct).toFixed(2));
@@ -100,12 +105,13 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   }
 
   confirmClicked(){
-    if(this.createTripBudgetForm.valid){
-      console.log("form is valid!");
-      const budget = this.sharedVar.createTripModel.budget;
 
-      console.log(budget);
-      console.log(this.totalBudget?.value);
+    if(!this.isManualCalEnabled){
+      this.showNotComputedError = !this.isBudgetComputed;
+    }
+
+    if(this.createTripBudgetForm.valid && !this.showNotComputedError){
+      const budget = this.sharedVar.createTripModel.budget;
 
       budget.totalBudget = this.totalBudget?.value;
       budget.flightBudget = this.flightBudget?.value;
@@ -114,15 +120,11 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
       budget.attractionBudget = this.attractionBudget?.value;
       budget.otherBudget = this.otherBudget?.value;
 
-      console.log("logging budget");
-      console.log(budget);
-      console.log(this.sharedVar.createTripModel.budget);
-
       this.navigateToTripDetailsPage();
     } else{
-      console.log("form is invalid!");
       this.reactiveFormService.displayValidationErrors(this.createTripBudgetForm);
     }
+
   }
 
   navigateToTripDetailsPage() {
