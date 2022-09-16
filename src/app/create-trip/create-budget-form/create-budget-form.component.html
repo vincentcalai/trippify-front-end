@@ -35,7 +35,14 @@
             <input id="total_budget_0" type="text" class="form-control allCaps" formControlName="totalBudget"
               name="totalBudget">
           </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5">
+            <button class="button_o btn_text_hover" type="button" *ngIf="!isManualCalEnabled" (click)="computeBudget()"><span
+                id="computeBudget">Compute
+                Budget</span>
+            </button>
           </div>
+        </div>
         <label id="total_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(totalBudget)}" class="error-text"
           for="total_budget_0">
           <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(totalBudget)) == 'pattern'">Please enter only number</span>
@@ -46,6 +53,9 @@
           </span>
         </label>
       </div>
+      <br>
+      <div class="sep-hr-line"></div>
+      <br>
       <div class="form-manual-fields" *ngIf="isManualCalEnabled || totalBudget.value">
         <div class="form-group form-row required">
           <div class="col-md-4">

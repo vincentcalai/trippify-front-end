@@ -30,3 +30,7 @@
 .error-text {
   margin-bottom: 20px;
 }
+
+.sep-hr-line {
+  border-bottom: 2px solid black;
+}

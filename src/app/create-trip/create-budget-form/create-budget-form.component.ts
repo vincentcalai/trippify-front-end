@@ -15,8 +15,14 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   public createTripBudgetForm: FormGroup;
   public isManualCalEnabled: boolean;
 
-  public subscriptions = new Subscription();
+  subscriptions = new Subscription();
 
+
+  flightBudgetPct = this.sharedVar.FLIGHT_BUDGET_PCT/100;
+  hotelBudgetPct = this.sharedVar.HOTEL_BUDGET_PCT/100;
+  transportBudgetPct = this.sharedVar.TRANSPORT_BUDGET_PCT/100;
+  attractionBudgetPct = this.sharedVar.ATTRACTION_BUDGET_PCT/100;
+  otherBudgetPct = this.sharedVar.OTHER_BUDGET_PCT/100;
 
   constructor(
     public reactiveFormService: ReactiveFormService,
@@ -46,6 +52,19 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
 
   fieldIsInvalid(field: AbstractControl): boolean {
     return this.reactiveFormService.fieldIsInvalid(field);
+  }
+
+  computeBudget(){
+    if(this.totalBudget.valid){
+      const totalBudgetCompute = this.totalBudget.value;
+      this.flightBudget.setValue((totalBudgetCompute * this.flightBudgetPct).toFixed(2));
+      this.hotelBudget.setValue((totalBudgetCompute * this.hotelBudgetPct).toFixed(2));
+      this.transportBudget.setValue((totalBudgetCompute * this.transportBudgetPct).toFixed(2));
+      this.attractionBudget.setValue((totalBudgetCompute * this.attractionBudgetPct).toFixed(2));
+      this.otherBudget.setValue((totalBudgetCompute * this.otherBudgetPct).toFixed(2));
+    } else{
+      this.reactiveFormService.displayValidationErrors(this.totalBudget);
+    }
   }
 
   confirmClicked(){

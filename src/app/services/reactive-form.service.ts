@@ -8,7 +8,7 @@ export class ReactiveFormService {
 
   public readonly ALPHABET_SPACE= new RegExp(/^[A-Za-z][A-Za-z ]*$/);
   public readonly EMAIL = new RegExp(/^[_A-Za-z0-9\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/);
-  public readonly NUMERIC_REGEX = new RegExp(/^[\d]+$/);
+  public readonly NUMBERIC_DEC_REGEX = new RegExp(/^\d*\.?\d*$/);
 
   constructor(public fb: FormBuilder) { }
 
@@ -45,7 +45,7 @@ export class ReactiveFormService {
     );
   }
   getBudgetFieldsControl(): FormControl {
-    return this.fb.control(null, { validators: [Validators.required, Validators.pattern(this.NUMERIC_REGEX), Validators.maxLength(9)] });
+    return this.fb.control(null, { validators: [Validators.required, Validators.pattern(this.NUMBERIC_DEC_REGEX), Validators.maxLength(9)] });
   }
 
   emailAddrValidators() {
