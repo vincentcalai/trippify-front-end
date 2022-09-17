@@ -30,3 +30,8 @@
 .error-text {
   margin-bottom: 20px;
 }
+
+.button_back{
+  border-right: 0px;
+  margin-right: 10px;
+}

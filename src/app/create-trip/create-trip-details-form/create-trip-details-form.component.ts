@@ -1,5 +1,6 @@
 import { Component, OnInit, ɵɵsetComponentScope } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
@@ -12,7 +13,10 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
   public createTripDetailsForm: FormGroup;
 
-  constructor(public reactiveFormService: ReactiveFormService, public sharedVar: SharedVar) { }
+  constructor(
+    public reactiveFormService: ReactiveFormService, 
+    public sharedVar: SharedVar, 
+    public router:Router) { }
 
   ngOnInit(): void {
     this.createTripDetailsForm = this.reactiveFormService.initializeCreateTripDetailsForm();
@@ -32,6 +36,10 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
   fieldIsInvalid(field: AbstractControl): boolean {
     return this.reactiveFormService.fieldIsInvalid(field);
+  }
+
+  backToBudgetScreen(){
+    this.router.navigate(['/create-trip/create-budget'], { skipLocationChange: true });
   }
 
   get staticQn2(){

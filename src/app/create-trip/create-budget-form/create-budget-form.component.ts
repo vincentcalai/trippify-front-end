@@ -139,6 +139,10 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
     this.router.navigate(['/create-trip/create-trip-details'], { skipLocationChange: true });
   }
 
+  backToParticularScreen(){
+    this.router.navigate(['/create-trip/create-particular'], { skipLocationChange: true });
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

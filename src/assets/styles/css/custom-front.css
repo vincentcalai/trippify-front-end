@@ -64,12 +64,11 @@ h6 {
   padding: 15px 20px;
   background-color: #1a5978;
   color: white;
-  border: 0px !important;
+  border: 2px solid black !important;
+  border-color: black;
   font-size: 1.1em;
   margin-bottom: 5px;
-  border-top: 0px;
   width: auto !important;
-  border-bottom: 0px !important;
 }
 
 form div.text-right {

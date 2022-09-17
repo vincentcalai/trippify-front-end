@@ -34,3 +34,8 @@
 .sep-hr-line {
   border-bottom: 2px solid black;
 }
+
+.button_back{
+  border-right: 0px;
+  margin-right: 10px;
+}
