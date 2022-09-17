@@ -40,6 +40,7 @@ export class ReactiveFormService {
         hotelBudget: this.getBudgetFieldsControl(),
         transportBudget: this.getBudgetFieldsControl(),
         attractionBudget: this.getBudgetFieldsControl(),
+        foodBudget: this.getBudgetFieldsControl(),
         otherBudget: this.getBudgetFieldsControl()
       }
     );

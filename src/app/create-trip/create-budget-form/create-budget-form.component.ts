@@ -23,6 +23,7 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   flightBudgetPct = this.sharedVar.FLIGHT_BUDGET_PCT/100;
   hotelBudgetPct = this.sharedVar.HOTEL_BUDGET_PCT/100;
   transportBudgetPct = this.sharedVar.TRANSPORT_BUDGET_PCT/100;
+  foodBudgetPct = this.sharedVar.FOOD_BUDGET_PCT/100;
   attractionBudgetPct = this.sharedVar.ATTRACTION_BUDGET_PCT/100;
   otherBudgetPct = this.sharedVar.OTHER_BUDGET_PCT/100;
 
@@ -50,6 +51,12 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(
       this.transportBudget.valueChanges.subscribe(val => {
+        this.addUpTotalBudget();
+      })
+    )
+
+    this.subscriptions.add(
+      this.foodBudget.valueChanges.subscribe(val => {
         this.addUpTotalBudget();
       })
     )
@@ -83,7 +90,8 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   }
 
   addUpTotalBudget() {
-    const totalAddedBudgetAmount = +this.flightBudget.value + +this.hotelBudget.value + +this.transportBudget.value + +this.attractionBudget.value + +this.otherBudget.value;
+    const totalAddedBudgetAmount = Number(this.flightBudget.value) + Number(this.hotelBudget.value) + Number(this.transportBudget.value) + 
+      Number(this.attractionBudget.value) + Number(this.foodBudget.value) + Number(this.otherBudget.value);
     this.totalBudget.setValue(totalAddedBudgetAmount.toFixed(2));
   }
 
@@ -96,6 +104,7 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
       this.hotelBudget.setValue((totalBudgetCompute * this.hotelBudgetPct).toFixed(2));
       this.transportBudget.setValue((totalBudgetCompute * this.transportBudgetPct).toFixed(2));
       this.attractionBudget.setValue((totalBudgetCompute * this.attractionBudgetPct).toFixed(2));
+      this.foodBudget.setValue((totalBudgetCompute * this.foodBudgetPct).toFixed(2));
       this.otherBudget.setValue((totalBudgetCompute * this.otherBudgetPct).toFixed(2));
     } else{
       this.reactiveFormService.displayValidationErrors(this.totalBudget);
@@ -116,6 +125,7 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
       budget.hotelBudget = this.hotelBudget?.value;
       budget.transportBudget = this.transportBudget?.value;
       budget.attractionBudget = this.attractionBudget?.value;
+      budget.foodBudget = this.foodBudget?.value;
       budget.otherBudget = this.otherBudget?.value;
 
       this.navigateToTripDetailsPage();
@@ -147,6 +157,10 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
 
   get transportBudget(){
     return this.createTripBudgetForm.get('transportBudget');
+  }
+
+  get foodBudget(){
+    return this.createTripBudgetForm.get('foodBudget');
   }
 
   get attractionBudget(){

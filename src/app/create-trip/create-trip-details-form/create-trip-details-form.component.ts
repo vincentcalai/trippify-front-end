@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵɵsetComponentScope } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
@@ -19,7 +19,15 @@ export class CreateTripDetailsFormComponent implements OnInit {
   }
 
   confirmClicked(){
+    if(this.createTripDetailsForm.valid){
+      console.log("form is valid...");
+      const tripDetails = this.sharedVar.createTripModel.tripDetails;
 
+      //this.navigateToPreviewPage();
+    } else{
+      console.log("form is invalid!");
+      this.reactiveFormService.displayValidationErrors(this.createTripDetailsForm);
+    }
   }
 
   fieldIsInvalid(field: AbstractControl): boolean {

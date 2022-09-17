@@ -13,8 +13,9 @@ export class SharedVar{
   public readonly FLIGHT_BUDGET_PCT = 40;
   public readonly HOTEL_BUDGET_PCT = 30;
   public readonly TRANSPORT_BUDGET_PCT = 7.5;
-  public readonly ATTRACTION_BUDGET_PCT = 12.5;
-  public readonly OTHER_BUDGET_PCT = 10;
+  public readonly FOOD_BUDGET_PCT = 7.5
+  public readonly ATTRACTION_BUDGET_PCT = 10;
+  public readonly OTHER_BUDGET_PCT = 5;
 
   public readonly STATIC_QN_1_VAL_MAP = new Map<string, boolean>([
     ["YES", true],
