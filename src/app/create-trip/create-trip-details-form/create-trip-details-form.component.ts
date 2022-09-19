@@ -1,6 +1,7 @@
 import { Component, OnInit, ɵɵsetComponentScope } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
@@ -11,15 +12,27 @@ import { SharedVar } from 'src/app/services/shared-var.service';
 })
 export class CreateTripDetailsFormComponent implements OnInit {
 
+  subscriptions = new Subscription();
   public createTripDetailsForm: FormGroup;
 
+  tmpDest: string[] = ["Amsterdam", "Brussels", "Singapore", "Lisbon", "Madrid", "Tokyo"];
+  noOfDest: number;
+
   constructor(
-    public reactiveFormService: ReactiveFormService, 
-    public sharedVar: SharedVar, 
+    public reactiveFormService: ReactiveFormService,
+    public sharedVar: SharedVar,
     public router:Router) { }
 
   ngOnInit(): void {
     this.createTripDetailsForm = this.reactiveFormService.initializeCreateTripDetailsForm();
+    console.log("logging staticQn2");
+    console.log(this.staticQn2);
+    // this.subscriptions.add(
+    //   this.staticQn2.valueChanges.subscribe(val => {
+    //     console.log(val);
+    //     this.noOfDest = val;
+    //   })
+    // )
   }
 
   confirmClicked(){

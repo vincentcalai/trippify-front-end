@@ -6,7 +6,7 @@ import { Timestamp } from "rxjs";
 })
 export class TripDetailsModel {
 
-    public isMultiTrip: boolean;
+    public noOfDestinations: number;
     public destinations: string[];
     public dateFrom: Date;
     public dateTo: Date;

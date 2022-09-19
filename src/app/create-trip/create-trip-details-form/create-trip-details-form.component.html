@@ -16,14 +16,14 @@
         <div class="col-md-8">
           <label id="qn2_label_0" for="qn2_0_Label" [ngClass]="{'highlightLabel' : fieldIsInvalid(destinations)}"
             class="control-label">
-            <span>Does the trip has multiple destinations?</span>
+            <span>How many destination does the trip has?</span>
             <span class="mandatory-label"></span>&nbsp;
           </label>
         </div>
         <br>
         <div class="col-md-4 col-md-8-offset top-padding selectContainer">
           <ng-select id="qn2Input_0" labelForId="qn2Input_0_Label" [clearable]="false"
-            [items]="sharedVar.ynListSource.getValue()" [placeholder]="sharedVar.QN2_PLACEHOLDER_DESC"
+            [items]="sharedVar.destNumSource.getValue()" [placeholder]="sharedVar.QN2_PLACEHOLDER_DESC"
             aria-labelledby="STATIC_QN_LABEL_2" formControlName="staticQn2">
           </ng-select>
         </div>
@@ -34,6 +34,28 @@
         </label>
       </div>
 
+      <div *ngIf="staticQn2.value">
+        <div class="form-group form-row required" *ngFor="let dest of [].constructor(staticQn2.value); let i = index">
+          <div class="col-md-8">
+            <label id="dest_label_0" for="dest_0_Label" [ngClass]="{'highlightLabel' : fieldIsInvalid(destinations)}"
+              class="control-label">
+              <span *ngIf="staticQn2.value != 1">Trip {{i + 1}} Destination</span>
+              <span *ngIf="staticQn2.value == 1">Trip Destination</span>
+              <span class="mandatory-label"></span>&nbsp;
+            </label>
+          </div>
+          <br>
+          <div class="col-md-4 col-md-8-offset top-padding selectContainer">
+            <ng-select id="destInput_0" labelForId="destInput_0_Label" [clearable]="false" [items]="tmpDest"
+              [placeholder]="sharedVar.QN2_PLACEHOLDER_DESC" aria-labelledby="DEST_LABEL_2" formControlName="destinations">
+            </ng-select>
+          </div>
+          <label id="dest_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(staticQn2)}" class="error-text" for="dest_0">
+            <span *ngIf="destinations.hasError('required') && !destinations.value && !destinations.pristine">This
+              field is required</span>
+          </label>
+        </div>
+      </div>
 
       <div class="text-right">
         <button class="button_o button_back btn_text_hover" type="button" (click)="backToBudgetScreen()"><span id="back">Back</span>

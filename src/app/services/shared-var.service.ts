@@ -22,14 +22,22 @@ export class SharedVar{
     ["NO", false]
   ]);
 
+  public readonly STATIC_QN_2_VAL = [1,2,3,4,5,6,7,8,9,10];
+
   public createTripModel: CreateTripModel = new CreateTripModel();
 
   public ynListSource = new BehaviorSubject(null);
   ynListSourceList = this.ynListSource.asObservable();
 
+  public destNumSource = new BehaviorSubject(null);
+  destNumSourceList = this.destNumSource.asObservable();
+
   constructor() {
     this.changeYnListSource(
       Array.from( this.STATIC_QN_1_VAL_MAP.keys() )
+    );
+    this.destNumListSource(
+      this.STATIC_QN_2_VAL
     );
   }
 
@@ -37,6 +45,8 @@ export class SharedVar{
     this.ynListSource.next(value);
   }
 
-
+  destNumListSource(value){
+    this.destNumSource.next(value);
+  }
 
 }
