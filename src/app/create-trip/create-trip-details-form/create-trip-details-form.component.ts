@@ -14,9 +14,9 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
   subscriptions = new Subscription();
   public createTripDetailsForm: FormGroup;
+  noOfTripsEvent: Subject<void> = new Subject<void>();
 
   tmpDest: string[] = ["Amsterdam", "Brussels", "Singapore", "Lisbon", "Madrid", "Tokyo"];
-  noOfDest: number;
 
   constructor(
     public reactiveFormService: ReactiveFormService,
@@ -27,12 +27,12 @@ export class CreateTripDetailsFormComponent implements OnInit {
     this.createTripDetailsForm = this.reactiveFormService.initializeCreateTripDetailsForm();
     console.log("logging staticQn2");
     console.log(this.staticQn2);
-    // this.subscriptions.add(
-    //   this.staticQn2.valueChanges.subscribe(val => {
-    //     console.log(val);
-    //     this.noOfDest = val;
-    //   })
-    // )
+    this.subscriptions.add(
+      this.staticQn2.valueChanges.subscribe(val => {
+        console.log(val);
+        this.noOfTripsEvent.next(val);
+      })
+    )
   }
 
   confirmClicked(){
@@ -43,6 +43,8 @@ export class CreateTripDetailsFormComponent implements OnInit {
       //this.navigateToPreviewPage();
     } else{
       console.log("form is invalid!");
+      console.log(this.createTripDetailsForm);
+
       this.reactiveFormService.displayValidationErrors(this.createTripDetailsForm);
     }
   }

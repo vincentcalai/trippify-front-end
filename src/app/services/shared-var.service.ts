@@ -10,6 +10,7 @@ export class SharedVar{
   public readonly QN1_PLACEHOLDER_DESC = "Please Select Option";
   public readonly QN2_PLACEHOLDER_DESC = "Please Select Option";
   public readonly NAME_PLACEHOLDER_DESC = "Please Select A Registered User";
+  public readonly TRIP_DEST_PLACEHOLDER_DESC = "Please Select A Trip Destination";
   public readonly FLIGHT_BUDGET_PCT = 40;
   public readonly HOTEL_BUDGET_PCT = 30;
   public readonly TRANSPORT_BUDGET_PCT = 7.5;
@@ -23,6 +24,8 @@ export class SharedVar{
   ]);
 
   public readonly STATIC_QN_2_VAL = [1,2,3,4,5,6,7,8,9,10];
+  public destinations: string[] = [];
+
 
   public createTripModel: CreateTripModel = new CreateTripModel();
 
