@@ -7,6 +7,8 @@ import { HeaderComponent } from './views/b-header/header/header.component';
 import { HomeComponent } from './views/c-content/home/home.component';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { SharedModule } from './shared/shared.module';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateCustomParserFormatter } from './shared/formatter/datepicker';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
+  ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
