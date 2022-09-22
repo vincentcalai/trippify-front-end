@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CreateTripModel } from '../model/create-trip.model';
+import { Destinations } from '../model/destinations.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,6 @@ export class SharedVar{
   ]);
 
   public readonly STATIC_QN_2_VAL = [1,2,3,4,5,6,7,8,9,10];
-  public destinations: string[] = [];
-
 
   public createTripModel: CreateTripModel = new CreateTripModel();
 

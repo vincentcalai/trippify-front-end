@@ -40,8 +40,8 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
   onChangeDest(destination: string){
     console.log(destination);
-    console.log(this.sharedVar.destinations);
-    this.destinations.setValue(this.sharedVar.destinations);
+    console.log(this.sharedVar.createTripModel.tripDetails.destinations);
+    this.destinations.setValue(this.sharedVar.createTripModel.tripDetails.destinations);
   }
 
   ngOnDestroy(): void {

@@ -2,6 +2,7 @@ import { Component, OnInit, ɵɵsetComponentScope } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
+import { Destinations } from 'src/app/model/destinations.model';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
@@ -29,7 +30,11 @@ export class CreateTripDetailsFormComponent implements OnInit {
     console.log(this.staticQn2);
     this.subscriptions.add(
       this.staticQn2.valueChanges.subscribe(val => {
-        console.log(val);
+        this.sharedVar.createTripModel.tripDetails.destinations = [];
+        for (let i = 0; i < val; i++) {
+          this.sharedVar.createTripModel.tripDetails.destinations.push(new Destinations());
+        }
+        console.log(this.sharedVar.createTripModel.tripDetails.destinations);
         this.noOfTripsEvent.next(val);
       })
     )

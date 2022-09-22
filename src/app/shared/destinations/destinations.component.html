@@ -10,9 +10,9 @@
     </div>
     <div class="col-md-4 col-md-8-offset top-padding selectContainer">
       <ng-select id="destInput_0" labelForId="destInput_0_Label" [clearable]="false" [items]="tmpDest"
-        [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_DESC" aria-labelledby="DEST_LABEL_2"
-        [(ngModel)]="sharedVar.destinations[i]" [ngModelOptions]="{standalone: true}"
-        (change)="onChangeDest(sharedVar.destinations[i])">
+        [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_DESC" aria-labelledby="DEST_LABEL"
+        [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].name" [ngModelOptions]="{standalone: true}"
+        (change)="onChangeDest(sharedVar.createTripModel.tripDetails.destinations[i].name)">
       </ng-select>
     </div>
     <label id="dest_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(destinations)}" class="error-text"
