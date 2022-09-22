@@ -29,7 +29,9 @@
         <input type="text" id="date_from_0" name="date_from" placeholder="dd/mm/yyyy" ngbDatepicker
           class="form-control datepicker" aria-required="true"
           placement="bottom-left top-left auto" #datefromdp="ngbDatepicker" data-container="body"
-          (keyup)="datefromdp.close()" (click)="datefromdp.open()" container="body" autocomplete="off">
+          (keyup)="datefromdp.close()" (click)="datefromdp.open()" container="body" autocomplete="off"
+          [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].dateFrom" [ngModelOptions]="{standalone: true}"
+          (change)="onChangeDest(sharedVar.createTripModel.tripDetails.destinations[i].dateFrom)">
       </div>
     </div>
     <div class="form-group required">
@@ -40,7 +42,9 @@
         <input type="text" id="date_to_0" name="date_to" placeholder="dd/mm/yyyy" ngbDatepicker
           class="form-control datepicker" aria-required="true"
           placement="bottom-left top-left auto" #datetodp="ngbDatepicker" data-container="body"
-          (keyup)="datetodp.close()" (click)="datetodp.open()" container="body" autocomplete="off">
+          (keyup)="datetodp.close()" (click)="datetodp.open()" container="body" autocomplete="off"
+          [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].dateTo" [ngModelOptions]="{standalone: true}"
+          (change)="onChangeDest(sharedVar.createTripModel.tripDetails.destinations[i].dateTo)">
       </div>
     </div>
 
