@@ -34,14 +34,12 @@
           placement="bottom-left top-left auto" #datefromdp="ngbDatepicker" data-container="body"
           (keyup)="datefromdp.close()" (click)="datefromdp.open()" container="body" autocomplete="off"
           [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].dateFrom" [ngModelOptions]="{standalone: true}"
-          (ngModelChange)="onChangeDateFrom(i, sharedVar.createTripModel.tripDetails.destinations[i].dateFrom)">
+          (ngModelChange)="onChangeDateFrom(i)">
       </div>
       <label id="dateFrom_error_0"
         [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateFrom(i))}" class="error-text"
         for="dateFrom_0">
-        <span
-          *ngIf="getDestinationFormDateFrom(i).hasError('required') && !getDestinationFormDateFrom(i).value && !getDestinationFormDateFrom(i).pristine">This
-          field is required</span>
+        <span *ngIf="this['dateFrom_error_' + i] == 1">Please fill in the field above</span>
       </label>
     </div>
     <div class="form-group required">
@@ -55,14 +53,12 @@
           placement="bottom-left top-left auto" #datetodp="ngbDatepicker" data-container="body"
           (keyup)="datetodp.close()" (click)="datetodp.open()" container="body" autocomplete="off"
           [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].dateTo" [ngModelOptions]="{standalone: true}"
-          (ngModelChange)="onChangeDateTo(i, sharedVar.createTripModel.tripDetails.destinations[i].dateTo)">
+          (ngModelChange)="onChangeDateTo(i)">
       </div>
       <label id="dateTo_error_0"
         [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateTo(i))}" class="error-text"
         for="dateTo_0">
-        <span
-          *ngIf="getDestinationFormDateTo(i).hasError('required') && !getDestinationFormDateTo(i).value && !getDestinationFormDateTo(i).pristine">This
-          field is required</span>
+        <span *ngIf="this['dateTo_error_' + i] == 1">Please fill in the field above</span>
       </label>
     </div>
 

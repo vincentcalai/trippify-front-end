@@ -1,10 +1,11 @@
-import { Component, OnInit, ɵɵsetComponentScope } from '@angular/core';
+import { Component, OnInit, ViewChild, ɵɵsetComponentScope } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { Destinations } from 'src/app/model/destinations.model';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
+import { DestinationsComponent } from 'src/app/shared/destinations/destinations.component';
 
 @Component({
   selector: 'app-create-trip-details-form',
@@ -12,6 +13,8 @@ import { SharedVar } from 'src/app/services/shared-var.service';
   styleUrls: ['./create-trip-details-form.component.css']
 })
 export class CreateTripDetailsFormComponent implements OnInit {
+
+  @ViewChild(DestinationsComponent) destinationsComponent: DestinationsComponent;
 
   subscriptions = new Subscription();
   public createTripDetailsForm: FormGroup;
@@ -32,13 +35,14 @@ export class CreateTripDetailsFormComponent implements OnInit {
     this.subscriptions.add(
       this.staticQn2.valueChanges.subscribe(val => {
         console.log(this.createTripDetailsForm);
-
         this.noOfTripsEvent.next(val);
       })
     )
   }
 
   confirmClicked(){
+    this.destinationsComponent.validateAllDate();
+
     if(this.createTripDetailsForm.valid){
       console.log("form is valid...");
       const tripDetails = this.sharedVar.createTripModel.tripDetails;
