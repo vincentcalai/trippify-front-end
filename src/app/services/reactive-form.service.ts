@@ -50,9 +50,7 @@ export class ReactiveFormService {
     return this.fb.group(
       {
         staticQn2: this.getBasicRequiredControl(),
-        destinations: this.getBasicRequiredControl(),
-        dateFrom: this.getBasicRequiredControl(),
-        dateTo: this.getBasicRequiredControl()
+        destinations: this.fb.array([]),
       }
     );
   }

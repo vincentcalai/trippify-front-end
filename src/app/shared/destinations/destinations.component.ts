@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, ControlContainer } from '@angular/forms';
+import { AbstractControl, ControlContainer, Form, FormArray } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
@@ -38,10 +38,16 @@ export class DestinationsComponent implements OnInit, OnDestroy {
     return this.reactiveFormService.fieldIsInvalid(field);
   }
 
-  onChangeDest(destination: string){
-    console.log(destination);
-    console.log(this.sharedVar.createTripModel.tripDetails.destinations);
-    this.destinations.setValue(this.sharedVar.createTripModel.tripDetails.destinations);
+  onChangeDest(index: number, name: string){
+    this.destinations.at(index).get('name').setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].name);
+  }
+
+  onChangeDateFrom(index: number, dateFrom: string){
+    this.destinations.at(index).get('dateFrom').setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateFrom);
+  }
+
+  onChangeDateTo(index: number, dateTo: string){
+    this.destinations.at(index).get('dateTo').setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateTo);
   }
 
   ngOnDestroy(): void {
@@ -49,7 +55,8 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   }
 
   get destinations(){
-    return this.controlContainer.control.get('destinations');
+    return this.controlContainer.control.get('destinations') as FormArray;
+    //return this.controlContainer.control['destinations'] as FormArray;
   }
 
 }
