@@ -55,6 +55,14 @@ export class ReactiveFormService {
     );
   }
 
+  initDestinationFormGrp(){
+    return this.fb.group({
+      name:  [null, { validators: [Validators.required]}],
+      dateFrom: [null, { validators: [Validators.required]}],
+      dateTo: [null, { validators: [Validators.required]}]
+    })
+  }
+
   getBudgetFieldsControl(): FormControl {
     return this.fb.control(null, { validators: [Validators.required, Validators.pattern(this.NUMBERIC_DEC_REGEX), Validators.maxLength(9)] });
   }
@@ -96,10 +104,17 @@ export class ReactiveFormService {
         const control = form.get(field);
         if (control instanceof FormControl) {
           this.markControlAsDirtyAndTouched(control);
-        } else if (control instanceof FormGroup) {
+        } else if (control instanceof FormGroup || control instanceof FormArray) {
+          if (control instanceof FormArray) {
+            this.markControlAsDirtyAndTouched(control);
+          }
           this.displayValidationErrors(control);
         }
       });
+    } else if (form instanceof FormArray) {
+      form.controls.forEach(element => {
+        this.displayValidationErrors(element);
+      })
     }
   }
 

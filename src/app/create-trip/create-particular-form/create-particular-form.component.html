@@ -21,7 +21,7 @@
           </label>
         </div>
         <br>
-        <div class="col-md-4 col-md-8-offset top-padding selectContainer">
+        <div class="col-md-4 col-md-8-offset selectContainer">
           <ng-select id="qn1Input_0" labelForId="qn1Input_0_Label" [clearable]="false"
             [items]="sharedVar.ynListSource.getValue()" [placeholder]="sharedVar.QN1_PLACEHOLDER_DESC"
             aria-labelledby="STATIC_QN_LABEL_1" formControlName="staticQn1">
@@ -40,7 +40,7 @@
           </label>
           <input id="name_0" type="text" class="form-control allCaps" formControlName="name" name="name"
             *ngIf="!isUserRegistered">
-          <div class="col-md-4 col-md-8-offset top-padding selectContainer" *ngIf="isUserRegistered">
+          <div class="col-md-4 col-md-8-offset selectContainer" *ngIf="isUserRegistered">
             <ng-select id="nameInput_0" labelForId="nameInput_0_Label" [clearable]="false"
               [items]="username" [placeholder]="sharedVar.NAME_PLACEHOLDER_DESC"
               aria-labelledby="NAME_LABEL_1" formControlName="name">

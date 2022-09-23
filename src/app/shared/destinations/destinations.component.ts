@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, ControlContainer, Form, FormArray } from '@angular/forms';
+import { AbstractControl, ControlContainer, Form, FormArray, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
+import { Destinations } from 'src/app/model/destinations.model';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
@@ -28,14 +29,22 @@ export class DestinationsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.events.subscribe(val => {
         console.log(val);
+
+        this.sharedVar.createTripModel.tripDetails.destinations = [];
+        for (let i = 0; i < val; i++) {
+          const destination = new Destinations();
+          destination.name = '';
+          destination.dateFrom = {year: 0, month: 0, day: 0};
+          destination.dateTo = {year: 0, month: 0, day: 0};
+
+          this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
+          this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
+        }
+        console.log(this.sharedVar.createTripModel.tripDetails.destinations);
+
         this.noOfTrips = val;
       })
     );
-    console.log("in destinations component!");
-  }
-
-  fieldIsInvalid(field: AbstractControl): boolean {
-    return this.reactiveFormService.fieldIsInvalid(field);
   }
 
   onChangeDest(index: number, name: string){
@@ -56,7 +65,18 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
   get destinations(){
     return this.controlContainer.control.get('destinations') as FormArray;
-    //return this.controlContainer.control['destinations'] as FormArray;
+  }
+
+  getDestinationFormName(index: number){
+    return this.destinations.get(index.toString()).get('name');
+  }
+
+  getDestinationFormDateFrom(index: number){
+    return this.destinations.get(index.toString()).get('dateFrom');
+  }
+
+  getDestinationFormDateTo(index: number){
+    return this.destinations.get(index.toString()).get('dateTo');
   }
 
 }

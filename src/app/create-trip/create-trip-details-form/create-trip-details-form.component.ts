@@ -31,24 +31,6 @@ export class CreateTripDetailsFormComponent implements OnInit {
     console.log(this.staticQn2);
     this.subscriptions.add(
       this.staticQn2.valueChanges.subscribe(val => {
-        this.sharedVar.createTripModel.tripDetails.destinations = [];
-        for (let i = 0; i < val; i++) {
-
-          const destinationFormGroup = this.fb.group({
-            name:  [null, { validators: [Validators.required]}],
-            dateFrom: [null, { validators: [Validators.required]}],
-            dateTo: [null, { validators: [Validators.required]}]
-          })
-
-          const destination = new Destinations();
-          destination.name = '';
-          destination.dateFrom = {year: 0, month: 0, day: 0};
-          destination.dateTo = {year: 0, month: 0, day: 0};
-
-          this.destinations.push(destinationFormGroup);
-          this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
-        }
-        console.log(this.sharedVar.createTripModel.tripDetails.destinations);
         console.log(this.createTripDetailsForm);
 
         this.noOfTripsEvent.next(val);

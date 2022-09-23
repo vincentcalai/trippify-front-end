@@ -1,28 +1,31 @@
 <div *ngIf="noOfTrips">
   <div class="form-group form-row required" *ngFor="let dest of [].constructor(noOfTrips); let i = index">
     <div class="col-md-8">
-      <label id="dest_label_0" for="dest_0_Label" [ngClass]="{'highlightLabel' : fieldIsInvalid(destinations)}"
+      <label id="name_label_0" for="name_0_label"
+        [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormName(i))}"
         class="control-label">
         <span *ngIf="noOfTrips != 1">Trip {{i + 1}} Destination</span>
         <span *ngIf="noOfTrips == 1">Trip Destination</span>
         <span class="mandatory-label"></span>&nbsp;
       </label>
     </div>
-    <div class="col-md-4 col-md-8-offset top-padding selectContainer">
-      <ng-select id="destInput_0" labelForId="destInput_0_Label" [clearable]="false" [items]="tmpDest"
-        [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_DESC" aria-labelledby="DEST_LABEL"
+    <div class="col-md-4 col-md-8-offset selectContainer">
+      <ng-select id="nameInput_0" labelForId="nameInput_0_Label" [clearable]="false" [items]="tmpDest"
+        [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_DESC" aria-labelledby="DEST_NAME_LABEL"
         [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].name" [ngModelOptions]="{standalone: true}"
         (change)="onChangeDest(i, sharedVar.createTripModel.tripDetails.destinations[i].name)">
       </ng-select>
     </div>
-    <label id="dest_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(destinations)}" class="error-text"
-      for="dest_0">
-      <span *ngIf="destinations.hasError('required') && !destinations.value && !destinations.pristine">This
+    <label id="name_error_0" [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormName(i))}"
+      class="error-text" for="name_0">
+      <span
+        *ngIf="getDestinationFormName(i).hasError('required') && !getDestinationFormName(i).value && !getDestinationFormName(i).pristine">This
         field is required</span>
     </label>
 
     <div class="form-group required">
-      <label id="date_from_label_0" class="control-label mandatory-label" for="date_from_0">
+      <label id="date_from_label_0" class="control-label mandatory-label" for="date_from_0"
+        [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateFrom(i))}">
         <span id="">Trip {{i + 1}} Date From:</span>
       </label>
       <div class="col-md-4">
@@ -33,9 +36,17 @@
           [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].dateFrom" [ngModelOptions]="{standalone: true}"
           (ngModelChange)="onChangeDateFrom(i, sharedVar.createTripModel.tripDetails.destinations[i].dateFrom)">
       </div>
+      <label id="dateFrom_error_0"
+        [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateFrom(i))}" class="error-text"
+        for="dateFrom_0">
+        <span
+          *ngIf="getDestinationFormDateFrom(i).hasError('required') && !getDestinationFormDateFrom(i).value && !getDestinationFormDateFrom(i).pristine">This
+          field is required</span>
+      </label>
     </div>
     <div class="form-group required">
-      <label id="date_to_label_0" class="control-label mandatory-label" for="date_to_0">
+      <label id="date_to_label_0" class="control-label mandatory-label" for="date_to_0"
+        [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateTo(i))}">
         <span id="">Trip {{i + 1}} Date To:</span>
       </label>
       <div class="col-md-4">
@@ -46,6 +57,13 @@
           [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].dateTo" [ngModelOptions]="{standalone: true}"
           (ngModelChange)="onChangeDateTo(i, sharedVar.createTripModel.tripDetails.destinations[i].dateTo)">
       </div>
+      <label id="dateTo_error_0"
+        [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateTo(i))}" class="error-text"
+        for="dateTo_0">
+        <span
+          *ngIf="getDestinationFormDateTo(i).hasError('required') && !getDestinationFormDateTo(i).value && !getDestinationFormDateTo(i).pristine">This
+          field is required</span>
+      </label>
     </div>
 
     <br>
