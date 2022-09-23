@@ -31,6 +31,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
         console.log(val);
 
         this.sharedVar.createTripModel.tripDetails.destinations = [];
+        this.destinations.clear();
         for (let i = 0; i < val; i++) {
           const destination = new Destinations();
           destination.name = '';
@@ -40,6 +41,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
           this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
           this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
         }
+        console.log(this.destinations);
         console.log(this.sharedVar.createTripModel.tripDetails.destinations);
 
         this.noOfTrips = val;
