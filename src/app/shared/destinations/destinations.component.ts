@@ -61,11 +61,15 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   }
 
   validateDateFrom(index: number) {
-    const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
+    let destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
     if(!destination.dateFrom || (destination.dateFrom.year == 0 && destination.dateFrom.month == 0 && destination.dateFrom.day == 0)){
       this['dateFrom_error_' + index] = 1;
     } else{
       this['dateFrom_error_' + index] = 0;
+    }
+
+    if(this['dateTo_error_' + index] == 0){
+      this.getDestinationFormDateTo(index).setErrors(null);
     }
   }
 
@@ -80,6 +84,10 @@ export class DestinationsComponent implements OnInit, OnDestroy {
       this['dateTo_error_' + index] = 1;
     } else{
       this['dateTo_error_' + index] = 0;
+    }
+
+    if(this['dateFrom_error_' + index] == 0){
+      this.getDestinationFormDateFrom(index).setErrors(null);
     }
   }
 

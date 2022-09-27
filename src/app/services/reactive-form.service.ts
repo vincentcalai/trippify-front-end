@@ -1,16 +1,21 @@
-import { Injectable } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable, OnDestroy } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReactiveFormService {
+export class ReactiveFormService{
 
   public readonly ALPHABET_SPACE= new RegExp(/^[A-Za-z][A-Za-z ]*$/);
   public readonly EMAIL = new RegExp(/^[_A-Za-z0-9\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/);
   public readonly NUMBERIC_DEC_REGEX = new RegExp(/^\d*\.?\d*$/);
 
-  constructor(public fb: FormBuilder) { }
+  constructor(
+    public fb: FormBuilder)
+  { }
+
 
   initializeCreateTripParticularForm() {
     return this.fb.group(
@@ -60,6 +65,9 @@ export class ReactiveFormService {
       name:  [null, { validators: [Validators.required]}],
       dateFrom: [null, { validators: [Validators.required]}],
       dateTo: [null, { validators: [Validators.required]}]
+    },
+    {
+      validators: this.validateDateFromLaterThanDateTo()
     })
   }
 
@@ -122,4 +130,37 @@ export class ReactiveFormService {
     control.markAsTouched({ onlySelf: true });
     control.markAsDirty({ onlySelf: true });
   }
+
+  validateDateFromLaterThanDateTo(): ValidationErrors {
+    return (group: FormGroup): ValidationErrors => {
+
+      let dateFrom = group.controls['dateFrom'];
+      let dateTo = group.controls['dateTo'];
+
+      if (dateFrom && dateFrom.valid && dateTo && dateTo.valid) {
+        const dateFromValue = this.getMomentDateFormat(dateFrom.value);
+        const dateToValue = this.getMomentDateFormat(dateTo.value);
+        if (dateToValue.isBefore(dateFromValue, 'day')) {
+          dateFrom.setErrors({dateToBeforeDateFromErr: true});
+          dateTo.setErrors({dateToBeforeDateFromErr: true});
+          return { dateToBeforeDateFromErr: true };
+        }
+      }
+      return null;
+    };
+  }
+
+  getMomentDateFormat(value: NgbDateStruct | string) {
+    if (typeof value == 'object') {
+      let date = moment().startOf('day'); // set time to 00:00:00
+      date.set('year', value.year);
+      date.set('month', value.month - 1);
+      date.set('date', value.day);
+      return date;
+    } else {
+      return moment(value, 'DD/MM/YYYY', true);
+    }
+  }
+
+
 }
