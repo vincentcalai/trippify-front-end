@@ -22,10 +22,6 @@
   padding: 19px;
 }
 
-.button_o:disabled {
-  background: #dddddd;
-}
-
 .btn_text_hover:hover {
   text-decoration: underline;
 }

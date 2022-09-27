@@ -1,1 +1,130 @@
-<p>create-preview-form works!</p>
+<app-progress-banner [currentProgress]="'preview'"></app-progress-banner>
+<div class="create-preview-container">
+
+  <div class="create-preview-sidenav">
+    <app-side-nav></app-side-nav>
+  </div>
+
+  <div class="create-preview-content">
+
+    <div class="form_title">
+      <span id="">Traveller Particulars</span>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_name_0" class="greyed_out">
+          <span id="particular_name">Traveller's Name:</span></label><br />
+        <div id="preview_name_0" class="form-desc">{{ particulars.name }}</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_email_0" class="greyed_out">
+          <span id="particular_email">Traveller's Email Address:</span></label><br />
+        <div id="preview_email_0" class="form-desc">{{ particulars.email }}</div>
+      </div>
+    </div>
+
+    <div class="form_title">
+      <span id="">Trip Budget</span>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_flightBudget_0" class="greyed_out">
+          <span id="budget_flightBudget">Flight Budget:</span></label><br />
+        <div id="preview_flightBudget_0" class="form-desc">{{ budget.flightBudget }}</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_hotelBudget_0" class="greyed_out">
+          <span id="budget_hotelBudget">Hotel Budget:</span></label><br />
+        <div id="preview_hotelBudget_0" class="form-desc">{{ budget.hotelBudget }}</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_attractionBudget_0" class="greyed_out">
+          <span id="budget_attractionBudget">Attraction Budget:</span></label><br />
+        <div id="preview_attractionBudget_0" class="form-desc">{{ budget.attractionBudget }}</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_transportBudget_0" class="greyed_out">
+          <span id="budget_transportBudget">Transport Budget:</span></label><br />
+        <div id="preview_transportBudget_0" class="form-desc">{{ budget.transportBudget }}</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_foodBudget_0" class="greyed_out">
+          <span id="budget_foodBudget">Food Budget:</span></label><br />
+        <div id="preview_foodBudget_0" class="form-desc">{{ budget.foodBudget }}</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_otherBudget_0" class="greyed_out">
+          <span id="budget_otherBudget">Other Budget:</span></label><br />
+        <div id="preview_otherBudget_0" class="form-desc">{{ budget.otherBudget }}</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_totalBudget_0" class="greyed_out">
+          <span id="budget_totalBudget">Total Budget:</span></label><br />
+        <div id="preview_totalBudget_0" class="form-desc">{{ budget.totalBudget }}</div>
+      </div>
+    </div>
+
+    <div class="form_title">
+      <span id="">Trip Details</span>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label id="preview_label_noOfDest_0" class="greyed_out">
+          <span id="trip_noOfDest">No. of Destinations:</span></label><br />
+        <div id="preview_noOfDest_0" class="form-desc">{{ tripDetails.noOfDestinations }}</div>
+      </div>
+    </div>
+
+    <div class="destinations-container" *ngFor="let destination of destinations; let i = index">
+      <div class="form-row">
+        <div class="col-md-6 form-group">
+          <label id="preview_label_dest_name_0" class="greyed_out">
+            <span id="trip_dest_name">Trip {{i + 1}} Destination:</span></label><br />
+          <div id="preview_dest_name_0" class="form-desc">{{ destination.name }}</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6 form-group">
+          <label id="preview_label_dateFrom_0" class="greyed_out">
+            <span id="trip_dateFrom">Trip {{i + 1}} Date From:</span></label><br />
+          <div id="preview_dateFrom_0" class="form-desc">{{ destination.dateFromStr }}</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6 form-group">
+          <label id="preview_label_dateTo_0" class="greyed_out">
+            <span id="trip_dateTo">Trip {{i + 1}} Date To:</span></label><br />
+          <div id="preview_dateTo_0" class="form-desc">{{ destination.dateToStr }}</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="text-right">
+      <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"><span id="next">Next</span>
+      </button>
+    </div>
+
+  </div>
+
+</div>

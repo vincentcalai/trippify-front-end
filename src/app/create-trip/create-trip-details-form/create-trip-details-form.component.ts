@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild, ɵɵsetComponentScope } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, Subscription } from 'rxjs';
 import { Destinations } from 'src/app/model/destinations.model';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 import { DestinationsComponent } from 'src/app/shared/destinations/destinations.component';
+import { NgbDateCustomParserFormatter } from 'src/app/shared/formatter/datepicker';
 
 @Component({
   selector: 'app-create-trip-details-form',
@@ -26,6 +28,7 @@ export class CreateTripDetailsFormComponent implements OnInit {
     public reactiveFormService: ReactiveFormService,
     public sharedVar: SharedVar,
     public fb: FormBuilder,
+    public dateFormatter: NgbDateParserFormatter,
     public router:Router) { }
 
   ngOnInit(): void {
@@ -45,15 +48,26 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
     if(this.createTripDetailsForm.valid){
       console.log("form is valid...");
-      const tripDetails = this.sharedVar.createTripModel.tripDetails;
 
-      //this.navigateToPreviewPage();
+      this.sharedVar.createTripModel.tripDetails.noOfDestinations = this.staticQn2.value;
+      const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
+
+      destinations.forEach(destination => {
+        destination.dateFromStr = this.dateFormatter.format(destination.dateFrom);
+        destination.dateToStr = this.dateFormatter.format(destination.dateTo);
+      });
+
+      this.navigateToPreviewPage();
     } else{
       console.log("form is invalid!");
       console.log(this.createTripDetailsForm);
 
       this.reactiveFormService.displayValidationErrors(this.createTripDetailsForm);
     }
+  }
+
+  navigateToPreviewPage() {
+    this.router.navigate(['/create-trip/create-preview'], { skipLocationChange: true });
   }
 
   fieldIsInvalid(field: AbstractControl): boolean {

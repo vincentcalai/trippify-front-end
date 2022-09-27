@@ -1,0 +1,32 @@
+.create-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.create-preview-container .create-preview-sidenav {
+  flex-basis: 25%;
+  flex-grow: 1;
+  background-color: #1a5978;
+}
+
+.create-preview-content {
+  border-right: 5px solid #1a5978;
+}
+
+.create-preview-container .create-preview-content {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 25%;
+  padding: 19px;
+}
+
+.text-right {
+  text-align: right;
+  margin-top: 32px;
+}
+
+.sep-hr-line {
+  border-bottom: 2px solid black;
+}
