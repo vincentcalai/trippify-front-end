@@ -26,7 +26,8 @@
     <div class="form-group required">
       <label id="date_from_label_0" class="control-label mandatory-label" for="date_from_0"
         [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateFrom(i))}">
-        <span id="">Trip {{i + 1}} Date From:</span>
+        <span id="" *ngIf="noOfTrips == 1">Trip Date From:</span>
+        <span id="" *ngIf="noOfTrips != 1">Trip {{i + 1}} Date From:</span>
       </label>
       <div class="col-md-4">
         <input type="text" id="date_from_0" name="date_from" placeholder="dd/mm/yyyy" ngbDatepicker
@@ -47,7 +48,8 @@
     <div class="form-group required">
       <label id="date_to_label_0" class="control-label mandatory-label" for="date_to_0"
         [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateTo(i))}">
-        <span id="">Trip {{i + 1}} Date To:</span>
+        <span id="" *ngIf="noOfTrips == 1">Trip Date To:</span>
+        <span id="" *ngIf="noOfTrips != 1">Trip {{i + 1}} Date To:</span>
       </label>
       <div class="col-md-4">
         <input type="text" id="date_to_0" name="date_to" placeholder="dd/mm/yyyy" ngbDatepicker

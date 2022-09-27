@@ -97,7 +97,8 @@
       <div class="form-row">
         <div class="col-md-6 form-group">
           <label id="preview_label_dest_name_0" class="greyed_out">
-            <span id="trip_dest_name">Trip {{i + 1}} Destination:</span></label><br />
+            <span id="trip_dest_name" *ngIf="destinations.length == 1">Trip Destination:</span>
+            <span id="trip_dest_name" *ngIf="destinations.length != 1">Trip {{i + 1}} Destination:</span></label><br />
           <div id="preview_dest_name_0" class="form-desc">{{ destination.name }}</div>
         </div>
       </div>
@@ -105,7 +106,8 @@
       <div class="form-row">
         <div class="col-md-6 form-group">
           <label id="preview_label_dateFrom_0" class="greyed_out">
-            <span id="trip_dateFrom">Trip {{i + 1}} Date From:</span></label><br />
+            <span id="trip_dateFrom" *ngIf="destinations.length == 1">Trip Date From:</span>
+            <span id="trip_dateFrom" *ngIf="destinations.length != 1">Trip {{i + 1}} Date From:</span></label><br />
           <div id="preview_dateFrom_0" class="form-desc">{{ destination.dateFromStr }}</div>
         </div>
       </div>
@@ -113,7 +115,8 @@
       <div class="form-row">
         <div class="col-md-6 form-group">
           <label id="preview_label_dateTo_0" class="greyed_out">
-            <span id="trip_dateTo">Trip {{i + 1}} Date To:</span></label><br />
+            <span id="trip_dateTo" *ngIf="destinations.length == 1">Trip Date To:</span>
+            <span id="trip_dateTo" *ngIf="destinations.length != 1">Trip {{i + 1}} Date To:</span></label><br />
           <div id="preview_dateTo_0" class="form-desc">{{ destination.dateToStr }}</div>
         </div>
       </div>
