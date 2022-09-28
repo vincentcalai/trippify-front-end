@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 })
 export class BudgetModel {
 
+    public isManualCal: boolean;
     public flightBudget: number;
     public hotelBudget: number;
     public attractionBudget: number;

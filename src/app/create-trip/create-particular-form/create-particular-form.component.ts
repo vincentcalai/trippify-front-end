@@ -28,7 +28,7 @@ export class CreateParticularFormComponent implements OnInit {
     this.createTripParticularForm = this.initializeCreateTripParticularForm();
 
     const prevRequest = this.sharedVar.createTripModel.particulars;
-    console.log(prevRequest);
+
     if(prevRequest && prevRequest.name && prevRequest.email){
       this.staticQn1.setValue(prevRequest.isRegUser ? this.sharedVar.YES : this.sharedVar.NO);
       this.name.setValue(prevRequest.name);

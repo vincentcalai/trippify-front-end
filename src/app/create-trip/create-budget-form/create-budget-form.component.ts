@@ -37,6 +37,20 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.createTripBudgetForm = this.reactiveFormService.initializeCreateTripBudgetForm();
 
+    const prevRequest = this.sharedVar.createTripModel.budget;
+    if(prevRequest && prevRequest.attractionBudget && prevRequest.flightBudget && prevRequest.foodBudget && prevRequest.hotelBudget
+      && prevRequest.otherBudget && prevRequest.transportBudget && prevRequest.totalBudget){
+        this.isManualCalEnabled = prevRequest.isManualCal;
+        this.attractionBudget.setValue(prevRequest.attractionBudget);
+        this.flightBudget.setValue(prevRequest.flightBudget);
+        this.foodBudget.setValue(prevRequest.foodBudget);
+        this.hotelBudget.setValue(prevRequest.hotelBudget);
+        this.otherBudget.setValue(prevRequest.otherBudget);
+        this.transportBudget.setValue(prevRequest.transportBudget);
+        this.totalBudget.setValue(prevRequest.totalBudget);
+        this.isBudgetComputed = true;
+    }
+
     this.subscriptions.add(
       this.flightBudget.valueChanges.subscribe(val => {
         this.addUpTotalBudget();
@@ -90,7 +104,7 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   }
 
   addUpTotalBudget() {
-    const totalAddedBudgetAmount = Number(this.flightBudget.value) + Number(this.hotelBudget.value) + Number(this.transportBudget.value) + 
+    const totalAddedBudgetAmount = Number(this.flightBudget.value) + Number(this.hotelBudget.value) + Number(this.transportBudget.value) +
       Number(this.attractionBudget.value) + Number(this.foodBudget.value) + Number(this.otherBudget.value);
     this.totalBudget.setValue(totalAddedBudgetAmount.toFixed(2));
   }
@@ -112,7 +126,6 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
   }
 
   confirmClicked(){
-
     if(!this.isManualCalEnabled){
       this.showNotComputedError = !this.isBudgetComputed;
     }
@@ -120,6 +133,7 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
     if(this.createTripBudgetForm.valid && !this.showNotComputedError){
       const budget = this.sharedVar.createTripModel.budget;
 
+      budget.isManualCal = this.isManualCalEnabled;
       budget.totalBudget = this.totalBudget?.value;
       budget.flightBudget = this.flightBudget?.value;
       budget.hotelBudget = this.hotelBudget?.value;
@@ -132,7 +146,6 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
     } else{
       this.reactiveFormService.displayValidationErrors(this.createTripBudgetForm);
     }
-
   }
 
   navigateToTripDetailsPage() {
