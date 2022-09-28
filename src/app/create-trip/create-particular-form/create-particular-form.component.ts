@@ -85,6 +85,10 @@ export class CreateParticularFormComponent implements OnInit {
     this.router.navigate(['/create-trip/create-budget'], { skipLocationChange: true });
   }
 
+  backToHomeScreen(){
+    this.router.navigate([''], { skipLocationChange: true });
+  }
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

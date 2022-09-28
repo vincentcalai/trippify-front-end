@@ -29,3 +29,8 @@
 .form-row {
   margin-top: 0px;
 }
+
+.button_back {
+  border-right: 0px;
+  margin-right: 10px;
+}

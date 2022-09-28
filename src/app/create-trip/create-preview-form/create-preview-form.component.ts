@@ -4,6 +4,7 @@ import { ParticularsModel } from 'src/app/model/particulars.model';
 import { TripDetailsModel } from 'src/app/model/trip-details.model';
 import { Destinations } from "src/app/model/destinations.model";
 import { SharedVar } from 'src/app/services/shared-var.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-preview-form',
@@ -17,7 +18,9 @@ export class CreatePreviewFormComponent implements OnInit {
   tripDetails: TripDetailsModel;
   destinations: Destinations[];
 
-  constructor(public sharedVar: SharedVar) { }
+  constructor(
+    public sharedVar: SharedVar,
+    public router: Router) { }
 
   ngOnInit(): void {
     console.log(this.sharedVar.createTripModel);
@@ -29,6 +32,10 @@ export class CreatePreviewFormComponent implements OnInit {
 
   confirmClicked(){
 
+  }
+
+  backToBudgetScreen(){
+    this.router.navigate(['/create-trip/create-preview'], { skipLocationChange: true });
   }
 
 }

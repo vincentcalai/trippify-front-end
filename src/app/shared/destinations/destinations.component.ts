@@ -44,7 +44,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
             this.destinations.removeAt(formArrLength - 1 - i);
           }
         }
-
         this.noOfTrips = newNoOfTrips;
       })
     );
