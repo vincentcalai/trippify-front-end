@@ -19,9 +19,12 @@ export class SharedVar{
   public readonly ATTRACTION_BUDGET_PCT = 10;
   public readonly OTHER_BUDGET_PCT = 5;
 
+  public readonly YES = "YES";
+  public readonly NO = "NO";
+
   public readonly STATIC_QN_1_VAL_MAP = new Map<string, boolean>([
-    ["YES", true],
-    ["NO", false]
+    [this.YES, true],
+    [this.NO, false]
   ]);
 
   public readonly STATIC_QN_2_VAL = [1,2,3,4,5,6,7,8,9,10];

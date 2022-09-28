@@ -25,7 +25,15 @@ export class CreateParticularFormComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.createTripParticularForm = this.initializecreateTripParticularForm();
+    this.createTripParticularForm = this.initializeCreateTripParticularForm();
+
+    const prevRequest = this.sharedVar.createTripModel.particulars;
+    console.log(prevRequest);
+    if(prevRequest && prevRequest.name && prevRequest.email){
+      this.staticQn1.setValue(prevRequest.isRegUser ? this.sharedVar.YES : this.sharedVar.NO);
+      this.name.setValue(prevRequest.name);
+      this.email.setValue(prevRequest.email);
+    }
 
     this.subscriptions.add(
       this.createTripParticularForm.get('staticQn1')!.valueChanges.subscribe(val => {
@@ -59,7 +67,7 @@ export class CreateParticularFormComponent implements OnInit {
     }
   }
 
-  initializecreateTripParticularForm(): FormGroup {
+  initializeCreateTripParticularForm(): FormGroup {
     const rfg =  this.reactiveFormService.initializeCreateTripParticularForm();
     return rfg;
   }
@@ -71,7 +79,8 @@ export class CreateParticularFormComponent implements OnInit {
   confirmClicked(){
     if(this.createTripParticularForm.valid){
       const particulars = this.sharedVar.createTripModel.particulars;
-
+      const staticQn1Ans = this.staticQn1?.value;
+      particulars.isRegUser = this.sharedVar.STATIC_QN_1_VAL_MAP.get(staticQn1Ans);
       particulars.name = this.name?.value;
       particulars.email = this.email?.value;
 
