@@ -40,7 +40,9 @@ export class ReactiveFormService{
   initializeCreateTripBudgetForm(){
     return this.fb.group(
       {
-        totalBudget: this.getBudgetFieldsControl(),
+        totalBudget: [
+          null, { validators: [Validators.required, Validators.pattern(this.NUMBERIC_DEC_REGEX), Validators.maxLength(9)] }
+        ],
         flightBudget: this.getBudgetFieldsControl(),
         hotelBudget: this.getBudgetFieldsControl(),
         transportBudget: this.getBudgetFieldsControl(),
@@ -72,7 +74,7 @@ export class ReactiveFormService{
   }
 
   getBudgetFieldsControl(): FormControl {
-    return this.fb.control(null, { validators: [Validators.required, Validators.pattern(this.NUMBERIC_DEC_REGEX), Validators.maxLength(9)] });
+    return this.fb.control({value: null, disabled: true}, { validators: [Validators.required, Validators.pattern(this.NUMBERIC_DEC_REGEX), Validators.maxLength(9)] });
   }
 
   getBasicRequiredControl(): FormControl {

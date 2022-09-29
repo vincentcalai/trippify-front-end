@@ -38,6 +38,7 @@ export class CreateTripDetailsFormComponent implements OnInit {
     console.log("prevRequest");
     console.log(prevRequest);
     if(prevRequest && prevRequest.noOfDestinations && prevRequest.destinations){
+      console.log("setting staticQn2 value");
       this.staticQn2.setValue(prevRequest.noOfDestinations);
       // this.destinations.controls.forEach(destination => {
       //   destination.value.dateFrom = this.dateFormatter.format(destination.dateFrom);

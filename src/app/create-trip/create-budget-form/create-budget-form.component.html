@@ -21,7 +21,7 @@
       <div class="form-group form-row required">
         <div class="col-md-8">
           <label id="total_budget_label_0" for="total_budget_0_Label"
-            [ngClass]="{'highlightLabel' : fieldIsInvalid(totalBudget)}" class="control-label">
+            [ngClass]="{'highlightLabel' : fieldIsInvalid(totalBudget) || showNotComputedError}" class="control-label">
             <span>Total Estimated Trip Budget (in SGD)</span>
             <span class="mandatory-label"></span>&nbsp;
           </label>
@@ -44,7 +44,8 @@
             </button>
           </div>
         </div>
-        <label id="total_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(totalBudget)}" class="error-text"
+        <label id="total_budget_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(totalBudget) || showNotComputedError}"
+          class="error-text"
           for="total_budget_0">
           <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(totalBudget)) == 'pattern'">Please enter amount in the
             correct format</span>
@@ -53,7 +54,8 @@
           <span *ngIf="totalBudget.hasError('required') && !totalBudget.value && !totalBudget.pristine">This field is
             required
           </span>
-          <span *ngIf="showNotComputedError">Bugdet is not computed. Please compute budget before proceeding.</span>
+          <span *ngIf="showNotComputedError && !totalBudget.hasError('required')">Budget is not computed. Please compute budget
+            before proceeding.</span>
         </label>
       </div>
       <br>

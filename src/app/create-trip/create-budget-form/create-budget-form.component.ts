@@ -94,8 +94,20 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
       this.showNotComputedError = false;
       this.addUpTotalBudget();
       this.totalBudget.disable();
+      this.attractionBudget.enable();
+      this.flightBudget.enable();
+      this.foodBudget.enable();
+      this.hotelBudget.enable();
+      this.transportBudget.enable();
+      this.otherBudget.enable();
     } else{
       this.totalBudget.enable();
+      this.attractionBudget.disable();
+      this.flightBudget.disable();
+      this.foodBudget.disable();
+      this.hotelBudget.disable();
+      this.transportBudget.disable();
+      this.otherBudget.disable();
     }
   }
 
