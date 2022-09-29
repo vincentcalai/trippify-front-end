@@ -62,6 +62,8 @@ export class DestinationsComponent implements OnInit, OnDestroy {
         destination.dateTo = null;
         this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
       } else{
+        if(prevReqDestinations[i].dateTo) this['dateTo_error_' + i] = 0;
+        if(prevReqDestinations[i].dateFrom) this['dateFrom_error_' + i] = 0;
         this.getDestinationFormName(i).setValue(prevReqDestinations[i].name);
         this.getDestinationFormDateFrom(i).setValue(prevReqDestinations[i].dateFrom);
         this.getDestinationFormDateTo(i).setValue(prevReqDestinations[i].dateTo);
