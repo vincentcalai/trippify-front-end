@@ -17,7 +17,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   @Input() events: Observable<number>;
   noOfTrips: number = 0;
 
-  tmpDest: string[] = ["Amsterdam", "Brussels", "Singapore", "Lisbon", "Madrid", "Tokyo"];
+  tmpDest: string[] = ["Amsterdam", "Brussels", "Canberra", "Dallas", "Edinburgh"];
 
   constructor(
     public reactiveFormService: ReactiveFormService,
@@ -28,69 +28,47 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    const prevRequest = this.sharedVar.createTripModel.tripDetails;
-    const prevRequestNoOfDest = prevRequest.noOfDestinations;
-    const prevRequestDests = this.sharedVar.createTripModel.tripDetails.destinations;
 
-    this.noOfTrips = prevRequestNoOfDest ? prevRequestNoOfDest : 0;
-
+    this.noOfTrips = this.sharedVar.createTripModel.tripDetails.noOfDestinations;
     console.log("this.noOfTrips: " + this.noOfTrips);
-
-    if(this.noOfTrips){
-      console.log("inside noOfTrips if loop");
-      console.log("prevRequestDests.length: " + prevRequestDests.length);
-      for (let i = 0; i < this.noOfTrips; i++) {
-        // const destination = new Destinations();
-        // destination.name = prevRequestDests[i].name;
-        // destination.dateFrom = prevRequestDests[i].dateFrom;
-        // destination.dateTo = prevRequestDests[i].dateTo;
-
-
-        this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
-        //this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
-
-        this.getDestinationFormName(i).setValue(prevRequestDests[i].name);
-        this.getDestinationFormDateFrom(i).setValue(prevRequestDests[i].dateFrom);
-        this.getDestinationFormDateTo(i).setValue(prevRequestDests[i].dateTo);
-      }
-    }
-
-    console.log(this.destinations);
+    this.initDestFormGroup(this.noOfTrips);
 
     this.subscriptions.add(
       this.events.subscribe(newNoOfTrips => {
-        console.log("this.noOfTrips: " + this.noOfTrips);
-        console.log("newNoOfTrips: " + newNoOfTrips);
-        if(newNoOfTrips > this.noOfTrips) {
-          this.createNewTripDest(this.noOfTrips, newNoOfTrips);
-        } else if(newNoOfTrips < this.noOfTrips){
-          let arrLength = this.sharedVar.createTripModel.tripDetails.destinations.length;
-          let startIdx = this.noOfTrips - newNoOfTrips;
-          // console.log("delete from index onwards: " + (arrLength - startIdx) + " number of elements to be deleted: " + startIdx);
-          // this.sharedVar.createTripModel.tripDetails.destinations.splice(arrLength - startIdx, startIdx);
 
-          let formArrLength = this.destinations.length;
-          for (let i = 0; i < startIdx ; i++) {
-            this.destinations.removeAt(formArrLength - 1 - i);
-          }
-          console.log(this.destinations);
-        }
+        this.destinations.clear();
+
+        this.initDestFormGroup(newNoOfTrips);
+
+        console.log(this.sharedVar.createTripModel.tripDetails);
         this.noOfTrips = newNoOfTrips;
       })
     );
   }
 
-  createNewTripDest(startIdx: number, endIdx: number){
+  initDestFormGroup(newNoOfTrips: number) {
 
-    for (let i = startIdx; i < endIdx; i++) {
-      const destination = new Destinations();
-      destination.name = '';
-      destination.dateFrom = null;
-      destination.dateTo = null;
+    let prevReqDestinations = this.sharedVar.createTripModel.tripDetails.destinations;
 
+    for(let i = 0; i < newNoOfTrips; i++){
+      console.log(prevReqDestinations);
+      console.log(prevReqDestinations[i]);
       this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
-      this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
+      if(!prevReqDestinations[i]){
+        console.log("push in new destination...");
+        const destination = new Destinations();
+        destination.name = '';
+        destination.dateFrom = null;
+        destination.dateTo = null;
+        this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
+      } else{
+        this.getDestinationFormName(i).setValue(prevReqDestinations[i].name);
+        this.getDestinationFormDateFrom(i).setValue(prevReqDestinations[i].dateFrom);
+        this.getDestinationFormDateTo(i).setValue(prevReqDestinations[i].dateTo);
+      }
+
     }
+
   }
 
   onChangeDest(index: number, name: string){
@@ -120,6 +98,8 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   }
 
   validateDateFromAndTo(index: number) {
+    console.log("index: " + index);
+    console.log("this['dateTo_error_' + index]: " + this['dateTo_error_' + index] + "  this['dateFrom_error_' + index]: " + this['dateFrom_error_' + index]);
     if(this['dateTo_error_' + index] == 0 && this['dateFrom_error_' + index] == 0){
       this.getDestinationFormDateFrom(index).setErrors(null);
       this.getDestinationFormDateTo(index).setErrors(null);
