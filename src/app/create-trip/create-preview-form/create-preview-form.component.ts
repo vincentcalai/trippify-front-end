@@ -34,8 +34,8 @@ export class CreatePreviewFormComponent implements OnInit {
 
   }
 
-  backToBudgetScreen(){
-    this.router.navigate(['/create-trip/create-preview'], { skipLocationChange: true });
+  backToTripDetailsScreen(){
+    this.router.navigate(['/create-trip/create-trip-details'], { skipLocationChange: true });
   }
 
 }

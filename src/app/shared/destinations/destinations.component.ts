@@ -28,11 +28,13 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    console.log(this.destinations);
+
     this.subscriptions.add(
       this.events.subscribe(newNoOfTrips => {
-        if(this.noOfTrips == 0){
-          this.createNewTripDest(0, newNoOfTrips);
-        } else if(newNoOfTrips > this.noOfTrips) {
+        console.log("this.noOfTrips: " + this.noOfTrips);
+        console.log("newNoOfTrips: " + newNoOfTrips);
+        if(newNoOfTrips > this.noOfTrips) {
           this.createNewTripDest(this.noOfTrips, newNoOfTrips);
         } else if(newNoOfTrips < this.noOfTrips){
           let arrLength = this.sharedVar.createTripModel.tripDetails.destinations.length;

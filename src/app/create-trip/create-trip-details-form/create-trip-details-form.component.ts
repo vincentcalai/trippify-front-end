@@ -33,8 +33,18 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createTripDetailsForm = this.reactiveFormService.initializeCreateTripDetailsForm();
-    console.log("logging staticQn2");
-    console.log(this.staticQn2);
+
+    const prevRequest = this.sharedVar.createTripModel.tripDetails;
+    console.log("prevRequest");
+    console.log(prevRequest);
+    if(prevRequest && prevRequest.noOfDestinations && prevRequest.destinations){
+      this.staticQn2.setValue(prevRequest.noOfDestinations);
+      // this.destinations.controls.forEach(destination => {
+      //   destination.value.dateFrom = this.dateFormatter.format(destination.dateFrom);
+      //   destination.dateToStr = this.dateFormatter.format(destination.dateTo);
+      // });
+    }
+
     this.subscriptions.add(
       this.staticQn2.valueChanges.subscribe(val => {
         console.log(this.createTripDetailsForm);
@@ -52,6 +62,7 @@ export class CreateTripDetailsFormComponent implements OnInit {
       this.sharedVar.createTripModel.tripDetails.noOfDestinations = this.staticQn2.value;
       const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
 
+      console.log(destinations);
       destinations.forEach(destination => {
         destination.dateFromStr = this.dateFormatter.format(destination.dateFrom);
         destination.dateToStr = this.dateFormatter.format(destination.dateTo);
@@ -84,13 +95,5 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
   get destinations(){
     return this.createTripDetailsForm.controls['destinations'] as FormArray;
-  }
-
-  get dateFrom(){
-    return this.createTripDetailsForm.get('dateFrom');
-  }
-
-  get dateTo(){
-    return this.createTripDetailsForm.get('dateTo');
   }
 }
