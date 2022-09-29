@@ -47,11 +47,14 @@ export class CreateTripDetailsFormComponent implements OnInit {
     }
 
     this.subscriptions.add(
-      this.staticQn2.valueChanges.subscribe(val => {
+      this.staticQn2.valueChanges.subscribe(staticQn2Ans => {
+        this.sharedVar.createTripModel.tripDetails.noOfDestinations = staticQn2Ans;
         console.log(this.createTripDetailsForm);
-        this.noOfTripsEvent.next(val);
+        this.noOfTripsEvent.next(staticQn2Ans);
       })
     )
+
+
   }
 
   confirmClicked(){
@@ -60,7 +63,6 @@ export class CreateTripDetailsFormComponent implements OnInit {
     if(this.createTripDetailsForm.valid){
       console.log("form is valid...");
 
-      this.sharedVar.createTripModel.tripDetails.noOfDestinations = this.staticQn2.value;
       const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
 
       console.log(destinations);

@@ -28,6 +28,33 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    const prevRequest = this.sharedVar.createTripModel.tripDetails;
+    const prevRequestNoOfDest = prevRequest.noOfDestinations;
+    const prevRequestDests = this.sharedVar.createTripModel.tripDetails.destinations;
+
+    this.noOfTrips = prevRequestNoOfDest ? prevRequestNoOfDest : 0;
+
+    console.log("this.noOfTrips: " + this.noOfTrips);
+
+    if(this.noOfTrips){
+      console.log("inside noOfTrips if loop");
+      console.log("prevRequestDests.length: " + prevRequestDests.length);
+      for (let i = 0; i < this.noOfTrips; i++) {
+        // const destination = new Destinations();
+        // destination.name = prevRequestDests[i].name;
+        // destination.dateFrom = prevRequestDests[i].dateFrom;
+        // destination.dateTo = prevRequestDests[i].dateTo;
+
+
+        this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
+        //this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
+
+        this.getDestinationFormName(i).setValue(prevRequestDests[i].name);
+        this.getDestinationFormDateFrom(i).setValue(prevRequestDests[i].dateFrom);
+        this.getDestinationFormDateTo(i).setValue(prevRequestDests[i].dateTo);
+      }
+    }
+
     console.log(this.destinations);
 
     this.subscriptions.add(
@@ -39,12 +66,14 @@ export class DestinationsComponent implements OnInit, OnDestroy {
         } else if(newNoOfTrips < this.noOfTrips){
           let arrLength = this.sharedVar.createTripModel.tripDetails.destinations.length;
           let startIdx = this.noOfTrips - newNoOfTrips;
-          this.sharedVar.createTripModel.tripDetails.destinations.splice(arrLength - startIdx, startIdx);
+          // console.log("delete from index onwards: " + (arrLength - startIdx) + " number of elements to be deleted: " + startIdx);
+          // this.sharedVar.createTripModel.tripDetails.destinations.splice(arrLength - startIdx, startIdx);
 
           let formArrLength = this.destinations.length;
           for (let i = 0; i < startIdx ; i++) {
             this.destinations.removeAt(formArrLength - 1 - i);
           }
+          console.log(this.destinations);
         }
         this.noOfTrips = newNoOfTrips;
       })
@@ -56,8 +85,8 @@ export class DestinationsComponent implements OnInit, OnDestroy {
     for (let i = startIdx; i < endIdx; i++) {
       const destination = new Destinations();
       destination.name = '';
-      destination.dateFrom = {year: 0, month: 0, day: 0};
-      destination.dateTo = {year: 0, month: 0, day: 0};
+      destination.dateFrom = null;
+      destination.dateTo = null;
 
       this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
       this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
@@ -75,7 +104,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
   validateDateFrom(index: number) {
     const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
-    this['dateFrom_error_' + index] = (!destination.dateFrom || (destination.dateFrom.year == 0 && destination.dateFrom.month == 0 && destination.dateFrom.day == 0)) ? 1 : 0;
+    this['dateFrom_error_' + index] = !destination.dateFrom ? 1 : 0;
     this.validateDateFromAndTo(index);
   }
 
@@ -86,7 +115,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
   validateDateTo(index: number) {
     const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
-    this['dateTo_error_' + index] = (!destination.dateTo || (destination.dateTo.year == 0 && destination.dateTo.month == 0 && destination.dateTo.day == 0)) ? 1 : 0;
+    this['dateTo_error_' + index] = !destination.dateTo ? 1 : 0;
     this.validateDateFromAndTo(index);
   }
 
@@ -100,8 +129,8 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   validateAllDate(){
     const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
     for(let i=0; i<destinations.length; i++){
-      this['dateFrom_error_' + i] = (!destinations[i].dateFrom || (destinations[i].dateFrom.year == 0 && destinations[i].dateFrom.month == 0 && destinations[i].dateFrom.day == 0)) ? 1 : 0;
-      this['dateTo_error_' + i] = (!destinations[i].dateTo || (destinations[i].dateTo.year == 0 && destinations[i].dateTo.month == 0 && destinations[i].dateTo.day == 0)) ? 1: 0;
+      this['dateFrom_error_' + i] = !destinations[i].dateFrom ? 1 : 0;
+      this['dateTo_error_' + i] = !destinations[i].dateTo ? 1: 0;
     }
   }
 
