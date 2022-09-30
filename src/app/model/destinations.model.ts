@@ -11,5 +11,6 @@ export class Destinations{
   public dateTo: {year: number, month: number, day: number};
   public dateToStr: string;
   public dateToDayName : string;
+  public noOfTripDays: number;
 }
 

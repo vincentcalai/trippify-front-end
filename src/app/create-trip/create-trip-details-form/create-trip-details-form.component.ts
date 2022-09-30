@@ -62,6 +62,7 @@ export class CreateTripDetailsFormComponent implements OnInit {
         destination.dateToStr = this.dateFormatter.format(destination.dateTo);
         destination.dateFromDayName = this.sharedMethods.getDayName(destination.dateFromStr);
         destination.dateToDayName = this.sharedMethods.getDayName(destination.dateToStr);
+        destination.noOfTripDays = this.sharedMethods.getDayDiff(destination.dateFromStr, destination.dateToStr) + 1;
       });
 
       this.navigateToPreviewPage();

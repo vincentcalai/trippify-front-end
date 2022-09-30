@@ -40,6 +40,12 @@ export class SharedMethods {
       return dateMomentObject.format('dddd').substring(0,3).toUpperCase();
   }
 
+  getDayDiff(dateFromStr, dateToStr){
+    var dateFromMomentObject = moment(dateFromStr, "DD/MM/YYYY");
+    var dateToMomentObject = moment(dateToStr, "DD/MM/YYYY");
+    return dateToMomentObject.diff(dateFromMomentObject, 'days');
+}
+
 
   scrollToTop() {
     window.scroll(0, 0);
