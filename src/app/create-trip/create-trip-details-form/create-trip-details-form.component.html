@@ -14,14 +14,14 @@
 
       <div class="form-group form-row required">
         <div class="col-md-8">
-          <label id="qn2_label_0" for="qn2_0_Label" [ngClass]="{'highlightLabel' : fieldIsInvalid(staticQn2)}"
+          <label id="qn2_label_0" for="qn2_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(staticQn2)}"
             class="control-label">
             <span>How many destination does the trip has?</span>
             <span class="mandatory-label"></span>&nbsp;
           </label>
         </div>
         <div class="col-md-4 col-md-8-offset selectContainer">
-          <ng-select id="qn2Input_0" labelForId="qn2Input_0_Label" [clearable]="false"
+          <ng-select id="qn2Input_0" labelForId="qn2_0" [clearable]="false"
             [items]="sharedVar.destNumSource.getValue()" [placeholder]="sharedVar.QN2_PLACEHOLDER_DESC"
             aria-labelledby="STATIC_QN_LABEL_2" formControlName="staticQn2">
           </ng-select>

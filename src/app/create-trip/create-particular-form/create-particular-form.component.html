@@ -41,7 +41,7 @@
           <input id="name_0" type="text" class="form-control allCaps" formControlName="name" name="name"
             *ngIf="!isUserRegistered">
           <div class="col-md-4 col-md-8-offset selectContainer" *ngIf="isUserRegistered">
-            <ng-select id="nameInput_0" labelForId="nameInput_0_Label" [clearable]="false"
+            <ng-select id="nameInput_0" labelForId="name_0" [clearable]="false"
               [items]="username" [placeholder]="sharedVar.NAME_PLACEHOLDER_DESC"
               aria-labelledby="NAME_LABEL_1" formControlName="name">
             </ng-select>
