@@ -30,17 +30,12 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.noOfTrips = this.sharedVar.createTripModel.tripDetails.noOfDestinations;
-    console.log("this.noOfTrips: " + this.noOfTrips);
     this.initDestFormGroup(this.noOfTrips);
 
     this.subscriptions.add(
       this.events.subscribe(newNoOfTrips => {
-
         this.destinations.clear();
-
         this.initDestFormGroup(newNoOfTrips);
-
-        console.log(this.sharedVar.createTripModel.tripDetails);
         this.noOfTrips = newNoOfTrips;
       })
     );
@@ -51,11 +46,8 @@ export class DestinationsComponent implements OnInit, OnDestroy {
     let prevReqDestinations = this.sharedVar.createTripModel.tripDetails.destinations;
 
     for(let i = 0; i < newNoOfTrips; i++){
-      console.log(prevReqDestinations);
-      console.log(prevReqDestinations[i]);
       this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
       if(!prevReqDestinations[i]){
-        console.log("push in new destination...");
         const destination = new Destinations();
         destination.name = '';
         destination.dateFrom = null;
@@ -68,18 +60,17 @@ export class DestinationsComponent implements OnInit, OnDestroy {
         this.getDestinationFormDateFrom(i).setValue(prevReqDestinations[i].dateFrom);
         this.getDestinationFormDateTo(i).setValue(prevReqDestinations[i].dateTo);
       }
-
     }
 
   }
 
   onChangeDest(index: number, name: string){
-    this.destinations.at(index).get('name').setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].name);
+    this.getDestinationFormName(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].name);
   }
 
   onChangeDateFrom(index: number){
     this.validateDateFrom(index);
-    this.destinations.at(index).get('dateFrom').setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateFrom);
+    this.getDestinationFormDateFrom(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateFrom);
   }
 
   validateDateFrom(index: number) {
@@ -90,7 +81,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
   onChangeDateTo(index: number){
     this.validateDateTo(index);
-    this.destinations.at(index).get('dateTo').setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateTo);
+    this.getDestinationFormDateTo(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateTo);
   }
 
   validateDateTo(index: number) {
@@ -100,8 +91,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   }
 
   validateDateFromAndTo(index: number) {
-    console.log("index: " + index);
-    console.log("this['dateTo_error_' + index]: " + this['dateTo_error_' + index] + "  this['dateFrom_error_' + index]: " + this['dateFrom_error_' + index]);
     if(this['dateTo_error_' + index] == 0 && this['dateFrom_error_' + index] == 0){
       this.getDestinationFormDateFrom(index).setErrors(null);
       this.getDestinationFormDateTo(index).setErrors(null);

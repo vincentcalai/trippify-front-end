@@ -35,21 +35,13 @@ export class CreateTripDetailsFormComponent implements OnInit {
     this.createTripDetailsForm = this.reactiveFormService.initializeCreateTripDetailsForm();
 
     const prevRequest = this.sharedVar.createTripModel.tripDetails;
-    console.log("prevRequest");
-    console.log(prevRequest);
     if(prevRequest && prevRequest.noOfDestinations && prevRequest.destinations){
-      console.log("setting staticQn2 value");
       this.staticQn2.setValue(prevRequest.noOfDestinations);
-      // this.destinations.controls.forEach(destination => {
-      //   destination.value.dateFrom = this.dateFormatter.format(destination.dateFrom);
-      //   destination.dateToStr = this.dateFormatter.format(destination.dateTo);
-      // });
     }
 
     this.subscriptions.add(
       this.staticQn2.valueChanges.subscribe(staticQn2Ans => {
         this.sharedVar.createTripModel.tripDetails.noOfDestinations = staticQn2Ans;
-        console.log(this.createTripDetailsForm);
         this.noOfTripsEvent.next(staticQn2Ans);
       })
     )
@@ -61,11 +53,9 @@ export class CreateTripDetailsFormComponent implements OnInit {
     this.destinationsComponent.validateAllDate();
 
     if(this.createTripDetailsForm.valid){
-      console.log("form is valid...");
 
       const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
 
-      console.log(destinations);
       destinations.forEach(destination => {
         destination.dateFromStr = this.dateFormatter.format(destination.dateFrom);
         destination.dateToStr = this.dateFormatter.format(destination.dateTo);
@@ -73,7 +63,6 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
       this.navigateToPreviewPage();
     } else{
-      console.log("form is invalid!");
       console.log(this.createTripDetailsForm);
 
       this.reactiveFormService.displayValidationErrors(this.createTripDetailsForm);

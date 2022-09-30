@@ -23,7 +23,6 @@ export class CreatePreviewFormComponent implements OnInit {
     public router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.sharedVar.createTripModel);
     this.particulars = this.sharedVar.createTripModel.particulars;
     this.budget = this.sharedVar.createTripModel.budget;
     this.tripDetails = this.sharedVar.createTripModel.tripDetails;
