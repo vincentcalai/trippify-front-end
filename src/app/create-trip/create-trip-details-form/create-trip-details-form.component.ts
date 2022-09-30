@@ -55,6 +55,10 @@ export class CreateTripDetailsFormComponent implements OnInit {
     if(this.createTripDetailsForm.valid){
 
       const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
+      console.log(this.staticQn2.value);
+      console.log(destinations);
+      destinations.splice(this.staticQn2.value);
+      console.log(destinations);
 
       destinations.forEach(destination => {
         destination.dateFromStr = this.dateFormatter.format(destination.dateFrom);
@@ -63,7 +67,6 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
       this.navigateToPreviewPage();
     } else{
-      console.log(this.createTripDetailsForm);
 
       this.reactiveFormService.displayValidationErrors(this.createTripDetailsForm);
     }

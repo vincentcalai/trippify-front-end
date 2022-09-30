@@ -86,7 +86,6 @@ export class CreateParticularFormComponent implements OnInit {
 
       this.navigateToBudgetPage();
     } else{
-      console.log(this.createTripParticularForm);
       this.reactiveFormService.displayValidationErrors(this.createTripParticularForm);
     }
   }
