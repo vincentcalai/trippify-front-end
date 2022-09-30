@@ -5,6 +5,7 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, Subscription } from 'rxjs';
 import { Destinations } from 'src/app/model/destinations.model';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
+import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 import { DestinationsComponent } from 'src/app/shared/destinations/destinations.component';
 import { NgbDateCustomParserFormatter } from 'src/app/shared/formatter/datepicker';
@@ -27,6 +28,7 @@ export class CreateTripDetailsFormComponent implements OnInit {
   constructor(
     public reactiveFormService: ReactiveFormService,
     public sharedVar: SharedVar,
+    public sharedMethods: SharedMethods,
     public fb: FormBuilder,
     public dateFormatter: NgbDateParserFormatter,
     public router:Router) { }
@@ -45,8 +47,6 @@ export class CreateTripDetailsFormComponent implements OnInit {
         this.noOfTripsEvent.next(staticQn2Ans);
       })
     )
-
-
   }
 
   confirmClicked(){
@@ -55,19 +55,17 @@ export class CreateTripDetailsFormComponent implements OnInit {
     if(this.createTripDetailsForm.valid){
 
       const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
-      console.log(this.staticQn2.value);
-      console.log(destinations);
       destinations.splice(this.staticQn2.value);
-      console.log(destinations);
 
       destinations.forEach(destination => {
         destination.dateFromStr = this.dateFormatter.format(destination.dateFrom);
         destination.dateToStr = this.dateFormatter.format(destination.dateTo);
+        destination.dateFromDayName = this.sharedMethods.getDayName(destination.dateFromStr);
+        destination.dateToDayName = this.sharedMethods.getDayName(destination.dateToStr);
       });
 
       this.navigateToPreviewPage();
     } else{
-
       this.reactiveFormService.displayValidationErrors(this.createTripDetailsForm);
     }
   }

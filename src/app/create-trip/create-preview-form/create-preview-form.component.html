@@ -106,20 +106,13 @@
       <div class="form-row">
         <div class="col-md-6 form-group">
           <label id="preview_label_dateFrom_0" class="greyed_out">
-            <span id="trip_dateFrom" *ngIf="destinations.length == 1">Trip Date From:</span>
-            <span id="trip_dateFrom" *ngIf="destinations.length != 1">Trip {{i + 1}} Date From:</span></label><br />
-          <div id="preview_dateFrom_0" class="form-desc">{{ destination.dateFromStr }}</div>
+            <span id="trip_dateFrom" *ngIf="destinations.length == 1">Trip Period:</span>
+            <span id="trip_dateFrom" *ngIf="destinations.length != 1">Trip {{i + 1}} Period:</span></label><br />
+            <div id="preview_dateFrom_0" class="form-desc">{{ destination.dateFromStr }} ({{destination.dateFromDayName}}) - {{
+              destination.dateToStr }} ({{destination.dateToDayName}})</div>
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="col-md-6 form-group">
-          <label id="preview_label_dateTo_0" class="greyed_out">
-            <span id="trip_dateTo" *ngIf="destinations.length == 1">Trip Date To:</span>
-            <span id="trip_dateTo" *ngIf="destinations.length != 1">Trip {{i + 1}} Date To:</span></label><br />
-          <div id="preview_dateTo_0" class="form-desc">{{ destination.dateToStr }}</div>
-        </div>
-      </div>
     </div>
 
 

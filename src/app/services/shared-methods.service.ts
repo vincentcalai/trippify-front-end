@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { BudgetModel } from '../model/budget.model';
 import { CreateTripModel } from '../model/create-trip.model';
-import { Destinations } from '../model/destinations.model';
 import { ParticularsModel } from '../model/particulars.model';
 import { TripDetailsModel } from '../model/trip-details.model';
 import { SharedVar } from './shared-var.service';
@@ -34,6 +34,12 @@ export class SharedMethods {
     }
     this.router.navigate(route, { skipLocationChange: true });
   }
+
+  getDayName(dateStr){
+      var dateMomentObject = moment(dateStr, "DD/MM/YYYY");
+      return dateMomentObject.format('dddd').substring(0,3).toUpperCase();
+  }
+
 
   scrollToTop() {
     window.scroll(0, 0);
