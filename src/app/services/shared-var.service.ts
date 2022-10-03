@@ -43,6 +43,9 @@ export class SharedVar{
   public destNumSource = new BehaviorSubject(null);
   destNumSourceList = this.destNumSource.asObservable();
 
+  public exceptionSource = new BehaviorSubject<string>('');
+  currentException = this.exceptionSource.asObservable();
+
   constructor() {
     this.changeYnListSource(
       Array.from( this.STATIC_QN_1_VAL_MAP.keys() )
@@ -58,6 +61,10 @@ export class SharedVar{
 
   destNumListSource(value){
     this.destNumSource.next(value);
+  }
+
+  changeException(status: string) {
+    this.exceptionSource.next(status);
   }
 
 }

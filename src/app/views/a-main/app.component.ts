@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedVar } from 'src/app/services/shared-var.service';
 
 @Component({
   selector: 'app-root',

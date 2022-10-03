@@ -1,4 +1,9 @@
 <div id="home" class="layout-container">
+  <div id="msgDiv" class="no-padding" *ngIf="errorMsg">
+    <div id="txtDiv" class="alert-text notification">
+      <div [innerHTML]="errorMsg" style="word-wrap: break-word"></div>
+    </div>
+  </div>
   <section class="bg-hero">
     <div class="bp-hero-body">
       <div class="header-container">

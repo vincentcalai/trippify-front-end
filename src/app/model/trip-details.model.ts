@@ -8,7 +8,5 @@ export class TripDetailsModel {
 
     public noOfDestinations: number;
     public destinations: Destinations[];
-    public createdBy: string;
-    public createdDt: Date;
 
 }

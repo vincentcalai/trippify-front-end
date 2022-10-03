@@ -9,6 +9,7 @@ import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApiService } from 'src/app/services/api/api.service';
 import { take } from 'rxjs/operators';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-create-preview-form',
@@ -46,6 +47,10 @@ export class CreatePreviewFormComponent implements OnInit {
   confirmTrip(){
     this.apiService.postCreateTrip().pipe(take(1)).subscribe(resp => {
       console.log(resp);
+      this.modalRef.hide();
+      this.router.navigate([''], { skipLocationChange: true });
+    }, error => {
+      this.sharedVar.changeException(error);
     })
   }
 
