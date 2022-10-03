@@ -9,6 +9,8 @@ import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { SharedModule } from './shared/shared.module';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from './shared/formatter/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { NgbDateCustomParserFormatter } from './shared/formatter/datepicker';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule,
+    ModalModule.forRoot(),
   ],
   providers: [
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }

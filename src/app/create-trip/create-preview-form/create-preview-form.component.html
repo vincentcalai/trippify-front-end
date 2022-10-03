@@ -121,10 +121,33 @@
           id="back">Back</span>
       </button>
 
-      <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"><span id="next">Next</span>
+      <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"><span id="next">Confirm</span>
       </button>
     </div>
 
   </div>
 
 </div>
+
+<ng-template #confirmInputsModal>
+  <div class="modal-sm modal-dialog-centered">
+    <div class="popup_dialog">
+      <div class="form_content">
+        <div class="popup_title">
+          <h3>
+            <span id="cfm_trip_dialog_heading">Confirm Create Trip</span>
+          </h3>
+        </div>
+        <div>
+          <span id="cfm_trip_dialog_desc">Are you sure to create trip with the confirmed details?</span>
+        </div>
+      </div>
+      <div class="popup_btn">
+        <button id="cfm_trip_dialog_button" class="btn btn-default"
+          (click)="confirmTrip()"><span>Confirm</span></button>
+        <button id="cx_trip_dialog_button" class="btn btn-default"
+          (click)="modalRef.hide()"><span>Cancel</span></button>
+      </div>
+    </div>
+  </div>
+</ng-template>

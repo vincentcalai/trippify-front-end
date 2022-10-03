@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BudgetModel } from 'src/app/model/budget.model';
 import { ParticularsModel } from 'src/app/model/particulars.model';
 import { TripDetailsModel } from 'src/app/model/trip-details.model';
@@ -6,6 +6,7 @@ import { Destinations } from "src/app/model/destinations.model";
 import { SharedVar } from 'src/app/services/shared-var.service';
 import { Router } from '@angular/router';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-create-preview-form',
@@ -18,11 +19,14 @@ export class CreatePreviewFormComponent implements OnInit {
   budget: BudgetModel;
   tripDetails: TripDetailsModel;
   destinations: Destinations[];
+  modalRef: BsModalRef;
+  @ViewChild('confirmInputsModal', { static: true }) confirmInputsModal: TemplateRef<any>;
 
   constructor(
     public sharedVar: SharedVar,
     public sharedMethods: SharedMethods,
-    public router: Router) { }
+    public router: Router,
+    public modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.particulars = this.sharedVar.createTripModel.particulars;
@@ -33,7 +37,11 @@ export class CreatePreviewFormComponent implements OnInit {
   }
 
   confirmClicked(){
+    this.modalRef = this.modalService.show(this.confirmInputsModal, this.sharedVar.sharedModalConfig);
+  }
 
+  confirmTrip(){
+    console.log(this.sharedVar.createTripModel);
   }
 
   backToTripDetailsScreen(){

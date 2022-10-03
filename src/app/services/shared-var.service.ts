@@ -27,6 +27,12 @@ export class SharedVar{
     [this.NO, false]
   ]);
 
+  public readonly sharedModalConfig = {
+    backdrop: true,
+    ignoreBackdropClick: true,
+    animated: false
+  };
+
   public readonly STATIC_QN_2_VAL = [1,2,3,4,5,6,7,8,9,10];
 
   public createTripModel: CreateTripModel = new CreateTripModel();
