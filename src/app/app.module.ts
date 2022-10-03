@@ -11,6 +11,7 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from './shared/formatter/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
   ],

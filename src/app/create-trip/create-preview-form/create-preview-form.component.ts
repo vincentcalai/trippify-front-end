@@ -7,6 +7,8 @@ import { SharedVar } from 'src/app/services/shared-var.service';
 import { Router } from '@angular/router';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ApiService } from 'src/app/services/api/api.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-preview-form',
@@ -26,7 +28,8 @@ export class CreatePreviewFormComponent implements OnInit {
     public sharedVar: SharedVar,
     public sharedMethods: SharedMethods,
     public router: Router,
-    public modalService: BsModalService) { }
+    public modalService: BsModalService,
+    public apiService: ApiService) { }
 
   ngOnInit(): void {
     this.particulars = this.sharedVar.createTripModel.particulars;
@@ -41,7 +44,9 @@ export class CreatePreviewFormComponent implements OnInit {
   }
 
   confirmTrip(){
-    console.log(this.sharedVar.createTripModel);
+    this.apiService.postCreateTrip().pipe(take(1)).subscribe(resp => {
+      console.log(resp);
+    })
   }
 
   backToTripDetailsScreen(){
