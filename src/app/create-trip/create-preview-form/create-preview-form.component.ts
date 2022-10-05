@@ -10,7 +10,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApiService } from 'src/app/services/api/api.service';
 import { finalize, take } from 'rxjs/operators';
 import { error } from '@angular/compiler/src/util';
-import { Subscription } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
+import { ResponseModel } from 'src/app/model/response.model';
 
 @Component({
   selector: 'app-create-preview-form',
@@ -52,7 +53,12 @@ export class CreatePreviewFormComponent implements OnInit {
       this.apiService.postCreateTrip().pipe(take(1), finalize(() => {
         this.modalRef.hide();
         this.router.navigate([''], { skipLocationChange: true });
-      })).subscribe(() => undefined,
+      })).subscribe((resp: ResponseModel) => {
+        if (resp.statusCode != 0) {
+          console.log("THROW ERROR!");
+          this.sharedVar.changeException(resp.resultMessage);
+        }
+      } ,
         error => {
         this.sharedVar.changeException(error);
       })
