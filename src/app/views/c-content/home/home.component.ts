@@ -11,7 +11,8 @@ import { SharedVar } from 'src/app/services/shared-var.service';
 export class HomeComponent implements OnInit {
 
   public subscriptions: Subscription = new Subscription();
-  public errorMsg: String = "";
+  public errorMsg: String = "This system is currently not available. Please try again at a later time.";
+  public showError: boolean = false;
 
   constructor(public sharedVar: SharedVar,
     public sharedMethods: SharedMethods) { }
@@ -23,8 +24,10 @@ export class HomeComponent implements OnInit {
     this.sharedVar.currentException
       .subscribe(error => {
         if(error != ''){
+          this.showError = true;
           window.scroll(0, 0);
-          this.errorMsg = "This system is currently not available. Please try again at a later time.";
+        }else {
+          this.showError = false;
         }
     }));
 

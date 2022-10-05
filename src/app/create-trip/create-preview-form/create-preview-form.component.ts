@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApiService } from 'src/app/services/api/api.service';
-import { take } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { error } from '@angular/compiler/src/util';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-preview-form',
@@ -18,6 +19,7 @@ import { error } from '@angular/compiler/src/util';
 })
 export class CreatePreviewFormComponent implements OnInit {
 
+  subscriptions: Subscription = new Subscription();
   particulars: ParticularsModel;
   budget: BudgetModel;
   tripDetails: TripDetailsModel;
@@ -45,13 +47,16 @@ export class CreatePreviewFormComponent implements OnInit {
   }
 
   confirmTrip(){
-    this.apiService.postCreateTrip().pipe(take(1)).subscribe(resp => {
-      console.log(resp);
-      this.modalRef.hide();
-      this.router.navigate([''], { skipLocationChange: true });
-    }, error => {
-      this.sharedVar.changeException(error);
-    })
+    this.sharedVar.changeException('');
+    this.subscriptions.add(
+      this.apiService.postCreateTrip().pipe(take(1), finalize(() => {
+        this.modalRef.hide();
+        this.router.navigate([''], { skipLocationChange: true });
+      })).subscribe(() => undefined,
+        error => {
+        this.sharedVar.changeException(error);
+      })
+    );
   }
 
   backToTripDetailsScreen(){
