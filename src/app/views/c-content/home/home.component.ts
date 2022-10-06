@@ -23,14 +23,11 @@ export class HomeComponent implements OnInit {
     this.subscriptions.add(
     this.sharedVar.currentException
       .subscribe(error => {
-        console.log(error);
         if(error != ''){
-          console.log("show error...");
           this.showError = true;
           this.errorMsg = this.errorMsg + "<br />" + "Error: " + error;
           window.scroll(0, 0);
         }else {
-          console.log("dont show error...");
           this.showError = false;
         }
     }));

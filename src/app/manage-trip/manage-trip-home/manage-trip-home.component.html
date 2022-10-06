@@ -1,7 +1,100 @@
-<p>manage-trip-home works!</p>
-<div class="col-md-4 col-md-8-offset selectContainer">
-  <ng-select id="qn1Input_0" labelForId="qn1Input_0_Label" [clearable]="false" [items]="['Y', 'N']" bindLabel="cdDescr"
-    bindValue="cd" [placeholder]="'Please Enter Option'" aria-labelledby="STATIC_QN_LABEL_1" class="custom"
-    bindLabel="cdDescr" bindValue="cd" formControlName="staticQn1">
-  </ng-select>
+<div class="container-fluid">
+  <br />
+
+  <div class="card ">
+    <h2 class="card-header">
+      Manage Trips
+    </h2>
+    <!-- <div *ngIf="this.message" class="alert alert-success">
+      <b>Success: </b> {{message}}
+    </div> -->
+    <div class="card-body">
+      <div class="container">
+        <table class="table table-striped" style="width: 100%">
+          <thead class="table-header">
+            <tr>
+              <th>ID</th>
+              <th>Travellers</th>
+              <th>Trip Destination</th>
+              <th>Total Budget</th>
+              <th>Date From</th>
+              <th>Date To</th>
+              <th>Created By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr *ngFor="let trip of trips">
+              <td>{{trip.id}}</td>
+              <td>
+                <label>
+                  <a href='javascript:void(0)' (click)="updatePortfolio(portfolio)">
+                    {{trip.particulars.name}}</a>
+                </label>
+              </td>
+              <tr>
+                <td>nested table</td>
+                <td>nested table</td>
+              </tr>
+              <td>{{trip.budget.totalBudget}}</td>
+              <td></td>
+              <td></td>
+              <td>{{trip.createdBy}}</td>
+            </tr>
+            <tr *ngIf="!trips || trips.length == 0">
+              <td class=' text-center' colspan=12>
+                No Record(s) Found.
+              </td>
+            </tr> -->
+            <ng-container *ngFor="let trip of trips">
+              <tr>
+                <td>{{trip.id}}</td>
+                <td>
+                  <label>
+                    <a href='javascript:void(0)'>
+                      {{trip.particulars.name}}</a>
+                  </label>
+                </td>
+                <td>
+                  <table>
+                    <tr *ngFor="let destination of trip.tripDetails.destinations">
+                      <td>{{destination.name}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td>{{trip.budget.totalBudget}}</td>
+                <td>
+                  <table>
+                    <tr *ngFor="let destination of trip.tripDetails.destinations">
+                      <td>{{destination.dateFromStr}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td>
+                  <table>
+                    <tr *ngFor="let destination of trip.tripDetails.destinations">
+                      <td>{{destination.dateToStr}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td>{{trip.createdBy}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+
+        <!-- <div class="row" *ngIf='portfolios && portfolios.length > 0'>
+          <div class="col-3 text-left">
+            <label>No. of Records: {{totalItems}}</label>
+          </div>
+          <div class="col-6 text-center">
+            <pagination-controls (pageChange)="retrieveAllPortfolio($event)"></pagination-controls>
+          </div>
+        </div> -->
+
+        <!-- <div class="row">
+          <button class="btn btn-success" (click)="addPortfolio()">Add Portfolio</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
 </div>

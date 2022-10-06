@@ -19,30 +19,18 @@ export class ApiService {
   }
 
   postCreateTrip(): Observable<Object> {
-    console.log(this.sharedVar.createTripModel);
     return this.http.post(this.servicePrefix + "/trip/create-trip", this.sharedVar.createTripModel).pipe(
       timeout(this.timeout),
       catchError(this.handleError)
     );
   }
 
-  // get(url): Observable<Object> {
-  //   return this.http.get(this.servicePrefix + url).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  // put(url,model): Observable<Object> {
-  //   return this.http.put(this.servicePrefix + url, model).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  // delete(url): Observable<Object> {
-  //   return this.http.delete(this.servicePrefix + url).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
+  getAllTrips(): Observable<Object> {
+    return this.http.get(this.servicePrefix + "/trip/get-trips").pipe(
+      timeout(this.timeout),
+      catchError(this.handleError)
+    );
+  }
 
   handleError(error){
     alert('An unexpected error has occured.')

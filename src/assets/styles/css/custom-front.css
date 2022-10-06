@@ -9,6 +9,15 @@ h6 {
   font-family: "Roboto", sans-serif;
 }
 
+.card-header {
+  background-color: #1f4877 !important;
+  color: white;
+}
+
+.table-header {
+  background-color: #68261f !important;
+  color: white;
+}
 .form_title {
   margin-top: 10px;
   margin-bottom: 10px;

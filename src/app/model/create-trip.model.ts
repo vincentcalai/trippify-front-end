@@ -8,8 +8,11 @@ import { TripDetailsModel } from "./trip-details.model";
 })
 export class CreateTripModel {
 
+  public id: number;
   public particulars: ParticularsModel;
   public budget: BudgetModel;
   public tripDetails: TripDetailsModel;
+  public createdBy: string;
+  public createdDt: Date;
 
 }

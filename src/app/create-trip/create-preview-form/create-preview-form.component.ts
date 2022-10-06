@@ -40,7 +40,6 @@ export class CreatePreviewFormComponent implements OnInit {
     this.budget = this.sharedVar.createTripModel.budget;
     this.tripDetails = this.sharedVar.createTripModel.tripDetails;
     this.destinations = this.sharedVar.createTripModel.tripDetails.destinations;
-    console.log(this.destinations);
   }
 
   confirmClicked(){
@@ -55,7 +54,6 @@ export class CreatePreviewFormComponent implements OnInit {
         this.router.navigate([''], { skipLocationChange: true });
       })).subscribe((resp: ResponseModel) => {
         if (resp.statusCode != 0) {
-          console.log("THROW ERROR!");
           this.sharedVar.changeException(resp.resultMessage);
         }
       } ,
