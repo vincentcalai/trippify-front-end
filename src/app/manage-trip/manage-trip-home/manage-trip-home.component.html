@@ -23,28 +23,6 @@
             </tr>
           </thead>
           <tbody>
-            <!-- <tr *ngFor="let trip of trips">
-              <td>{{trip.id}}</td>
-              <td>
-                <label>
-                  <a href='javascript:void(0)' (click)="updatePortfolio(portfolio)">
-                    {{trip.particulars.name}}</a>
-                </label>
-              </td>
-              <tr>
-                <td>nested table</td>
-                <td>nested table</td>
-              </tr>
-              <td>{{trip.budget.totalBudget}}</td>
-              <td></td>
-              <td></td>
-              <td>{{trip.createdBy}}</td>
-            </tr>
-            <tr *ngIf="!trips || trips.length == 0">
-              <td class=' text-center' colspan=12>
-                No Record(s) Found.
-              </td>
-            </tr> -->
             <ng-container *ngFor="let trip of trips">
               <tr>
                 <td>{{trip.id}}</td>
@@ -79,6 +57,11 @@
                 <td>{{trip.createdBy}}</td>
               </tr>
             </ng-container>
+            <tr *ngIf="!trips || trips.length == 0">
+              <td class=' text-center' colspan=12>
+                No Record(s) Found.
+              </td>
+            </tr>
           </tbody>
         </table>
 

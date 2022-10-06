@@ -1,2 +1,7 @@
 <app-header></app-header>
+<div id="msgDiv" class="no-padding" *ngIf="errorMsg">
+  <div id="txtDiv" class="alert-text notification" *ngIf="showError">
+    <div [innerHTML]="errorMsg" style="word-wrap: break-word"></div>
+  </div>
+</div>
 <router-outlet></router-outlet>

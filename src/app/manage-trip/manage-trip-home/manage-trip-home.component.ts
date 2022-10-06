@@ -20,6 +20,7 @@ export class ManageTripHomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.sharedVar.createTripModel);
     this.subscriptions.add(
       this.findAllTrips()
     );
