@@ -1,13 +1,13 @@
 <div class="container-fluid">
   <br />
-
+  <div *ngIf="responseMsg" class="alert alert-success">
+    <b>Success: </b> {{responseMsg}}
+  </div>
   <div class="card ">
     <h2 class="card-header">
       Manage Trips
     </h2>
-    <!-- <div *ngIf="this.message" class="alert alert-success">
-      <b>Success: </b> {{message}}
-    </div> -->
+
     <div class="card-body">
       <div class="container">
         <table class="table table-striped" style="width: 100%">
@@ -16,9 +16,9 @@
               <th>ID</th>
               <th>Travellers</th>
               <th>Trip Destination</th>
-              <th>Total Budget</th>
               <th>Date From</th>
               <th>Date To</th>
+              <th>Total Budget</th>
               <th>Created By</th>
             </tr>
           </thead>
@@ -39,7 +39,6 @@
                     </tr>
                   </table>
                 </td>
-                <td>{{trip.budget.totalBudget}}</td>
                 <td>
                   <table>
                     <tr *ngFor="let destination of trip.tripDetails.destinations">
@@ -54,6 +53,7 @@
                     </tr>
                   </table>
                 </td>
+                <td>{{trip.budget.totalBudget}}</td>
                 <td>{{trip.createdBy}}</td>
               </tr>
             </ng-container>

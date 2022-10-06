@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CreateTripModel } from '../model/create-trip.model';
 import { Destinations } from '../model/destinations.model';
+import { ResponseModel } from '../model/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,9 @@ export class SharedVar{
   public exceptionSource = new BehaviorSubject<string>('');
   currentException = this.exceptionSource.asObservable();
 
+  public responseSource = new BehaviorSubject<ResponseModel>(null);
+  responseModel = this.exceptionSource.asObservable();
+
   constructor() {
     this.changeYnListSource(
       Array.from( this.STATIC_QN_1_VAL_MAP.keys() )
@@ -65,6 +69,10 @@ export class SharedVar{
 
   changeException(status: string) {
     this.exceptionSource.next(status);
+  }
+
+  changeResponse(resp: ResponseModel) {
+    this.responseSource.next(resp);
   }
 
 }

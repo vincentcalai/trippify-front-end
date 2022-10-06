@@ -52,7 +52,9 @@ export class CreatePreviewFormComponent implements OnInit {
       this.apiService.postCreateTrip().pipe(take(1), finalize(() => {
         this.modalRef.hide();
         this.router.navigate(['/manage-trip/manage-trip-home'], { skipLocationChange: true });
-      })).subscribe((resp: ResponseModel) => {
+      })).subscribe( (resp: ResponseModel) => {
+        console.log(resp);
+        this.sharedVar.changeResponse(resp);
         if (resp.statusCode != 0) {
           this.sharedVar.changeException(resp.resultMessage);
         }

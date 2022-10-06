@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CreateTripModel } from 'src/app/model/create-trip.model';
+import { ResponseModel } from 'src/app/model/response.model';
 import { ApiService } from 'src/app/services/api/api.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
@@ -13,6 +14,7 @@ export class ManageTripHomeComponent implements OnInit {
 
   public subscriptions: Subscription = new Subscription();
   public trips : CreateTripModel[];
+  public responseMsg: string = '';
 
   constructor(
     public apiService: ApiService,
@@ -20,19 +22,24 @@ export class ManageTripHomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.sharedVar.createTripModel);
     this.subscriptions.add(
-      this.findAllTrips()
-    );
-  }
+        this.sharedVar.responseSource
+        .subscribe(resp => {
+          if(resp){
+            this.responseMsg = resp.resultMessage;
+          }
+        }
+      )
+    )
 
-  findAllTrips(){
-    this.apiService.getAllTrips().subscribe((resp: any) => {
-        this.trips = resp.tripList;
-      } ,
-        error => {
-        this.sharedVar.changeException(error);
-      }
+    this.subscriptions.add(
+        this.apiService.getAllTrips().subscribe((resp: any) => {
+          this.trips = resp.tripList;
+        } ,
+          error => {
+          this.sharedVar.changeException(error);
+        }
+      )
     );
   }
 

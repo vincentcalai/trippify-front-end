@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { BudgetModel } from '../model/budget.model';
 import { CreateTripModel } from '../model/create-trip.model';
 import { ParticularsModel } from '../model/particulars.model';
+import { ResponseModel } from '../model/response.model';
 import { TripDetailsModel } from '../model/trip-details.model';
 import { SharedVar } from './shared-var.service';
 

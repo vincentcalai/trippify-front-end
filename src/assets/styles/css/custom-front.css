@@ -202,10 +202,6 @@ form div.text-right {
   border-radius: 0;
 }
 
-.popup_btn button:first-of-type {
-  border-right: 1px solid #f0f4f6;
-}
-
 .popup_btn button:hover {
   background-color: #f0f4f6;
   color: #0d2c41;

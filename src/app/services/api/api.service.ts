@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { timeout, catchError } from 'rxjs/operators';
 import { SharedVar } from '../shared-var.service';
+import { ResponseModel } from 'src/app/model/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class ApiService {
     this.servicePrefix = environment.apiUrl;
   }
 
-  postCreateTrip(): Observable<Object> {
-    return this.http.post(this.servicePrefix + "/trip/create-trip", this.sharedVar.createTripModel).pipe(
+  postCreateTrip(): Observable<ResponseModel> {
+    return this.http.post<ResponseModel>(this.servicePrefix + "/trip/create-trip", this.sharedVar.createTripModel).pipe(
       timeout(this.timeout),
       catchError(this.handleError)
     );
