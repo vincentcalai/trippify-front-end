@@ -1,11 +1,11 @@
 <app-progress-banner [isViewTripScreen]="true"></app-progress-banner>
-<div class="create-preview-container">
+<div class="view-preview-container">
 
-  <div class="create-preview-sidenav">
+  <div class="view-preview-sidenav">
     <app-side-nav></app-side-nav>
   </div>
 
-  <div class="create-preview-content">
+  <div class="view-preview-content">
 
     <div class="form_title">
       <span id="traveller_particular_title">Traveller Particulars</span>
@@ -108,9 +108,12 @@
           <label id="preview_label_dateFrom_0" class="greyed_out">
             <span id="trip_dateFrom" *ngIf="destinations.length == 1">Trip Period:</span>
             <span id="trip_dateFrom" *ngIf="destinations.length != 1">Trip {{i + 1}} Period:</span></label><br />
-          <div id="preview_dateFrom_0" class="form-desc">{{ destination.dateFromStr }} ({{destination.dateFromDayName}})
-            - {{
-            destination.dateToStr }} ({{destination.dateToDayName}}) [{{destination.noOfTripDays}} DAYS]</div>
+          <div id="preview_dateFrom_0" class="form-desc">
+            <span>{{ destination.dateFromStr }} ({{destination.dateFromDayName}}) - {{destination.dateToStr }}
+              ({{destination.dateToDayName}})</span>
+            <span *ngIf="destination.noOfTripDays <= 1"> [{{destination.noOfTripDays}} DAY]</span>
+            <span *ngIf="destination.noOfTripDays > 1"> [{{destination.noOfTripDays}} DAYS]</span>
+          </div>
         </div>
       </div>
 
