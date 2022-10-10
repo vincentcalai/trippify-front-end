@@ -20,6 +20,7 @@
               <th>Date To</th>
               <th>Total Budget</th>
               <th>Created By</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -27,12 +28,7 @@
               *ngFor="let trip of trips | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems } ">
               <tr>
                 <td>{{trip.id}}</td>
-                <td>
-                  <label>
-                    <a href='javascript:void(0)'>
-                      {{trip.particulars.name}}</a>
-                  </label>
-                </td>
+                <td>{{trip.particulars.name}}</td>
                 <td>
                   <table>
                     <tr *ngFor="let destination of trip.tripDetails.destinations">
@@ -56,6 +52,17 @@
                 </td>
                 <td>{{trip.budget.totalBudget}}</td>
                 <td>{{trip.createdBy}}</td>
+                <td>
+                  <button class="menu_button" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Trip Menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="deleteTrip(trip)">
+                      <mat-icon class="close_icon">close</mat-icon>
+                      <span>Delete Trip</span>
+                    </button>
+                  </mat-menu>
+                </td>
               </tr>
             </ng-container>
             <tr *ngIf="!trips || trips.length == 0">

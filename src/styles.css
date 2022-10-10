@@ -4,3 +4,6 @@
 @import "~@ng-select/ng-select/themes/material.theme.css";
 @import '~mdb-ui-kit/css/mdb.min.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

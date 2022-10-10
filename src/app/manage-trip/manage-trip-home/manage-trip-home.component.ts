@@ -60,5 +60,8 @@ export class ManageTripHomeComponent implements OnInit {
     });
   }
 
+  deleteTrip(trip){
+    console.log(trip);
+  }
 
 }

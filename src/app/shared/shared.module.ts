@@ -7,6 +7,8 @@ import { ProgressBannerComponent } from './progress-banner/progress-banner.compo
 import { DestinationsComponent } from './destinations/destinations.component';
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -15,14 +17,19 @@ import { NgxPaginationModule } from "ngx-pagination";
     DestinationsComponent
   ],
   imports: [
+    MatMenuModule,
+    MatIconModule,
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+
   ],
   exports: [
+    MatMenuModule,
+    MatIconModule,
     NgbModule,
     NgSelectModule,
     ProgressBannerComponent,
@@ -31,7 +38,7 @@ import { NgxPaginationModule } from "ngx-pagination";
     ReactiveFormsModule,
     CommonModule,
     DestinationsComponent,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [
 
