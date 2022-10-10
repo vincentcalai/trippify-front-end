@@ -27,21 +27,22 @@ export class ApiService {
   }
 
   getAllTrips(page: number, itemsPerPage: number): Observable<Object> {
-    return this.http.get(this.servicePrefix + `/trip/get-trips?page=` + page + '&size=' + itemsPerPage).pipe(
+    return this.http.get(this.servicePrefix + '/trip/get-trips?page=' + page + '&size=' + itemsPerPage).pipe(
       timeout(this.timeout),
       catchError(this.handleError)
     );
   }
 
-  // getAllTrips(): Observable<Object> {
-  //   return this.http.get(this.servicePrefix + "/trip/get-trips").pipe(
-  //     timeout(this.timeout),
-  //     catchError(this.handleError)
-  //   );
-  // }
+  deleteTrip(id: number) {
+    return this.http.delete(this.servicePrefix + '/trip/delete-trip/' + id).pipe(
+      timeout(this.timeout),
+      catchError(this.handleError)
+    );
+  }
 
   handleError(error){
     alert('An unexpected error has occured.')
     return throwError(error.message || "Server Error has occured.");
   }
+
 }

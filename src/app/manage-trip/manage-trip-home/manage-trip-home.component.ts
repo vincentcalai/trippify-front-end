@@ -16,14 +16,15 @@ export class ManageTripHomeComponent implements OnInit {
   public trips : CreateTripModel[];
   public responseMsg: string = '';
 
-  totalItems = 0;
-  itemsPerPage = 10;
-  p = 1;
+  totalItems: number = 0;
+  itemsPerPage: number = 10;
+  p: number = 1;
 
   constructor(
     public apiService: ApiService,
     public sharedVar: SharedVar
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -61,7 +62,11 @@ export class ManageTripHomeComponent implements OnInit {
   }
 
   deleteTrip(trip){
-    console.log(trip);
+    this.apiService.deleteTrip(trip.id).subscribe((resp: any) => {
+      this.sharedVar.changeResponse(resp);
+      this.retrieveAllTrips(1);
+      window.scroll(0,0);
+    });
   }
 
 }
