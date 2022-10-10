@@ -28,6 +28,7 @@
     "moment": "^2.29.4",
     "ngx-bootstrap": "^7.1.2",
     "ngx-bs-modal": "^2.0.1",
+    "ngx-pagination": "^6.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -23,7 +23,8 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let trip of trips">
+            <ng-container
+              *ngFor="let trip of trips | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems } ">
               <tr>
                 <td>{{trip.id}}</td>
                 <td>
@@ -65,18 +66,15 @@
           </tbody>
         </table>
 
-        <!-- <div class="row" *ngIf='portfolios && portfolios.length > 0'>
+        <div class="row" *ngIf='trips && trips.length > 0'>
           <div class="col-3 text-left">
             <label>No. of Records: {{totalItems}}</label>
           </div>
           <div class="col-6 text-center">
-            <pagination-controls (pageChange)="retrieveAllPortfolio($event)"></pagination-controls>
+            <pagination-controls (pageChange)="retrieveAllTrips($event)"></pagination-controls>
           </div>
-        </div> -->
+        </div>
 
-        <!-- <div class="row">
-          <button class="btn btn-success" (click)="addPortfolio()">Add Portfolio</button>
-        </div> -->
       </div>
     </div>
   </div>

@@ -26,12 +26,19 @@ export class ApiService {
     );
   }
 
-  getAllTrips(): Observable<Object> {
-    return this.http.get(this.servicePrefix + "/trip/get-trips").pipe(
+  getAllTrips(page: number, itemsPerPage: number): Observable<Object> {
+    return this.http.get(this.servicePrefix + `/trip/get-trips?page=` + page + '&size=' + itemsPerPage).pipe(
       timeout(this.timeout),
       catchError(this.handleError)
     );
   }
+
+  // getAllTrips(): Observable<Object> {
+  //   return this.http.get(this.servicePrefix + "/trip/get-trips").pipe(
+  //     timeout(this.timeout),
+  //     catchError(this.handleError)
+  //   );
+  // }
 
   handleError(error){
     alert('An unexpected error has occured.')

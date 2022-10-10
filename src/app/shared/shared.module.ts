@@ -6,6 +6,7 @@ import { SideNavComponent } from "./side-nav/side-nav.component";
 import { ProgressBannerComponent } from './progress-banner/progress-banner.component';
 import { DestinationsComponent } from './destinations/destinations.component';
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
   ],
   exports: [
     NgbModule,
@@ -28,7 +30,8 @@ import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    DestinationsComponent
+    DestinationsComponent,
+    NgxPaginationModule
   ],
   providers: [
 

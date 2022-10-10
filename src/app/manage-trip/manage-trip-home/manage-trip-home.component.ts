@@ -16,6 +16,10 @@ export class ManageTripHomeComponent implements OnInit {
   public trips : CreateTripModel[];
   public responseMsg: string = '';
 
+  totalItems = 0;
+  itemsPerPage = 10;
+  p = 1;
+
   constructor(
     public apiService: ApiService,
     public sharedVar: SharedVar
@@ -33,8 +37,10 @@ export class ManageTripHomeComponent implements OnInit {
     )
 
     this.subscriptions.add(
-        this.apiService.getAllTrips().subscribe((resp: any) => {
-          this.trips = resp.tripList;
+        this.apiService.getAllTrips(this.p, this.itemsPerPage).subscribe((resp: any) => {
+          this.trips = resp.tripList.content;
+          this.p = resp.tripList.page;
+          this.totalItems = resp.tripList.totalElements;
         } ,
           error => {
           this.sharedVar.changeException(error);
@@ -43,6 +49,16 @@ export class ManageTripHomeComponent implements OnInit {
     );
   }
 
+  retrieveAllTrips(page){
+    this.apiService.getAllTrips(page, this.itemsPerPage).subscribe((resp: any) => {
+        this.trips = resp.tripList.content;
+        this.p = page;
+        this.totalItems = resp.tripList.totalElements;
+    } ,
+      error => {
+      this.sharedVar.changeException(error);
+    });
+  }
 
 
 }
