@@ -14,6 +14,11 @@
   padding-bottom: 20px;
 }
 
+.wizard_steps2 {
+  background-color: #153854 !important;
+  line-height: 1.3em;
+  min-height: 10px;
+}
 .wizard_steps.progress1 li {
   background-color: #153854 !important;
 }

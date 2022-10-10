@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CreateTripModel } from 'src/app/model/create-trip.model';
 import { ResponseModel } from 'src/app/model/response.model';
 import { ApiService } from 'src/app/services/api/api.service';
+import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
 @Component({
@@ -22,11 +24,16 @@ export class ManageTripHomeComponent implements OnInit {
 
   constructor(
     public apiService: ApiService,
-    public sharedVar: SharedVar
+    public sharedVar: SharedVar,
+    public sharedMethod: SharedMethods,
+    public router: Router
   ) {
   }
 
   ngOnInit(): void {
+
+    this.sharedMethod.initializedViewModel();
+
     this.subscriptions.add(
         this.sharedVar.responseSource
         .subscribe(resp => {
@@ -59,6 +66,15 @@ export class ManageTripHomeComponent implements OnInit {
       error => {
       this.sharedVar.changeException(error);
     });
+  }
+
+  viewTrip(trip){
+    console.log(trip);
+    this.sharedVar.viewTripModel.id = trip.id;
+    this.sharedVar.viewTripModel.budget = trip.budget;
+    this.sharedVar.viewTripModel.particulars = trip.particulars;
+    this.sharedVar.viewTripModel.tripDetails = trip.tripDetails;
+    this.router.navigate(['/manage-trip/manage-trip-view'], { skipLocationChange: true });
   }
 
   deleteTrip(trip){

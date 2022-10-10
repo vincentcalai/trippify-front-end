@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProgressBannerComponent implements OnInit {
 
   @Input() currentProgress: string;
+  @Input() isViewTripScreen: boolean;
 
 
   constructor() { }

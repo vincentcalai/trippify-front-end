@@ -6,6 +6,7 @@ import { CreateTripModel } from '../model/create-trip.model';
 import { ParticularsModel } from '../model/particulars.model';
 import { ResponseModel } from '../model/response.model';
 import { TripDetailsModel } from '../model/trip-details.model';
+import { ViewTripModel } from '../model/view-trip.model';
 import { SharedVar } from './shared-var.service';
 
 @Injectable({
@@ -24,6 +25,10 @@ export class SharedMethods {
     this.sharedVar.createTripModel.budget = new BudgetModel();
     this.sharedVar.createTripModel.tripDetails = new TripDetailsModel();
     this.sharedVar.createTripModel.tripDetails.destinations = [];
+  }
+
+  initializedViewModel(){
+    this.sharedVar.viewTripModel = new ViewTripModel();
   }
 
   showForm(form: string) {

@@ -57,6 +57,10 @@
                     <mat-icon>more_vert</mat-icon>
                   </button>
                   <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="viewTrip(trip)">
+                      <mat-icon class="view_icon">view_list</mat-icon>
+                      <span>View Trip Details</span>
+                    </button>
                     <button mat-menu-item (click)="deleteTrip(trip)">
                       <mat-icon class="close_icon">close</mat-icon>
                       <span>Delete Trip</span>

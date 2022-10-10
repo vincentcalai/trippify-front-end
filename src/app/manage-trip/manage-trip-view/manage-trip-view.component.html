@@ -1,4 +1,4 @@
-<app-progress-banner [currentProgress]="'preview'" [isViewTripScreen]="false"></app-progress-banner>
+<app-progress-banner [isViewTripScreen]="true"></app-progress-banner>
 <div class="create-preview-container">
 
   <div class="create-preview-sidenav">
@@ -8,7 +8,7 @@
   <div class="create-preview-content">
 
     <div class="form_title">
-      <span id="">Traveller Particulars</span>
+      <span id="traveller_particular_title">Traveller Particulars</span>
     </div>
 
     <div class="form-row">
@@ -108,8 +108,9 @@
           <label id="preview_label_dateFrom_0" class="greyed_out">
             <span id="trip_dateFrom" *ngIf="destinations.length == 1">Trip Period:</span>
             <span id="trip_dateFrom" *ngIf="destinations.length != 1">Trip {{i + 1}} Period:</span></label><br />
-            <div id="preview_dateFrom_0" class="form-desc">{{ destination.dateFromStr }} ({{destination.dateFromDayName}}) - {{
-              destination.dateToStr }} ({{destination.dateToDayName}}) [{{destination.noOfTripDays}} DAYS]</div>
+          <div id="preview_dateFrom_0" class="form-desc">{{ destination.dateFromStr }} ({{destination.dateFromDayName}})
+            - {{
+            destination.dateToStr }} ({{destination.dateToDayName}}) [{{destination.noOfTripDays}} DAYS]</div>
         </div>
       </div>
 
@@ -117,37 +118,11 @@
 
 
     <div class="text-right">
-      <button class="button_o button_back btn_text_hover" type="button" (click)="backToTripDetailsScreen()"><span
+      <button class="button_o button_back btn_text_hover" type="button" (click)="backToManageTripHomeScreen()"><span
           id="back">Back</span>
-      </button>
-
-      <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()"><span id="next">Confirm</span>
       </button>
     </div>
 
   </div>
 
 </div>
-
-<ng-template #confirmInputsModal>
-  <div class="modal-sm modal-dialog-centered">
-    <div class="popup_dialog">
-      <div class="form_content">
-        <div class="popup_title">
-          <h3>
-            <span id="cfm_trip_dialog_heading">Confirm Create Trip</span>
-          </h3>
-        </div>
-        <div>
-          <span id="cfm_trip_dialog_desc">Are you sure to create trip with the confirmed details?</span>
-        </div>
-      </div>
-      <div class="popup_btn">
-        <button id="cfm_trip_dialog_button" class="btn btn-default"
-          (click)="confirmTrip()"><span>Confirm</span></button>
-        <button id="cx_trip_dialog_button" class="btn btn-default"
-          (click)="modalRef.hide()"><span>Cancel</span></button>
-      </div>
-    </div>
-  </div>
-</ng-template>
