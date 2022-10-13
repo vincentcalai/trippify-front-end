@@ -17,8 +17,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   @Input() events: Observable<number>;
   noOfTrips: number = 0;
 
-  tmpDest: string[] = ["Amsterdam", "Brussels", "Canberra", "Dallas", "Edinburgh"];
-
   constructor(
     public reactiveFormService: ReactiveFormService,
     public sharedVar: SharedVar,
@@ -28,7 +26,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-
     this.noOfTrips = this.sharedVar.createTripModel.tripDetails.noOfDestinations;
     this.initDestFormGroup(this.noOfTrips);
 

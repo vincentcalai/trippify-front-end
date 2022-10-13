@@ -45,4 +45,11 @@ export class ApiService {
     return throwError(error.message || "Server Error has occured.");
   }
 
+  postCodes() {
+    return this.http.get(this.servicePrefix + '/code/retrieveCodeResult')
+      .pipe(
+        timeout(this.timeout),
+        catchError(this.handleError)
+      );
+  }
 }

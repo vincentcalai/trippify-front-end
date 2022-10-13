@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ApiService } from 'src/app/services/api/api.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
 @Component({
@@ -14,7 +15,9 @@ export class AppComponent implements OnInit {
   public errorMsg: String = "This system is currently not available. Please try again at a later time.";
   public showError: boolean = false;
 
-  constructor(public sharedVar: SharedVar){
+  constructor(
+    public sharedVar: SharedVar,
+    public apiService: ApiService){
 
   }
 
@@ -30,5 +33,16 @@ export class AppComponent implements OnInit {
             this.showError = false;
           }
       }));
+
+    this.subscriptions.add(
+      this.apiService.postCodes()
+        .subscribe(resp => {
+          this.sharedVar.changeCodes(resp);
+        },
+          err => {
+            this.sharedVar.changeException(err);
+          }
+        ));
   }
+
 }

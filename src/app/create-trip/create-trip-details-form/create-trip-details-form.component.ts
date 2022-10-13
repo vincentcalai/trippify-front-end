@@ -23,8 +23,6 @@ export class CreateTripDetailsFormComponent implements OnInit {
   public createTripDetailsForm: FormGroup;
   noOfTripsEvent: Subject<void> = new Subject<void>();
 
-  tmpDest: string[] = ["Amsterdam", "Brussels", "Singapore", "Lisbon", "Madrid", "Tokyo"];
-
   constructor(
     public reactiveFormService: ReactiveFormService,
     public sharedVar: SharedVar,

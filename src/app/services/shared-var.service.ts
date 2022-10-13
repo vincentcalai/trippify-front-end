@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { CodeLabelModel } from '../model/code-label.model';
 import { CreateTripModel } from '../model/create-trip.model';
 import { Destinations } from '../model/destinations.model';
 import { ResponseModel } from '../model/response.model';
@@ -9,6 +10,7 @@ import { ViewTripModel } from '../model/view-trip.model';
   providedIn: 'root'
 })
 export class SharedVar{
+
 
   public readonly QN1_PLACEHOLDER_DESC = "Please Select Option";
   public readonly QN2_PLACEHOLDER_DESC = "Please Select Option";
@@ -46,11 +48,16 @@ export class SharedVar{
   public destNumSource = new BehaviorSubject(null);
   destNumSourceList = this.destNumSource.asObservable();
 
-  public exceptionSource = new BehaviorSubject<string>('');
+  public exceptionSource = new BehaviorSubject('');
   currentException = this.exceptionSource.asObservable();
 
   public responseSource = new BehaviorSubject<ResponseModel>(null);
   responseModel = this.exceptionSource.asObservable();
+
+  public globalCodeSource = new BehaviorSubject<any>(null);
+  currentGlobalCode = this.globalCodeSource.asObservable();
+
+  public cityCode$ = new BehaviorSubject<string[]>(null);
 
   constructor() {
     this.changeYnListSource(
@@ -75,6 +82,10 @@ export class SharedVar{
 
   changeResponse(resp: ResponseModel) {
     this.responseSource.next(resp);
+  }
+
+  changeCodes(codes) {
+    this.globalCodeSource.next(codes);
   }
 
 }

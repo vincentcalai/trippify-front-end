@@ -10,7 +10,7 @@
       </label>
     </div>
     <div class="col-md-4 col-md-8-offset selectContainer">
-      <ng-select id="nameInput_0" labelForId="name_{{i}}" [clearable]="false" [items]="tmpDest"
+      <ng-select id="nameInput_0" labelForId="name_{{i}}" [clearable]="false" [items]="(sharedVar.cityCode$ | async)"
         [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_DESC" aria-labelledby="DEST_NAME_LABEL"
         [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].name" [ngModelOptions]="{standalone: true}"
         (change)="onChangeDest(i, sharedVar.createTripModel.tripDetails.destinations[i].name)">
