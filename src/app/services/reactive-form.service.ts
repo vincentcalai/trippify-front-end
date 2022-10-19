@@ -64,7 +64,8 @@ export class ReactiveFormService{
 
   initDestinationFormGrp(){
     return this.fb.group({
-      name:  [null, { validators: [Validators.required]}],
+      ctryName:  [null, { validators: [Validators.required]}],
+      cityName:  [null, { validators: [Validators.required]}],
       dateFrom: [null, { validators: [Validators.required]}],
       dateTo: [null, { validators: [Validators.required]}]
     },

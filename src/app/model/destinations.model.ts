@@ -4,7 +4,8 @@ import { Injectable } from "@angular/core";
   providedIn: 'root'
 })
 export class Destinations{
-  public name: string;
+  public ctryName: string;
+  public cityName: string;
   public dateFrom: {year: number, month: number, day: number};
   public dateFromStr: string;
   public dateFromDayName : string;

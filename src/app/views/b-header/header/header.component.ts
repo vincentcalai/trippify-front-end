@@ -17,12 +17,13 @@ export class HeaderComponent implements OnInit {
     this.subscriptions.add(
       this.sharedVar.currentGlobalCode
         .subscribe(data => {
+          console.log(data);
           if(data){
-            let cityList = [];
-            data.result.cdTyp.CD_CITY.forEach(city => {
-              cityList.push(city.cdDesc);
+            let ctryList = [];
+            data.result.cdTyp.CD_CTRY.forEach(ctry => {
+              ctryList.push(ctry.cdDesc);
             })
-            this.sharedVar.cityCode$.next(cityList);
+            this.sharedVar.ctryList$.next(ctryList);
           }
         })
     )

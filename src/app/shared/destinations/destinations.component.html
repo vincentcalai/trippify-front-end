@@ -1,8 +1,8 @@
 <div *ngIf="noOfTrips">
   <div class="form-group form-row required" *ngFor="let dest of [].constructor(noOfTrips); let i = index">
     <div class="col-md-8">
-      <label id="name_label_0" for="name_{{i}}"
-        [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormName(i))}"
+      <label id="ctry_label_0" for="ctry_{{i}}"
+        [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormCtryName(i))}"
         class="control-label">
         <span *ngIf="noOfTrips != 1">Trip {{i + 1}} Destination</span>
         <span *ngIf="noOfTrips == 1">Trip Destination</span>
@@ -10,18 +10,36 @@
       </label>
     </div>
     <div class="col-md-4 col-md-8-offset selectContainer">
-      <ng-select id="nameInput_0" labelForId="name_{{i}}" [clearable]="false" [items]="(sharedVar.cityCode$ | async)"
-        [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_DESC" aria-labelledby="DEST_NAME_LABEL"
-        [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].name" [ngModelOptions]="{standalone: true}"
-        (change)="onChangeDest(i, sharedVar.createTripModel.tripDetails.destinations[i].name)">
+      <ng-select id="ctryInput_0" labelForId="ctry_{{i}}" [clearable]="false" [items]="(sharedVar.ctryList$ | async)"
+        [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_CTRY_DESC" aria-labelledby="DEST_CTRY_NAME_LABEL"
+        [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].ctryName" [ngModelOptions]="{standalone: true}"
+        (change)="onChangeCtryDest(i, sharedVar.createTripModel.tripDetails.destinations[i].ctryName)">
       </ng-select>
-    </div>
-    <label id="name_error_0" [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormName(i))}"
-      class="error-text" for="name_0">
-      <span
-        *ngIf="getDestinationFormName(i).hasError('required') && !getDestinationFormName(i).value && !getDestinationFormName(i).pristine">This
-        field is required</span>
-    </label>
+      </div>
+      <label id="ctry_error_0"
+        [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormCtryName(i))}" class="error-text"
+        for="ctry_0">
+        <span
+          *ngIf="getDestinationFormCtryName(i).hasError('required') && !getDestinationFormCtryName(i).value && !getDestinationFormCtryName(i).pristine">This
+          field is required
+        </span>
+      </label>
+
+      <div class="col-md-4 col-md-8-offset selectContainer">
+        <ng-select id="cityInput_0" labelForId="city_{{i}}" [clearable]="false" [items]="(sharedVar.ctryList$ | async)"
+          [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_CITY_DESC" aria-labelledby="DEST_CITY_NAME_LABEL"
+          [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].cityName" [ngModelOptions]="{standalone: true}"
+          (change)="onChangeCityDest(i, sharedVar.createTripModel.tripDetails.destinations[i].cityName)">
+        </ng-select>
+      </div>
+      <label id="city_error_0"
+        [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormCityName(i))}" class="error-text"
+        for="city_0">
+        <span
+          *ngIf="getDestinationFormCityName(i).hasError('required') && !getDestinationFormCityName(i).value && !getDestinationFormCityName(i).pristine">This
+          field is required
+        </span>
+      </label>
 
     <div class="form-group required">
       <label class="control-label mandatory-label" id="dateFrom_label_0" for="dateFrom_{{i}}"

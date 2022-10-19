@@ -24,8 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     CommonModule,
     NgbModule,
-    NgxPaginationModule,
-
+    NgxPaginationModule
   ],
   exports: [
     MatMenuModule,
@@ -38,7 +37,7 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     CommonModule,
     DestinationsComponent,
-    NgxPaginationModule,
+    NgxPaginationModule
   ],
   providers: [
 

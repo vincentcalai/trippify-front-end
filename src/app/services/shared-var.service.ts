@@ -15,7 +15,8 @@ export class SharedVar{
   public readonly QN1_PLACEHOLDER_DESC = "Please Select Option";
   public readonly QN2_PLACEHOLDER_DESC = "Please Select Option";
   public readonly NAME_PLACEHOLDER_DESC = "Please Select A Registered User";
-  public readonly TRIP_DEST_PLACEHOLDER_DESC = "Please Select A Trip Destination";
+  public readonly TRIP_DEST_PLACEHOLDER_CTRY_DESC = "Please Select A Trip Destination Country";
+  public readonly TRIP_DEST_PLACEHOLDER_CITY_DESC = "Please Select A Trip Destination City";
   public readonly FLIGHT_BUDGET_PCT = 40;
   public readonly HOTEL_BUDGET_PCT = 30;
   public readonly TRANSPORT_BUDGET_PCT = 7.5;
@@ -57,7 +58,7 @@ export class SharedVar{
   public globalCodeSource = new BehaviorSubject<any>(null);
   currentGlobalCode = this.globalCodeSource.asObservable();
 
-  public cityCode$ = new BehaviorSubject<string[]>(null);
+  public ctryList$ = new BehaviorSubject<string[]>(null);
 
   constructor() {
     this.changeYnListSource(

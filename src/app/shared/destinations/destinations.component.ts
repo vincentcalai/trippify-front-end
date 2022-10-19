@@ -36,6 +36,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
         this.noOfTrips = newNoOfTrips;
       })
     );
+
   }
 
   initDestFormGroup(newNoOfTrips: number) {
@@ -46,14 +47,16 @@ export class DestinationsComponent implements OnInit, OnDestroy {
       this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
       if(!prevReqDestinations[i]){
         const destination = new Destinations();
-        destination.name = '';
+        destination.ctryName = '';
+        destination.cityName = '';
         destination.dateFrom = null;
         destination.dateTo = null;
         this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
       } else{
         if(prevReqDestinations[i].dateTo) this['dateTo_error_' + i] = 0;
         if(prevReqDestinations[i].dateFrom) this['dateFrom_error_' + i] = 0;
-        this.getDestinationFormName(i).setValue(prevReqDestinations[i].name);
+        this.getDestinationFormCtryName(i).setValue(prevReqDestinations[i].ctryName);
+        this.getDestinationFormCityName(i).setValue(prevReqDestinations[i].cityName);
         this.getDestinationFormDateFrom(i).setValue(prevReqDestinations[i].dateFrom);
         this.getDestinationFormDateTo(i).setValue(prevReqDestinations[i].dateTo);
       }
@@ -61,8 +64,12 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
   }
 
-  onChangeDest(index: number, name: string){
-    this.getDestinationFormName(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].name);
+  onChangeCtryDest(index: number, name: string){
+    this.getDestinationFormCtryName(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].ctryName);
+  }
+
+  onChangeCityDest(index: number, name: string){
+    this.getDestinationFormCityName(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].cityName);
   }
 
   onChangeDateFrom(index: number){
@@ -110,8 +117,12 @@ export class DestinationsComponent implements OnInit, OnDestroy {
     return this.controlContainer.control.get('destinations') as FormArray;
   }
 
-  getDestinationFormName(index: number){
-    return this.destinations.get(index.toString()).get('name');
+  getDestinationFormCtryName(index: number){
+    return this.destinations.get(index.toString()).get('ctryName');
+  }
+
+  getDestinationFormCityName(index: number){
+    return this.destinations.get(index.toString()).get('ctryName');
   }
 
   getDestinationFormDateFrom(index: number){
