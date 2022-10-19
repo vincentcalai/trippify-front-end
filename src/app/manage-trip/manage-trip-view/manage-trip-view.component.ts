@@ -26,7 +26,6 @@ export class ManageTripViewComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log(this.sharedVar.viewTripModel);
     this.particulars = this.sharedVar.viewTripModel.particulars;
     this.budget = this.sharedVar.viewTripModel.budget;
     this.tripDetails = this.sharedVar.viewTripModel.tripDetails;

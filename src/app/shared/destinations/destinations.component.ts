@@ -16,6 +16,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
   @Input() events: Observable<number>;
   noOfTrips: number = 0;
+  cityListArray: string[][] = [[]];
 
   constructor(
     public reactiveFormService: ReactiveFormService,
@@ -40,7 +41,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   }
 
   initDestFormGroup(newNoOfTrips: number) {
-
     let prevReqDestinations = this.sharedVar.createTripModel.tripDetails.destinations;
 
     for(let i = 0; i < newNoOfTrips; i++){
@@ -60,12 +60,19 @@ export class DestinationsComponent implements OnInit, OnDestroy {
         this.getDestinationFormDateFrom(i).setValue(prevReqDestinations[i].dateFrom);
         this.getDestinationFormDateTo(i).setValue(prevReqDestinations[i].dateTo);
       }
+
+      let cityListOptions = [];
+      this.cityListArray.push(cityListOptions);
     }
 
   }
 
   onChangeCtryDest(index: number, name: string){
+    this.cityListArray[index] = [];
+    this.sharedVar.createTripModel.tripDetails.destinations[index].cityName = '';
     this.getDestinationFormCtryName(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].ctryName);
+    let cities = this.sharedVar.destMap.get(name);
+    cities.forEach(city => this.cityListArray[index].push(city));
   }
 
   onChangeCityDest(index: number, name: string){
@@ -122,7 +129,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   }
 
   getDestinationFormCityName(index: number){
-    return this.destinations.get(index.toString()).get('ctryName');
+    return this.destinations.get(index.toString()).get('cityName');
   }
 
   getDestinationFormDateFrom(index: number){

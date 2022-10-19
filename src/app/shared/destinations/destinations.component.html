@@ -10,7 +10,7 @@
       </label>
     </div>
     <div class="col-md-4 col-md-8-offset selectContainer">
-      <ng-select id="ctryInput_0" labelForId="ctry_{{i}}" [clearable]="false" [items]="(sharedVar.ctryList$ | async)"
+      <ng-select id="ctryInput_0" labelForId="ctry_{{i}}" [clearable]="false" [items]="(sharedVar.destCtryList$ | async)"
         [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_CTRY_DESC" aria-labelledby="DEST_CTRY_NAME_LABEL"
         [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].ctryName" [ngModelOptions]="{standalone: true}"
         (change)="onChangeCtryDest(i, sharedVar.createTripModel.tripDetails.destinations[i].ctryName)">
@@ -25,14 +25,15 @@
         </span>
       </label>
 
-      <div class="col-md-4 col-md-8-offset selectContainer">
-        <ng-select id="cityInput_0" labelForId="city_{{i}}" [clearable]="false" [items]="(sharedVar.ctryList$ | async)"
+      <div class="col-md-4 col-md-8-offset selectContainer"
+        *ngIf="sharedVar.createTripModel.tripDetails.destinations[i].ctryName">
+        <ng-select id="cityInput_0" labelForId="city_{{i}}" [clearable]="false" [items]="cityListArray[i]"
           [placeholder]="sharedVar.TRIP_DEST_PLACEHOLDER_CITY_DESC" aria-labelledby="DEST_CITY_NAME_LABEL"
           [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].cityName" [ngModelOptions]="{standalone: true}"
           (change)="onChangeCityDest(i, sharedVar.createTripModel.tripDetails.destinations[i].cityName)">
         </ng-select>
       </div>
-      <label id="city_error_0"
+      <label id="city_error_0" *ngIf="sharedVar.createTripModel.tripDetails.destinations[i].ctryName"
         [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormCityName(i))}" class="error-text"
         for="city_0">
         <span

@@ -96,10 +96,21 @@
     <div class="destinations-container" *ngFor="let destination of destinations; let i = index">
       <div class="form-row">
         <div class="col-md-6 form-group">
-          <label id="preview_label_dest_name_0" class="greyed_out">
-            <span id="trip_dest_name" *ngIf="destinations.length == 1">Trip Destination:</span>
-            <span id="trip_dest_name" *ngIf="destinations.length != 1">Trip {{i + 1}} Destination:</span></label><br />
-          <div id="preview_dest_name_0" class="form-desc">{{ destination.name }}</div>
+          <label id="preview_label_dest_ctry_name_0" class="greyed_out">
+            <span id="trip_dest_ctry_name" *ngIf="destinations.length == 1">Trip Destination Country:</span>
+            <span id="trip_dest_ctry_name" *ngIf="destinations.length != 1">Trip {{i + 1}} Destination
+              Country:</span></label><br />
+          <div id="preview_dest_ctry_name_0" class="form-desc">{{ destination.ctryName }}</div>
+          </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 form-group">
+              <label id="preview_label_dest_city_name_0" class="greyed_out">
+                <span id="trip_dest_city_name" *ngIf="destinations.length == 1">Trip Destination City:</span>
+                <span id="trip_dest_city_name" *ngIf="destinations.length != 1">Trip {{i + 1}} Destination
+                  City:</span></label><br />
+              <div id="preview_dest_city_name_0" class="form-desc">{{ destination.cityName }}</div>
         </div>
       </div>
 

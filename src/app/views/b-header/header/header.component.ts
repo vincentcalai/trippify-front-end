@@ -17,13 +17,21 @@ export class HeaderComponent implements OnInit {
     this.subscriptions.add(
       this.sharedVar.currentGlobalCode
         .subscribe(data => {
-          console.log(data);
           if(data){
-            let ctryList = [];
-            data.result.cdTyp.CD_CTRY.forEach(ctry => {
-              ctryList.push(ctry.cdDesc);
-            })
-            this.sharedVar.ctryList$.next(ctryList);
+            let destList = [];
+            data.result.cdTyp.CD_DEST.forEach(
+              destCd => {
+                if(this.sharedVar.destMap.has(destCd.ctry)){
+                  let destArray = this.sharedVar.destMap.get(destCd.ctry);
+                  destArray.push(destCd.city);
+                  this.sharedVar.destMap.set(destCd.ctry, destArray);
+                } else {
+                  const initDestArr = [destCd.city];
+                  this.sharedVar.destMap.set(destCd.ctry, initDestArr);
+                }
+              })
+            let ctryList = Array.from( this.sharedVar.destMap.keys() );
+            this.sharedVar.destCtryList$.next(ctryList);
           }
         })
     )

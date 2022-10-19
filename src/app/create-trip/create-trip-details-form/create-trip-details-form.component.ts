@@ -49,9 +49,7 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
   confirmClicked(){
     this.destinationsComponent.validateAllDate();
-
     if(this.createTripDetailsForm.valid){
-
       const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
       destinations.splice(this.staticQn2.value);
 

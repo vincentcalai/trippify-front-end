@@ -40,6 +40,8 @@ export class SharedVar{
 
   public readonly STATIC_QN_2_VAL = [1,2,3,4,5,6,7,8,9,10];
 
+  public destMap = new Map<string, string[]>();
+
   public createTripModel: CreateTripModel = new CreateTripModel();
   public viewTripModel: ViewTripModel = new ViewTripModel();
 
@@ -58,7 +60,7 @@ export class SharedVar{
   public globalCodeSource = new BehaviorSubject<any>(null);
   currentGlobalCode = this.globalCodeSource.asObservable();
 
-  public ctryList$ = new BehaviorSubject<string[]>(null);
+  public destCtryList$ = new BehaviorSubject<string[]>(null);
 
   constructor() {
     this.changeYnListSource(
