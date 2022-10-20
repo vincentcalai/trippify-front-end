@@ -40,11 +40,6 @@ export class ApiService {
     );
   }
 
-  handleError(error){
-    alert('An unexpected error has occured.')
-    return throwError(error.message || "Server Error has occured.");
-  }
-
   postCodes() {
     return this.http.get(this.servicePrefix + '/code/retrieveCodeResult')
       .pipe(
@@ -52,4 +47,10 @@ export class ApiService {
         catchError(this.handleError)
       );
   }
+
+  handleError(error){
+    alert('An unexpected error has occured.')
+    return throwError(error.message || "Server Error has occured.");
+  }
+
 }

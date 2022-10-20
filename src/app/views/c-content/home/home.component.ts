@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedVar.changeResponse(null);
-    this.sharedMethods.initializeIndSubmission();
+    this.sharedMethods.initializeCreateTripModel();
   }
 
   submitTripClicked(action: string){

@@ -1,5 +1,4 @@
-import { DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
@@ -16,7 +15,7 @@ describe('ProgressBannerComponent', () => {
       declarations: [ ProgressBannerComponent ],
       imports: [
         RouterTestingModule,
-        HttpClientModule
+        HttpClientTestingModule
       ],
       providers: [
         SharedVar,

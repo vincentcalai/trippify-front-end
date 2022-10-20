@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -15,7 +15,7 @@ describe('HeaderComponent', () => {
       declarations: [ HeaderComponent ],
       imports: [
         RouterTestingModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         SharedModule
       ],
       providers: [

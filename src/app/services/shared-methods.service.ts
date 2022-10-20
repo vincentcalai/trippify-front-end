@@ -14,12 +14,10 @@ import { SharedVar } from './shared-var.service';
 })
 export class SharedMethods {
 
+  constructor(public router: Router, public sharedVar: SharedVar) { }
 
 
-  constructor(private router: Router, public sharedVar: SharedVar) { }
-
-
-  initializeIndSubmission() {
+  initializeCreateTripModel() {
     this.sharedVar.createTripModel = new CreateTripModel();
     this.sharedVar.createTripModel.particulars = new ParticularsModel();
     this.sharedVar.createTripModel.budget = new BudgetModel();
