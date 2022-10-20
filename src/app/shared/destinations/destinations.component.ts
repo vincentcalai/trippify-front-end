@@ -38,6 +38,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
       })
     );
 
+
   }
 
   initDestFormGroup(newNoOfTrips: number) {
@@ -49,8 +50,8 @@ export class DestinationsComponent implements OnInit, OnDestroy {
       this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
       if(!prevReqDestinations[i]){
         const destination = new Destinations();
-        destination.ctryName = '';
-        destination.cityName = '';
+        destination.ctryName = null;
+        destination.cityName = null;
         destination.dateFrom = null;
         destination.dateTo = null;
         this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
