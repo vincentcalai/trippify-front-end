@@ -29,6 +29,10 @@ export class SharedMethods {
 
   initializedViewModel(){
     this.sharedVar.viewTripModel = new ViewTripModel();
+    this.sharedVar.viewTripModel.particulars = new ParticularsModel();
+    this.sharedVar.viewTripModel.budget = new BudgetModel();
+    this.sharedVar.viewTripModel.tripDetails = new TripDetailsModel();
+    this.sharedVar.viewTripModel.tripDetails.destinations = [];
   }
 
   showForm(form: string) {
