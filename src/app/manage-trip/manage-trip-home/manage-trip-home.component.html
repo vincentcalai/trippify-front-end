@@ -15,7 +15,8 @@
             <tr>
               <th>ID</th>
               <th>Travellers</th>
-              <th>Trip Destination</th>
+              <th>Trip Destination Country</th>
+              <th>Trip Destination City</th>
               <th>Date From</th>
               <th>Date To</th>
               <th>Total Budget</th>
@@ -29,6 +30,13 @@
               <tr>
                 <td>{{trip.id}}</td>
                 <td>{{trip.particulars.name}}</td>
+                <td>
+                  <table>
+                    <tr *ngFor="let destination of trip.tripDetails.destinations">
+                      <td>{{destination.ctryName}}</td>
+                    </tr>
+                  </table>
+                </td>
                 <td>
                   <table>
                     <tr *ngFor="let destination of trip.tripDetails.destinations">

@@ -69,7 +69,6 @@ export class ManageTripHomeComponent implements OnInit {
   }
 
   viewTrip(trip){
-    console.log(trip);
     this.sharedVar.viewTripModel.id = trip.id;
     this.sharedVar.viewTripModel.budget = trip.budget;
     this.sharedVar.viewTripModel.particulars = trip.particulars;

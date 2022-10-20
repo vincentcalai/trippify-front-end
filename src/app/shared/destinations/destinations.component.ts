@@ -44,6 +44,8 @@ export class DestinationsComponent implements OnInit, OnDestroy {
     let prevReqDestinations = this.sharedVar.createTripModel.tripDetails.destinations;
 
     for(let i = 0; i < newNoOfTrips; i++){
+      let cityListOptions = [];
+      this.cityListArray.push(cityListOptions);
       this.destinations.push(this.reactiveFormService.initDestinationFormGrp());
       if(!prevReqDestinations[i]){
         const destination = new Destinations();
@@ -53,6 +55,10 @@ export class DestinationsComponent implements OnInit, OnDestroy {
         destination.dateTo = null;
         this.sharedVar.createTripModel.tripDetails.destinations.push(destination);
       } else{
+        if(prevReqDestinations[i].ctryName){
+          let cities = this.sharedVar.destMap.get(prevReqDestinations[i].ctryName);
+          cities.forEach(city => this.cityListArray[i].push(city));
+        }
         if(prevReqDestinations[i].dateTo) this['dateTo_error_' + i] = 0;
         if(prevReqDestinations[i].dateFrom) this['dateFrom_error_' + i] = 0;
         this.getDestinationFormCtryName(i).setValue(prevReqDestinations[i].ctryName);
@@ -60,9 +66,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
         this.getDestinationFormDateFrom(i).setValue(prevReqDestinations[i].dateFrom);
         this.getDestinationFormDateTo(i).setValue(prevReqDestinations[i].dateTo);
       }
-
-      let cityListOptions = [];
-      this.cityListArray.push(cityListOptions);
     }
 
   }
