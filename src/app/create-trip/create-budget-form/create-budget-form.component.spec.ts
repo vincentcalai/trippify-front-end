@@ -75,7 +75,6 @@ describe('CreateBudgetFormComponent', () => {
 
   it('form should be invalid when total budget is empty', () => {
     component.totalBudget.setValue(null);
-    console.log(component.totalBudget.valid);
     spyOn(component.reactiveFormService, 'displayValidationErrors');
     component.computeBudget();
     expect(component.reactiveFormService.displayValidationErrors).withContext("validation should fail when total budget is null").toHaveBeenCalledTimes(1);

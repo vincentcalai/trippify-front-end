@@ -36,7 +36,7 @@ export class CreateParticularFormComponent implements OnInit {
     }
 
     this.subscriptions.add(
-      this.createTripParticularForm.get('staticQn1')!.valueChanges.subscribe(val => {
+      this.staticQn1.valueChanges.subscribe(val => {
         this.isUserRegistered = this.sharedVar.STATIC_QN_1_VAL_MAP.get(val);
         if(!this.isUserRegistered){
           this.createTripParticularForm.get('email')?.enable();
@@ -46,23 +46,25 @@ export class CreateParticularFormComponent implements OnInit {
     )
 
     this.subscriptions.add(
-      this.createTripParticularForm.get('name')!.valueChanges.subscribe(val => {
+      this.name.valueChanges.subscribe(val => {
         if(this.isUserRegistered){
+          console.log("calling retrieveUserEmail");
           this.retrieveUserEmail();
-          this.createTripParticularForm.get('email')?.disable();
+          this.email?.disable();
         }
       })
     )
   }
   resetForm() {
-    this.createTripParticularForm.get('name')?.markAsPristine();
-    this.createTripParticularForm.get('email')?.markAsPristine();
+    this.name?.markAsPristine();
+    this.email?.markAsPristine();
     this.name?.setValue(null);
     this.email?.setValue(null);
   }
 
   retrieveUserEmail(){
-    if(this.createTripParticularForm.get('name')!.value){
+    console.log("inside retrieveUserEmail");
+    if(this.name!.value){
       this.email?.setValue("VINCENTCALAI@GMAIL.COM");
     }
   }

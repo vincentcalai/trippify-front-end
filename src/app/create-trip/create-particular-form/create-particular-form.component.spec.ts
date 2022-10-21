@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -15,6 +17,7 @@ import { CreateParticularFormComponent } from './create-particular-form.componen
 describe('CreateParticularFormComponent', () => {
   let component: CreateParticularFormComponent;
   let fixture: ComponentFixture<CreateParticularFormComponent>;
+  let el: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -40,9 +43,40 @@ describe('CreateParticularFormComponent', () => {
     fixture = TestBed.createComponent(CreateParticularFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    el = fixture.debugElement;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('ngOnInit test case', () => {
+    component.sharedMethods.initializeCreateTripModel();
+    component.sharedVar.createTripModel.particulars.isRegUser = true;
+    component.sharedVar.createTripModel.particulars.name = "TEST USER";
+    component.sharedVar.createTripModel.particulars.email = "TEST@TEST.COM";
+
+    component.ngOnInit();
+
+    fixture.detectChanges();
+    expect(component.createTripParticularForm.valid).toBe(true);
+  });
+
+  it('enable/disable email input field when user is registered', () => {
+    component.ngOnInit();
+    component.staticQn1.setValue("YES");
+    fixture.detectChanges();
+    expect(el.nativeElement.querySelector('#email_0').disabled).toBeTruthy();
+    component.staticQn1.setValue("NO");
+    fixture.detectChanges();
+    expect(el.nativeElement.querySelector('#email_0').disabled).toBeFalsy();
+  });
+
+  xit('retrieve email when registered user selects a name', () => {
+    component.ngOnInit();
+    component.name.setValue("TESTUSER");
+    fixture.detectChanges();
+    expect(el.nativeElement.querySelector('#email_0').disabled).toBeTruthy();
+  });
+
 });

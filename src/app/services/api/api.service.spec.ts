@@ -30,7 +30,6 @@ describe('ApiService', () => {
   });
 
   it('postCreateTrip method test case', () => {
-    //sharedMethods.initializeCreateTripModel();
     expect(service.postCreateTrip()).toBeTruthy();
   });
 
@@ -49,7 +48,6 @@ describe('ApiService', () => {
   it('handleError method test case', (done) => {
     let error = {message : ''};
     expect(service.handleError(error)).toEqual(jasmine.any(Observable));
-    console.log(service.handleError(error));
     service.handleError(new Error('test')).subscribe(
       value => {
         done();
