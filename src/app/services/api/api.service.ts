@@ -20,28 +20,28 @@ export class ApiService {
   }
 
   postCreateTrip(): Observable<ResponseModel> {
-    return this.http.post<ResponseModel>(this.servicePrefix + "/trip/create-trip", this.sharedVar.createTripModel).pipe(
+    return this.http.post<ResponseModel>(this.servicePrefix + "/trip/createTrip", this.sharedVar.createTripModel).pipe(
       timeout(this.timeout),
       catchError(this.handleError)
     );
   }
 
   getAllTrips(page: number, itemsPerPage: number): Observable<Object> {
-    return this.http.get(this.servicePrefix + '/trip/get-trips?page=' + page + '&size=' + itemsPerPage).pipe(
+    return this.http.get(this.servicePrefix + '/trip/getTrips?page=' + page + '&size=' + itemsPerPage).pipe(
       timeout(this.timeout),
       catchError(this.handleError)
     );
   }
 
   deleteTrip(id: number) {
-    return this.http.delete(this.servicePrefix + '/trip/delete-trip/' + id).pipe(
+    return this.http.delete(this.servicePrefix + '/trip/deleteTrip/' + id).pipe(
       timeout(this.timeout),
       catchError(this.handleError)
     );
   }
 
-  postCodes() {
-    return this.http.get(this.servicePrefix + '/code/retrieveCodeResult')
+  postDestCodes() {
+    return this.http.get(this.servicePrefix + '/code/retrieveDestCode')
       .pipe(
         timeout(this.timeout),
         catchError(this.handleError)

@@ -42,8 +42,8 @@ describe('ApiService', () => {
     expect(service.deleteTrip(1)).toBeTruthy();
   });
 
-  it('postCodes method test case', () => {
-    expect(service.postCodes()).toBeTruthy();
+  it('postDestCodes method test case', () => {
+    expect(service.postDestCodes()).toBeTruthy();
   });
 
   it('handleError method test case', (done) => {

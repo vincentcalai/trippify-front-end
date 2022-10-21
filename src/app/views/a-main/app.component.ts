@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
       }));
 
     this.subscriptions.add(
-      this.apiService.postCodes()
+      this.apiService.postDestCodes()
         .subscribe(resp => {
           this.sharedVar.changeCodes(resp);
         },
