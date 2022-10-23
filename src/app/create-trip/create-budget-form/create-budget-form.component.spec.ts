@@ -150,6 +150,24 @@ describe('CreateBudgetFormComponent', () => {
     expect(component.navigateToTripDetailsPage).withContext("should navigate too trip details page").toHaveBeenCalledTimes(1);
   });
 
+  it('form should be valid for manual calculation', () => {
+    service.initializeCreateTripModel();
+    component.ngOnInit();
+    component.attractionBudget.setValue(1000);
+    component.flightBudget.setValue(2000);
+    component.foodBudget.setValue(1500);
+    component.hotelBudget.setValue(1500);
+    component.otherBudget.setValue(2000);
+    component.transportBudget.setValue(1000);
+    spyOn(component, 'navigateToTripDetailsPage');
+    component.isManualCalEnabled = true;
+    component.showNotComputedError = false;
+    component.confirmClicked();
+    expect(component.showNotComputedError).toBeFalse;
+    expect(component.navigateToTripDetailsPage).withContext("should navigate too trip details page").toHaveBeenCalledTimes(1);
+  });
+
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
