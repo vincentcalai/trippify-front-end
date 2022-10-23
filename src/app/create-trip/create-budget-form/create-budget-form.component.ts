@@ -38,8 +38,8 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
     this.createTripBudgetForm = this.reactiveFormService.initializeCreateTripBudgetForm();
 
     const prevRequest = this.sharedVar.createTripModel.budget;
-    if(prevRequest && prevRequest.attractionBudget && prevRequest.flightBudget && prevRequest.foodBudget && prevRequest.hotelBudget
-      && prevRequest.otherBudget && prevRequest.transportBudget && prevRequest.totalBudget){
+    if(prevRequest && prevRequest.isManualCal && prevRequest.attractionBudget && prevRequest.flightBudget && prevRequest.foodBudget 
+      && prevRequest.hotelBudget && prevRequest.otherBudget && prevRequest.transportBudget && prevRequest.totalBudget){
         this.isManualCalEnabled = prevRequest.isManualCal;
         this.attractionBudget.setValue(prevRequest.attractionBudget);
         this.flightBudget.setValue(prevRequest.flightBudget);

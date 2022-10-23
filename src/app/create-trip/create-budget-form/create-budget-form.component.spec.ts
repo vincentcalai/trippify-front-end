@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -16,6 +17,7 @@ import { CreateBudgetFormComponent } from './create-budget-form.component';
 describe('CreateBudgetFormComponent', () => {
   let component: CreateBudgetFormComponent;
   let fixture: ComponentFixture<CreateBudgetFormComponent>;
+  let el: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -38,12 +40,59 @@ describe('CreateBudgetFormComponent', () => {
   });
 
   let createTripBudgetForm = null;
+  let service: SharedMethods;
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateBudgetFormComponent);
     component = fixture.componentInstance;
     createTripBudgetForm = component.reactiveFormService.initializeCreateTripBudgetForm();
     fixture.detectChanges();
+    service = TestBed.inject(SharedMethods);
+    el = fixture.debugElement;
+  });
+
+  it('ngOnInit test case, with stored value and clicked prev page', () => {
+    service.initializeCreateTripModel();
+    component.sharedVar.createTripModel.budget.isManualCal = true;
+    component.sharedVar.createTripModel.budget.attractionBudget = 1000;
+    component.sharedVar.createTripModel.budget.flightBudget = 1000;
+    component.sharedVar.createTripModel.budget.foodBudget = 1000;
+    component.sharedVar.createTripModel.budget.hotelBudget = 1000;
+    component.sharedVar.createTripModel.budget.otherBudget = 1000;
+    component.sharedVar.createTripModel.budget.transportBudget = 1000;
+    component.sharedVar.createTripModel.budget.totalBudget = 6000;
+
+    component.ngOnInit();
+
+    fixture.detectChanges();
+    expect(component.createTripBudgetForm.valid).toBe(true);
+  });
+
+  it('when auto calculation, total budget to be enabled, others disabled', () => {
+    service.initializeCreateTripModel();
+    component.isManualCalEnabled = false;
+    component.onManualSwitchChange();
+    expect(el.nativeElement.querySelector('#total_budget_0').disabled).toBeFalsy();
+    expect(el.nativeElement.querySelector('#flight_budget_0').disabled).toBeTruthy();
+    expect(el.nativeElement.querySelector('#hotel_budget_0').disabled).toBeTruthy();
+    expect(el.nativeElement.querySelector('#transport_budget_0').disabled).toBeTruthy();
+    expect(el.nativeElement.querySelector('#attraction_budget_0').disabled).toBeTruthy();
+    expect(el.nativeElement.querySelector('#food_budget_0').disabled).toBeTruthy();
+    expect(el.nativeElement.querySelector('#other_budget_0').disabled).toBeTruthy();
+  });
+
+  it('when manual calculation, total budget to be disabled, others enabled', () => {
+    service.initializeCreateTripModel();
+    component.isManualCalEnabled = true;
+    component.onManualSwitchChange();
+    console.log(el.nativeElement.querySelector('#total_budget_0').disabled);
+    expect(el.nativeElement.querySelector('#total_budget_0').disabled).toBeTruthy();
+    expect(el.nativeElement.querySelector('#flight_budget_0').disabled).toBeFalsy();
+    expect(el.nativeElement.querySelector('#hotel_budget_0').disabled).toBeFalsy();
+    expect(el.nativeElement.querySelector('#transport_budget_0').disabled).toBeFalsy();
+    expect(el.nativeElement.querySelector('#attraction_budget_0').disabled).toBeFalsy();
+    expect(el.nativeElement.querySelector('#food_budget_0').disabled).toBeFalsy();
+    expect(el.nativeElement.querySelector('#other_budget_0').disabled).toBeFalsy();
   });
 
   it('manual calculation total budget should be 9000', () => {
@@ -78,6 +127,27 @@ describe('CreateBudgetFormComponent', () => {
     spyOn(component.reactiveFormService, 'displayValidationErrors');
     component.computeBudget();
     expect(component.reactiveFormService.displayValidationErrors).withContext("validation should fail when total budget is null").toHaveBeenCalledTimes(1);
+  });
+
+  it('form should be invalid when is auto calculation and budget is not computed', () => {
+    component.ngOnInit();
+    component.totalBudget.setValue(20000);
+    spyOn(component.reactiveFormService, 'displayValidationErrors');
+    component.confirmClicked();
+    expect(component.showNotComputedError).toBeTrue;
+    expect(component.reactiveFormService.displayValidationErrors).withContext("should fail when budget is not computed").toHaveBeenCalledTimes(1);
+  });
+
+  it('form should be valid when is auto calculation and budget is computed', () => {
+    service.initializeCreateTripModel();
+    component.ngOnInit();
+    component.totalBudget.setValue(20000);
+    component.computeBudget();
+    spyOn(component, 'navigateToTripDetailsPage');
+    component.isManualCalEnabled = false;
+    component.confirmClicked();
+    expect(component.showNotComputedError).toBeFalse;
+    expect(component.navigateToTripDetailsPage).withContext("should navigate too trip details page").toHaveBeenCalledTimes(1);
   });
 
   it('should create', () => {
