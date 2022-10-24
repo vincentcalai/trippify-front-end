@@ -157,7 +157,7 @@ describe('CreateBudgetFormComponent', () => {
     component.flightBudget.setValue(2000);
     component.foodBudget.setValue(1500);
     component.hotelBudget.setValue(1500);
-    component.otherBudget.setValue(2000);
+    component.otherBudget.setValue(2000); 
     component.transportBudget.setValue(1000);
     spyOn(component, 'navigateToTripDetailsPage');
     component.isManualCalEnabled = true;

@@ -49,4 +49,11 @@ describe('CreatePreviewFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('when clicked next should show modal dialog', () => {
+    spyOn(component.modalService, 'show');
+    component.confirmClicked();
+    expect(component.modalService.show).toHaveBeenCalledTimes(1);
+  });
+
 });
