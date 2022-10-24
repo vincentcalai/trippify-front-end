@@ -85,7 +85,6 @@ describe('CreateBudgetFormComponent', () => {
     service.initializeCreateTripModel();
     component.isManualCalEnabled = true;
     component.onManualSwitchChange();
-    console.log(el.nativeElement.querySelector('#total_budget_0').disabled);
     expect(el.nativeElement.querySelector('#total_budget_0').disabled).toBeTruthy();
     expect(el.nativeElement.querySelector('#flight_budget_0').disabled).toBeFalsy();
     expect(el.nativeElement.querySelector('#hotel_budget_0').disabled).toBeFalsy();

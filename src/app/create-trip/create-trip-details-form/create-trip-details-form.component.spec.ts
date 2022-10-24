@@ -16,6 +16,8 @@ import { CreateTripDetailsFormComponent } from './create-trip-details-form.compo
 describe('CreateTripDetailsFormComponent', () => {
   let component: CreateTripDetailsFormComponent;
   let fixture: ComponentFixture<CreateTripDetailsFormComponent>;
+  let destinations: Destinations[] = [];
+  let destination = new Destinations();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -41,6 +43,17 @@ describe('CreateTripDetailsFormComponent', () => {
     fixture = TestBed.createComponent(CreateTripDetailsFormComponent);
     component = fixture.componentInstance;
     component.sharedMethods.initializeCreateTripModel();
+    
+    destination.cityName = "New York";
+    destination.ctryName = "United States";
+    destination.dateFrom = {year: 2022, month: 10, day: 24};
+    destination.dateTo = {year: 2022, month: 10, day: 31};
+    destination.dateFromDayName = 'MON';
+    destination.dateToDayName = 'MON';
+    destination.dateFromStr = '24/10/2022';
+    destination.dateToStr = '31/10/2022';
+    destination.noOfTripDays = 8;
+    destinations.push(destination);
     fixture.detectChanges();
   });
 
@@ -49,19 +62,6 @@ describe('CreateTripDetailsFormComponent', () => {
   });
 
   it('ngOnInit test case, with stored value and clicked prev page', () => {
-    let destinations: Destinations[] = [];
-    let destination = new Destinations();
-    destination.cityName = "New York";
-    destination.ctryName = "United States";
-    destination.dateFrom = {year: 2022, month: 10, day: 24};
-    destination.dateTo = {year: 2022, month: 10, day: 31};
-    destination.dateFromDayName = 'MON';
-    destination.dateToDayName = 'MON';
-    destination.dateFromStr = '20221024';
-    destination.dateToStr = '20221031';
-    destination.noOfTripDays = 8;
-    destinations.push(destination);
-
     component.sharedVar.createTripModel.tripDetails.noOfDestinations = 1;
     component.sharedVar.createTripModel.tripDetails.destinations = destinations;
 
@@ -70,5 +70,28 @@ describe('CreateTripDetailsFormComponent', () => {
     fixture.detectChanges();
     expect(component.staticQn2.value).toBe(1);
     expect(component.createTripDetailsForm.valid).toBe(true);
+  });
+
+  it('valid form input', () => {
+    component.sharedVar.createTripModel.tripDetails.noOfDestinations = 1;
+    component.sharedVar.createTripModel.tripDetails.destinations = destinations;
+    component.ngOnInit();
+    fixture.detectChanges();
+    spyOn(component.destinationsComponent, 'validateAllDate');
+    spyOn(component, 'navigateToPreviewPage');
+    component.confirmClicked();
+    expect(component.destinationsComponent.validateAllDate).toHaveBeenCalledTimes(1);
+    expect(component.navigateToPreviewPage).toHaveBeenCalledTimes(1);
+  });
+
+  it('invalid form input - missing mandatory fields', () => {
+    component.ngOnInit();
+    console.log(component.createTripDetailsForm);
+    fixture.detectChanges();
+    spyOn(component.destinationsComponent, 'validateAllDate');
+    spyOn(component.reactiveFormService, 'displayValidationErrors');
+    component.confirmClicked();
+    expect(component.destinationsComponent.validateAllDate).toHaveBeenCalledTimes(1);
+    expect(component.reactiveFormService.displayValidationErrors).toHaveBeenCalledTimes(1);
   });
 });
