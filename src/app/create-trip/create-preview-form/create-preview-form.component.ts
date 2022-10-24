@@ -51,7 +51,7 @@ export class CreatePreviewFormComponent implements OnInit {
     this.subscriptions.add(
       this.apiService.postCreateTrip().pipe(take(1), finalize(() => {
         this.modalRef.hide();
-        this.router.navigate(['/manage-trip/manage-trip-home'], { skipLocationChange: true });
+        this.navigateToManageTripPage();
       })).subscribe( (resp: ResponseModel) => {
         this.sharedVar.changeResponse(resp);
         if (resp.statusCode != 0) {
@@ -62,6 +62,10 @@ export class CreatePreviewFormComponent implements OnInit {
         this.sharedVar.changeException(error);
       })
     );
+  }
+
+  navigateToManageTripPage(){
+    return this.router.navigate(['/manage-trip/manage-trip-home'], { skipLocationChange: true });
   }
 
   backToTripDetailsScreen(){
