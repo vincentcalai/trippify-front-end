@@ -24,8 +24,6 @@ describe('CreatePreviewFormComponent', () => {
   let destinations: Destinations[] = [];
   let destination = new Destinations();
 
-  const apiServiceSpy = jasmine.createSpyObj('ApiService',['postCreateTrip']);
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CreatePreviewFormComponent ],
@@ -88,10 +86,23 @@ describe('CreatePreviewFormComponent', () => {
   });
 
   it('when clicked confirm, should call create trip API', () => {
-    spyOn(component.apiService, 'postCreateTrip');
-    apiServiceSpy.postCreateTrip.and.returnValue(of(new ResponseModel()));
+    spyOn(component.apiService, 'postCreateTrip').and.returnValue(of({"statusCode":0,"resultMessage": ''}));
+    spyOn(component.sharedVar, 'changeResponse');
     component.confirmTrip();
     expect(component.apiService.postCreateTrip).toHaveBeenCalledTimes(1);
+    expect(component.sharedVar.changeResponse).toHaveBeenCalledTimes(1);
+  });
+
+  it('navigate to manage trip page test', () => {
+    spyOn(component.router, 'navigate');
+    component.navigateToManageTripPage();
+    expect(component.router.navigate).toHaveBeenCalledTimes(1);
+  });
+
+  it('navigate to create trip details page test', () => {
+    spyOn(component.router, 'navigate');
+    component.backToTripDetailsScreen();
+    expect(component.router.navigate).toHaveBeenCalledTimes(1);
   });
 
 });

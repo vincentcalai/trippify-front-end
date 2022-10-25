@@ -43,7 +43,7 @@ describe('CreateTripDetailsFormComponent', () => {
     fixture = TestBed.createComponent(CreateTripDetailsFormComponent);
     component = fixture.componentInstance;
     component.sharedMethods.initializeCreateTripModel();
-    
+
     destination.cityName = "New York";
     destination.ctryName = "United States";
     destination.dateFrom = {year: 2022, month: 10, day: 24};
@@ -93,5 +93,11 @@ describe('CreateTripDetailsFormComponent', () => {
     component.confirmClicked();
     expect(component.destinationsComponent.validateAllDate).toHaveBeenCalledTimes(1);
     expect(component.reactiveFormService.displayValidationErrors).toHaveBeenCalledTimes(1);
+  });
+
+  it('navigate to crete preview page test', () => {
+    spyOn(component.router, 'navigate');
+    component.navigateToPreviewPage();
+    expect(component.router.navigate).toHaveBeenCalledTimes(1);
   });
 });
