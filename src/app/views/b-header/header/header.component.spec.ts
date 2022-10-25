@@ -54,7 +54,6 @@ describe('HeaderComponent', () => {
     component.sharedVar.changeCodes(destCodes);
     component.ngOnInit();
     let value = component.sharedVar.destCtryList$.getValue();
-    console.log(value);
     expect(component.sharedVar.destCtryList$).not.toBeNull();
     expect(value.length).toEqual(3);
     expect(value[0]).toEqual("SPAIN");

@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
             this.showError = true;
             this.errorMsg = this.errorMsg + "<br />" + "Error: " + error;
             window.scroll(0, 0);
-          }else {
+          } else {
             this.showError = false;
           }
       }));
