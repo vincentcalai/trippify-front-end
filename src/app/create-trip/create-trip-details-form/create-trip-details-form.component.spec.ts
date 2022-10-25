@@ -86,7 +86,6 @@ describe('CreateTripDetailsFormComponent', () => {
 
   it('invalid form input - missing mandatory fields', () => {
     component.ngOnInit();
-    console.log(component.createTripDetailsForm);
     fixture.detectChanges();
     spyOn(component.destinationsComponent, 'validateAllDate');
     spyOn(component.reactiveFormService, 'displayValidationErrors');

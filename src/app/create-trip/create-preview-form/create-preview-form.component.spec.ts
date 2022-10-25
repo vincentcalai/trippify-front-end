@@ -67,8 +67,6 @@ describe('CreatePreviewFormComponent', () => {
   });
 
   it('ngOnInit test case - all values from previous page should be passed to preview page', () => {
-    console.log(component.particulars.name);
-    console.log(component.sharedVar.createTripModel.particulars);
     component.sharedVar.createTripModel.particulars.name = "TEST USER";
     component.sharedVar.createTripModel.budget.totalBudget = 20000;
     component.sharedVar.createTripModel.tripDetails.noOfDestinations = 4;

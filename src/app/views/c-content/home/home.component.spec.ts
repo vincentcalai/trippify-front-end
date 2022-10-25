@@ -28,4 +28,19 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('ngOnInit unit test - should call change response to clear all previous messages', () => {
+    spyOn(component.sharedVar, 'changeResponse');
+    component.ngOnInit();
+    expect(component.sharedVar.changeResponse).toHaveBeenCalledTimes(1);
+  });
+
+  it('ngOnInit unit test - should initialise create trip model', () => {
+    component.ngOnInit();
+    expect(component.sharedVar.createTripModel).not.toEqual(null);
+    expect(component.sharedVar.createTripModel.particulars).not.toEqual(null);
+    expect(component.sharedVar.createTripModel.budget).not.toEqual(null);
+    expect(component.sharedVar.createTripModel.tripDetails).not.toEqual(null);
+    expect(component.sharedVar.createTripModel.tripDetails.destinations).not.toEqual(null);
+  });
 });

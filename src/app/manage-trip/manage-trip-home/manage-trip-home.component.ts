@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CreateTripModel } from 'src/app/model/create-trip.model';
 import { ResponseModel } from 'src/app/model/response.model';
+import { ViewTripModel } from 'src/app/model/view-trip.model';
 import { ApiService } from 'src/app/services/api/api.service';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
@@ -68,7 +69,7 @@ export class ManageTripHomeComponent implements OnInit {
     });
   }
 
-  viewTrip(trip){
+  viewTrip(trip: ViewTripModel){
     this.sharedVar.viewTripModel.id = trip.id;
     this.sharedVar.viewTripModel.budget = trip.budget;
     this.sharedVar.viewTripModel.particulars = trip.particulars;
