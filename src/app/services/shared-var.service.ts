@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CodeLabelModel } from '../model/code-label.model';
 import { CreateTripModel } from '../model/create-trip.model';
 import { Destinations } from '../model/destinations.model';
 import { ResponseModel } from '../model/response.model';

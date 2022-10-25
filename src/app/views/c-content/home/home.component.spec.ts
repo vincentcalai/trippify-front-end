@@ -43,4 +43,10 @@ describe('HomeComponent', () => {
     expect(component.sharedVar.createTripModel.tripDetails).not.toEqual(null);
     expect(component.sharedVar.createTripModel.tripDetails.destinations).not.toEqual(null);
   });
+
+  it('create or manage trip button clicked', () => {
+    spyOn(component.sharedMethods, 'showForm');
+    component.submitTripClicked('create');
+    expect(component.sharedMethods.showForm).toHaveBeenCalledTimes(1);
+  });
 });
