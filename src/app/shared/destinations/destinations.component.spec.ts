@@ -5,7 +5,7 @@ import { ControlContainer, FormArray, FormControl, FormGroup, FormGroupDirective
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { Destinations } from 'src/app/model/destinations.model';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
@@ -20,6 +20,19 @@ describe('DestinationsComponent', () => {
   let component: DestinationsComponent;
   let fixture: ComponentFixture<DestinationsComponent>;
 
+  const fg: FormGroup = new FormGroup({
+    destinations: new FormArray([
+      // new FormGroup({
+      //   ctryName: new FormControl(''),
+      //   cityName:  new FormControl(''),
+      //   dateFrom: new FormControl(''),
+      //   dateTo: new FormControl('')
+      // })
+    ])
+  });
+  const fgd: FormGroupDirective = new FormGroupDirective(null, null);
+  fgd.form = fg;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ DestinationsComponent ],
@@ -31,11 +44,8 @@ describe('DestinationsComponent', () => {
       providers: [
         SharedVar,
         SharedMethods,
-        DatePipe,
         { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter },
-        BsModalService,
-        ReactiveFormService,
-        ControlContainer
+        { provide: ControlContainer, useValue: fgd }
       ]
     })
     .compileComponents();
@@ -45,9 +55,8 @@ describe('DestinationsComponent', () => {
     fixture = TestBed.createComponent(DestinationsComponent);
     component = fixture.componentInstance;
     component.sharedMethods.initializeCreateTripModel();
-    component.events = new BehaviorSubject<number>(3);
+    component.events = new BehaviorSubject<number>(0);
     fixture.detectChanges();
-    dataSetup(component);
   });
 
   it('should create', () => {
@@ -55,15 +64,17 @@ describe('DestinationsComponent', () => {
   });
 
   it('validate all date in destinations component', () => {
+    dataSetup(component);
     component.validateAllDate();
     expect(component['dateFrom_error_0']).toBe(0);
     expect(component['dateTo_error_0']).toBe(0);
   });
 
-  xit('validate from and to date in destinations component', () => {
-    //ERROR here! - COULD NOT GET component.destinations BELOW!
-    component.destinations.setValue(component.sharedVar.createTripModel.tripDetails.destinations);
-    fixture.detectChanges();
+  it('validate from and to date in destinations component', () => {
+    dataSetup(component);
+    component.destinations.push(component.reactiveFormService.initDestinationFormGrp());
+    component.getDestinationFormDateFrom(0).setErrors({"testErr" : true});
+    component.getDestinationFormDateTo(0).setErrors({"testErr" : true});
     component['dateFrom_error_0'] = 0;
     component['dateTo_error_0'] = 0;
     component.validateDateFromAndTo(0);
@@ -71,12 +82,32 @@ describe('DestinationsComponent', () => {
     expect(component.getDestinationFormDateTo(0).errors).toBe(null);
   });
 
-  xit('initialise destination form when clicked previous page', () => {
-    //ERROR here! - COULD NOT GET component.destinations in initDestFormGroup!
+  it('initialise destination form when clicked previous page', () => {
+    dataSetup(component);
+    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
     component.initDestFormGroup(1);
     expect(component['dateFrom_error_0']).toBe(0);
     expect(component['dateTo_error_0']).toBe(0);
+    expect(component.getDestinationFormCtryName(0).value).toBe("United States");
+    expect(component.getDestinationFormCityName(0).value).toBe("New York");
+    expect(component.getDestinationFormDateFrom(0).value).toEqual({ year: 2022, month: 10, day: 24 });
+    expect(component.getDestinationFormDateTo(0).value).toEqual({ year: 2022, month: 10, day: 31 });
   });
+
+  it('initialise destination form for new fresh form', () => {
+    component.initDestFormGroup(3);
+    expect(component.sharedVar.createTripModel.tripDetails.destinations.length).toBe(3);
+    expect(component.sharedVar.createTripModel.tripDetails.destinations[0].ctryName).toBe(null);
+    expect(component.sharedVar.createTripModel.tripDetails.destinations[0].cityName).toBe(null);
+    expect(component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom).toBe(null);
+    expect(component.sharedVar.createTripModel.tripDetails.destinations[0].dateTo).toBe(null);
+  });
+
+  it('ngOnInit unit test - initialise page for new fresh form, no. of trip to be 0', () => {
+    component.ngOnInit();
+    expect(component.sharedVar.createTripModel.tripDetails.destinations.length).toBe(0);
+  });
+
 
 
 });

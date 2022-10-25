@@ -27,6 +27,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    console.log(this.sharedVar.createTripModel.tripDetails.noOfDestinations);
     this.noOfTrips = this.sharedVar.createTripModel.tripDetails.noOfDestinations;
     this.initDestFormGroup(this.noOfTrips);
 
@@ -58,6 +59,7 @@ export class DestinationsComponent implements OnInit, OnDestroy {
       } else{
         if(prevReqDestinations[i].ctryName){
           let cities = this.sharedVar.destMap.get(prevReqDestinations[i].ctryName);
+          console.log(cities);
           cities.forEach(city => this.cityListArray[i].push(city));
         }
         if(prevReqDestinations[i].dateTo) this['dateTo_error_' + i] = 0;
