@@ -43,7 +43,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
 
   initDestFormGroup(newNoOfTrips: number) {
     let prevReqDestinations = this.sharedVar.createTripModel.tripDetails.destinations;
-
     for(let i = 0; i < newNoOfTrips; i++){
       let cityListOptions = [];
       this.cityListArray.push(cityListOptions);

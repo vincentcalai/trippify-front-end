@@ -21,7 +21,7 @@ export class CreateTripDetailsFormComponent implements OnInit {
 
   subscriptions = new Subscription();
   public createTripDetailsForm: FormGroup;
-  noOfTripsEvent: Subject<void> = new Subject<void>();
+  noOfTripsEvent: Subject<number> = new Subject<number>();
 
   constructor(
     public reactiveFormService: ReactiveFormService,

@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BehaviorSubject, of } from 'rxjs';
+import { CreateTripDetailsFormComponent } from 'src/app/create-trip/create-trip-details-form/create-trip-details-form.component';
 import { Destinations } from 'src/app/model/destinations.model';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
@@ -19,19 +20,15 @@ import { DestinationsComponent } from './destinations.component';
 describe('DestinationsComponent', () => {
   let component: DestinationsComponent;
   let fixture: ComponentFixture<DestinationsComponent>;
+  let tripDetailsComponent: CreateTripDetailsFormComponent;
 
   const fg: FormGroup = new FormGroup({
-    destinations: new FormArray([
-      // new FormGroup({
-      //   ctryName: new FormControl(''),
-      //   cityName:  new FormControl(''),
-      //   dateFrom: new FormControl(''),
-      //   dateTo: new FormControl('')
-      // })
-    ])
+    destinations: new FormArray([])
   });
   const fgd: FormGroupDirective = new FormGroupDirective(null, null);
   fgd.form = fg;
+
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -44,6 +41,7 @@ describe('DestinationsComponent', () => {
       providers: [
         SharedVar,
         SharedMethods,
+        CreateTripDetailsFormComponent,
         { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter },
         { provide: ControlContainer, useValue: fgd }
       ]
@@ -56,6 +54,7 @@ describe('DestinationsComponent', () => {
     component = fixture.componentInstance;
     component.sharedMethods.initializeCreateTripModel();
     component.events = new BehaviorSubject<number>(0);
+    tripDetailsComponent = TestBed.inject(CreateTripDetailsFormComponent);
     fixture.detectChanges();
   });
 
@@ -108,6 +107,90 @@ describe('DestinationsComponent', () => {
     expect(component.sharedVar.createTripModel.tripDetails.destinations.length).toBe(0);
   });
 
+  it('validate "date from" value when not empty should have no error', () => {
+    dataSetup(component);
+    component.validateDateFrom(0);
+    expect(component['dateFrom_error_0']).toBe(0);
+  });
+
+  it('validate "date to" value when not empty should have no error', () => {
+    dataSetup(component);
+    component.validateDateTo(0);
+    expect(component['dateTo_error_0']).toBe(0);
+  });
+
+  it('validate change "date from" empty should show error', () => {
+    component.initDestFormGroup(1);
+    component.onChangeDateFrom(0);
+    expect(component['dateFrom_error_0']).toBe(1);
+    expect(component.getDestinationFormDateFrom(0).value).toEqual(null);
+  });
+
+  it('validate change "date to" empty should show error', () => {
+    component.initDestFormGroup(1);
+    component.onChangeDateTo(0);
+    expect(component['dateTo_error_0']).toBe(1);
+    expect(component.getDestinationFormDateTo(0).value).toEqual(null);
+  });
+
+  it('change country on selection should save country and populate the cities of the country', () => {
+    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+    component.initDestFormGroup(1);
+    component.sharedVar.createTripModel.tripDetails.destinations[0].ctryName = 'United States';
+    component.onChangeCtryDest(0, 'United States');
+    expect(component.getDestinationFormCtryName(0).value).toEqual('United States');
+    expect(component.cityListArray[0].length).toEqual(4);
+  });
+
+  it('save city on selection should save city in form', () => {
+    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+    dataSetup(component);
+    component.initDestFormGroup(1);
+    component.sharedVar.createTripModel.tripDetails.destinations[0].cityName = 'Boston';
+    component.onChangeCityDest(0, 'Boston');
+    expect(component.getDestinationFormCityName(0).value).toEqual('Boston');
+  });
+
+  it('validate date change fail when date from is later than date to', () => {
+    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+    dataSetup(component);
+    component.initDestFormGroup(1);
+    component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: 2022, month: 11, day: 11 };
+    component.onChangeDateFrom(0);
+    expect(component.destinations.invalid).toBe(true);
+  });
+
+  it('validate date change fail when date format is incorrect', () => {
+    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+    dataSetup(component);
+    component.initDestFormGroup(1);
+    component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: 2022, month: 11, day: 31 };
+    component.onChangeDateFrom(0);
+
+    expect(component.destinations.invalid).toBe(true);
+  });
+
+  it('validate date change fail when date format is incorrect 2', () => {
+    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+    dataSetup(component);
+    component.initDestFormGroup(1);
+    component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: null, month: null, day: 11 };
+    component.sharedVar.createTripModel.tripDetails.destinations[0].dateTo= { year: null, month: null, day: 1 };
+    component.onChangeDateFrom(0);
+    component.onChangeDateTo(0);
+    expect(component.destinations.invalid).toBe(true);
+  });
+
+  it('validate date change fail when date format is incorrect 3', () => {
+    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+    dataSetup(component);
+    component.initDestFormGroup(1);
+    component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: null, month: 11, day: 11 };
+    component.sharedVar.createTripModel.tripDetails.destinations[0].dateTo= { year: null, month: 10, day: 11 };
+    component.onChangeDateFrom(0);
+    component.onChangeDateTo(0);
+    expect(component.destinations.invalid).toBe(true);
+  });
 
 
 });
