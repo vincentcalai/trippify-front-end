@@ -11,6 +11,9 @@ export class ReactiveFormService{
   public readonly ALPHABET_SPACE= new RegExp(/^[A-Za-z][A-Za-z ]*$/);
   public readonly EMAIL = new RegExp(/^[_A-Za-z0-9\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/);
   public readonly NUMBERIC_DEC_REGEX = new RegExp(/^\d*\.?\d*$/);
+  public readonly DATE_YEAR_REGEX = new RegExp(/^\d{4}$/);
+  public readonly DATE_MONTH_REGEX = new RegExp(/^(0?[1-9]|1[012])$/);
+  public readonly DATE_DAY_REGEX = new RegExp(/^(0?[1-9]|[12][0-9]|3[01])$/);
 
   constructor(
     public fb: FormBuilder)
@@ -70,7 +73,7 @@ export class ReactiveFormService{
       dateTo: [null, { validators: [Validators.required]}]
     },
     {
-      validators: this.validateDateFromLaterThanDateTo()
+      validators: []
     })
   }
 
@@ -139,8 +142,7 @@ export class ReactiveFormService{
 
       let dateFrom = group.controls['dateFrom'];
       let dateTo = group.controls['dateTo'];
-
-      if (dateFrom && dateFrom.valid && dateTo && dateTo.valid) {
+      if (dateFrom.value && dateFrom.valid && dateTo.value && dateTo.valid) {
         const dateFromValue = this.getMomentDateFormat(dateFrom.value);
         const dateToValue = this.getMomentDateFormat(dateTo.value);
         if (dateToValue.isBefore(dateFromValue, 'day')) {

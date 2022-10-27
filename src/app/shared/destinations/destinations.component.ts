@@ -37,8 +37,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
         this.noOfTrips = newNoOfTrips;
       })
     );
-
-
   }
 
   initDestFormGroup(newNoOfTrips: number) {
@@ -83,40 +81,41 @@ export class DestinationsComponent implements OnInit, OnDestroy {
   }
 
   onChangeDateFrom(index: number){
-    this.validateDateFrom(index);
+    const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
+    this['dateFrom_error_' + index] = this.validateDate(destination.dateFrom);
     this.getDestinationFormDateFrom(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateFrom);
   }
 
-  validateDateFrom(index: number) {
-    const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
-    this['dateFrom_error_' + index] = !destination.dateFrom ? 1 : 0;
-    this.validateDateFromAndTo(index);
-  }
-
   onChangeDateTo(index: number){
-    this.validateDateTo(index);
+    const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
+    this['dateTo_error_' + index] = this.validateDate(destination.dateTo);
     this.getDestinationFormDateTo(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateTo);
   }
 
-  validateDateTo(index: number) {
-    const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
-    this['dateTo_error_' + index] = !destination.dateTo ? 1 : 0;
-    this.validateDateFromAndTo(index);
+  validateDate(date: any) {
+    console.log(date);
+    if(!date) {
+      return 1;
+    }else if(this.isDateFormatInvalid(date)){
+      return 2;
+    }
+    return 0;
   }
 
-  validateDateFromAndTo(index: number) {
-    if(this['dateTo_error_' + index] == 0 && this['dateFrom_error_' + index] == 0){
-      this.getDestinationFormDateFrom(index).setErrors(null);
-      this.getDestinationFormDateTo(index).setErrors(null);
-    }
-  }
-
-  validateAllDate(){
-    const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
-    for(let i=0; i<destinations.length; i++){
-      this['dateFrom_error_' + i] = !destinations[i].dateFrom ? 1 : 0;
-      this['dateTo_error_' + i] = !destinations[i].dateTo ? 1: 0;
-    }
+  isDateFormatInvalid(date: any): boolean {
+      if(!(date.year && date.month && date.day)){
+        return true;
+      }
+      if(!this.reactiveFormService.DATE_YEAR_REGEX.test(date.year)){
+        return true;
+      }
+      if(!this.reactiveFormService.DATE_MONTH_REGEX.test(date.month)){
+        return true;
+      }
+      if(!this.reactiveFormService.DATE_DAY_REGEX.test(date.day)){
+        return true;
+      }
+      return false;
   }
 
   ngOnDestroy(): void {
