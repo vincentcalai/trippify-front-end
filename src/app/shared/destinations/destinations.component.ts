@@ -57,8 +57,11 @@ export class DestinationsComponent implements OnInit, OnDestroy {
           let cities = this.sharedVar.destMap.get(prevReqDestinations[i].ctryName);
           cities.forEach(city => this.cityListArray[i].push(city));
         }
+
+        console.log(prevReqDestinations[i]);
         if(prevReqDestinations[i].dateTo) this['dateTo_error_' + i] = 0;
         if(prevReqDestinations[i].dateFrom) this['dateFrom_error_' + i] = 0;
+        this.validateDateFromLaterThanDateTo(i, prevReqDestinations[i].dateFrom, prevReqDestinations[i].dateTo);
         this.getDestinationFormCtryName(i).setValue(prevReqDestinations[i].ctryName);
         this.getDestinationFormCityName(i).setValue(prevReqDestinations[i].cityName);
         this.getDestinationFormDateFrom(i).setValue(prevReqDestinations[i].dateFrom);
@@ -80,26 +83,53 @@ export class DestinationsComponent implements OnInit, OnDestroy {
     this.getDestinationFormCityName(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].cityName);
   }
 
-  onChangeDateFrom(index: number){
+  onChangeDate(index: number, dateType: string){
     const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
-    this['dateFrom_error_' + index] = this.validateDate(destination.dateFrom);
-    this.getDestinationFormDateFrom(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateFrom);
+    if(dateType === 'dateFrom'){
+      this['dateFrom_error_' + index] = this.validateDate(destination.dateFrom);
+      this.getDestinationFormDateFrom(index).setValue(destination.dateFrom);
+    } else if(dateType == 'dateTo'){
+      this['dateTo_error_' + index] = this.validateDate(destination.dateTo);
+      this.getDestinationFormDateTo(index).setValue(destination.dateTo);
+    }
+    if((this['dateFrom_error_' + index] == 0 || this['dateFrom_error_' + index] == 3) && (this['dateTo_error_' + index] == 0 || this['dateTo_error_' + index] == 3)){
+      this.validateDateFromLaterThanDateTo(index, destination.dateFrom, destination.dateTo);
+    }
   }
 
-  onChangeDateTo(index: number){
-    const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
-    this['dateTo_error_' + index] = this.validateDate(destination.dateTo);
-    this.getDestinationFormDateTo(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateTo);
-  }
+  // onChangeDateFrom(index: number){
+  //   const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
+  //   this['dateFrom_error_' + index] = this.validateDate(destination.dateFrom);
+  //   this.getDestinationFormDateFrom(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateFrom);
+  // }
+
+  // onChangeDateTo(index: number){
+  //   const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
+  //   this['dateTo_error_' + index] = this.validateDate(destination.dateTo);
+  //   this.getDestinationFormDateTo(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateTo);
+  // }
 
   validateDate(date: any) {
-    console.log(date);
     if(!date) {
       return 1;
     }else if(this.isDateFormatInvalid(date)){
       return 2;
     }
     return 0;
+  }
+
+  validateDateFromLaterThanDateTo(index, dateFrom, dateTo) {
+    if (dateFrom && dateTo) {
+      const dateFromValue = this.reactiveFormService.getMomentDateFormat(dateFrom);
+      const dateToValue = this.reactiveFormService.getMomentDateFormat(dateTo);
+      if (dateToValue.isBefore(dateFromValue, 'day')) {
+        this['dateTo_error_' + index] = 3;
+        this['dateFrom_error_' + index] = 3;
+      } else{
+        this['dateTo_error_' + index] = 0;
+        this['dateFrom_error_' + index] = 0;
+      }
+    }
   }
 
   isDateFormatInvalid(date: any): boolean {

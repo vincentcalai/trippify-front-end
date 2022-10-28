@@ -54,13 +54,14 @@
           placement="bottom-left top-left auto" #datefromdp="ngbDatepicker" data-container="body"
           (keyup)="datefromdp.close()" (click)="datefromdp.open()" container="body" autocomplete="off"
           [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].dateFrom" [ngModelOptions]="{standalone: true}"
-          (ngModelChange)="onChangeDateFrom(i)">
+          (ngModelChange)="onChangeDate(i, 'dateFrom')">
       </div>
       <label id="dateFrom_error_0"
         [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateFrom(i))}" class="error-text"
         for="dateFrom_0">
         <span *ngIf="this['dateFrom_error_' + i] == 1">Please fill in the field above</span>
         <span *ngIf="this['dateFrom_error_' + i] == 2">Please enter a date format in DD/MM/YYYY</span>
+        <span *ngIf="this['dateFrom_error_' + i] == 3">Date From cannot be later than Date To</span>
       </label>
     </div>
     <div class="form-group required">
@@ -75,13 +76,14 @@
           placement="bottom-left top-left auto" #datetodp="ngbDatepicker" data-container="body"
           (keyup)="datetodp.close()" (click)="datetodp.open()" container="body" autocomplete="off"
           [(ngModel)]="sharedVar.createTripModel.tripDetails.destinations[i].dateTo" [ngModelOptions]="{standalone: true}"
-          (ngModelChange)="onChangeDateTo(i)">
+          (ngModelChange)="onChangeDate(i, 'dateTo')">
       </div>
       <label id="dateTo_error_0"
         [ngClass]="{'highlightLabel' : reactiveFormService.fieldIsInvalid(getDestinationFormDateTo(i))}" class="error-text"
         for="dateTo_0">
         <span *ngIf="this['dateTo_error_' + i] == 1">Please fill in the field above</span>
         <span *ngIf="this['dateTo_error_' + i] == 2">Please enter a date format in DD/MM/YYYY</span>
+        <span *ngIf="this['dateTo_error_' + i] == 3">Date From cannot be later than Date To</span>
       </label>
     </div>
 

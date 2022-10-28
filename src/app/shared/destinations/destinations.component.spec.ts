@@ -119,19 +119,19 @@ describe('DestinationsComponent', () => {
   //   expect(component['dateTo_error_0']).toBe(0);
   // });
 
-  it('validate change "date from" empty should show error', () => {
-    component.initDestFormGroup(1);
-    component.onChangeDateFrom(0);
-    expect(component['dateFrom_error_0']).toBe(1);
-    expect(component.getDestinationFormDateFrom(0).value).toEqual(null);
-  });
+  // it('validate change "date from" empty should show error', () => {
+  //   component.initDestFormGroup(1);
+  //   component.onChangeDateFrom(0);
+  //   expect(component['dateFrom_error_0']).toBe(1);
+  //   expect(component.getDestinationFormDateFrom(0).value).toEqual(null);
+  // });
 
-  it('validate change "date to" empty should show error', () => {
-    component.initDestFormGroup(1);
-    component.onChangeDateTo(0);
-    expect(component['dateTo_error_0']).toBe(1);
-    expect(component.getDestinationFormDateTo(0).value).toEqual(null);
-  });
+  // it('validate change "date to" empty should show error', () => {
+  //   component.initDestFormGroup(1);
+  //   component.onChangeDateTo(0);
+  //   expect(component['dateTo_error_0']).toBe(1);
+  //   expect(component.getDestinationFormDateTo(0).value).toEqual(null);
+  // });
 
   it('change country on selection should save country and populate the cities of the country', () => {
     spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
@@ -151,46 +151,46 @@ describe('DestinationsComponent', () => {
     expect(component.getDestinationFormCityName(0).value).toEqual('Boston');
   });
 
-  it('validate date change fail when date from is later than date to', () => {
-    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
-    dataSetup(component);
-    component.initDestFormGroup(1);
-    component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: 2022, month: 11, day: 11 };
-    component.onChangeDateFrom(0);
-    expect(component.destinations.invalid).toBe(true);
-  });
+  // it('validate date change fail when date from is later than date to', () => {
+  //   spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+  //   dataSetup(component);
+  //   component.initDestFormGroup(1);
+  //   component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: 2022, month: 11, day: 11 };
+  //   component.onChangeDateFrom(0);
+  //   expect(component.destinations.invalid).toBe(true);
+  // });
 
-  it('validate date change fail when date format is incorrect', () => {
-    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
-    dataSetup(component);
-    component.initDestFormGroup(1);
-    component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: 2022, month: 11, day: 31 };
-    component.onChangeDateFrom(0);
+  // it('validate date change fail when date format is incorrect', () => {
+  //   spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+  //   dataSetup(component);
+  //   component.initDestFormGroup(1);
+  //   component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: 2022, month: 11, day: 31 };
+  //   component.onChangeDateFrom(0);
 
-    expect(component.destinations.invalid).toBe(true);
-  });
+  //   expect(component.destinations.invalid).toBe(true);
+  // });
 
-  it('validate date change fail when date format is incorrect 2', () => {
-    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
-    dataSetup(component);
-    component.initDestFormGroup(1);
-    component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: null, month: null, day: 11 };
-    component.sharedVar.createTripModel.tripDetails.destinations[0].dateTo= { year: null, month: null, day: 1 };
-    component.onChangeDateFrom(0);
-    component.onChangeDateTo(0);
-    expect(component.destinations.invalid).toBe(true);
-  });
+  // it('validate date change fail when date format is incorrect 2', () => {
+  //   spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+  //   dataSetup(component);
+  //   component.initDestFormGroup(1);
+  //   component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: null, month: null, day: 11 };
+  //   component.sharedVar.createTripModel.tripDetails.destinations[0].dateTo= { year: null, month: null, day: 1 };
+  //   component.onChangeDateFrom(0);
+  //   component.onChangeDateTo(0);
+  //   expect(component.destinations.invalid).toBe(true);
+  // });
 
-  it('validate date change fail when date format is incorrect 3', () => {
-    spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
-    dataSetup(component);
-    component.initDestFormGroup(1);
-    component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: null, month: 11, day: 11 };
-    component.sharedVar.createTripModel.tripDetails.destinations[0].dateTo= { year: null, month: 10, day: 11 };
-    component.onChangeDateFrom(0);
-    component.onChangeDateTo(0);
-    expect(component.destinations.invalid).toBe(true);
-  });
+  // it('validate date change fail when date format is incorrect 3', () => {
+  //   spyOn(component.sharedVar.destMap, 'get').and.returnValue(['New York', 'Boston', 'San Francisco', 'Miami']);
+  //   dataSetup(component);
+  //   component.initDestFormGroup(1);
+  //   component.sharedVar.createTripModel.tripDetails.destinations[0].dateFrom = { year: null, month: 11, day: 11 };
+  //   component.sharedVar.createTripModel.tripDetails.destinations[0].dateTo= { year: null, month: 10, day: 11 };
+  //   component.onChangeDateFrom(0);
+  //   component.onChangeDateTo(0);
+  //   expect(component.destinations.invalid).toBe(true);
+  // });
 
 
 });
