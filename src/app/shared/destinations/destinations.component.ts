@@ -57,8 +57,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
           let cities = this.sharedVar.destMap.get(prevReqDestinations[i].ctryName);
           cities.forEach(city => this.cityListArray[i].push(city));
         }
-
-        console.log(prevReqDestinations[i]);
         if(prevReqDestinations[i].dateTo) this['dateTo_error_' + i] = 0;
         if(prevReqDestinations[i].dateFrom) this['dateFrom_error_' + i] = 0;
         this.validateDateFromLaterThanDateTo(i, prevReqDestinations[i].dateFrom, prevReqDestinations[i].dateTo);

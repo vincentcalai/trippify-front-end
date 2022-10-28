@@ -43,9 +43,7 @@ export class ReactiveFormService{
   initializeCreateTripBudgetForm(){
     return this.fb.group(
       {
-        totalBudget: [
-          null, { validators: [Validators.required, Validators.pattern(this.NUMBERIC_DEC_REGEX), Validators.maxLength(9)] }
-        ],
+        totalBudget: this.fb.control(null, { validators: [Validators.required, Validators.pattern(this.NUMBERIC_DEC_REGEX), Validators.maxLength(9)] }),
         flightBudget: this.getBudgetFieldsControl(),
         hotelBudget: this.getBudgetFieldsControl(),
         transportBudget: this.getBudgetFieldsControl(),

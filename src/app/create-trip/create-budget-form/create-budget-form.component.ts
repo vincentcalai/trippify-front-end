@@ -13,12 +13,11 @@ import { SharedVar } from 'src/app/services/shared-var.service';
 export class CreateBudgetFormComponent implements OnInit, OnDestroy {
 
   public createTripBudgetForm: FormGroup;
-  public isManualCalEnabled: boolean;
+  public isManualCalEnabled: boolean = false;
   public isBudgetComputed: boolean = false;
   public showNotComputedError: boolean = false;
 
   subscriptions = new Subscription();
-
 
   flightBudgetPct = this.sharedVar.FLIGHT_BUDGET_PCT/100;
   hotelBudgetPct = this.sharedVar.HOTEL_BUDGET_PCT/100;
@@ -38,9 +37,10 @@ export class CreateBudgetFormComponent implements OnInit, OnDestroy {
     this.createTripBudgetForm = this.reactiveFormService.initializeCreateTripBudgetForm();
 
     const prevRequest = this.sharedVar.createTripModel.budget;
-    if(prevRequest && prevRequest.isManualCal && prevRequest.attractionBudget && prevRequest.flightBudget && prevRequest.foodBudget 
+    if(prevRequest && prevRequest.attractionBudget && prevRequest.flightBudget && prevRequest.foodBudget
       && prevRequest.hotelBudget && prevRequest.otherBudget && prevRequest.transportBudget && prevRequest.totalBudget){
         this.isManualCalEnabled = prevRequest.isManualCal;
+        this.onManualSwitchChange();
         this.attractionBudget.setValue(prevRequest.attractionBudget);
         this.flightBudget.setValue(prevRequest.flightBudget);
         this.foodBudget.setValue(prevRequest.foodBudget);

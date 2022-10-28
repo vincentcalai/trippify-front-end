@@ -51,7 +51,6 @@ export class CreateTripDetailsFormComponent implements OnInit {
     let isFormValid: boolean = false;
     const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
     for(let i=0; i<destinations.length; i++){
-      console.log(this.destinationsComponent['dateFrom_error_' + i] + " -- "  + this.destinationsComponent['dateTo_error_' + i])
       if(this.destinationsComponent['dateFrom_error_' + i] !== 0 || this.destinationsComponent['dateTo_error_' + i] !== 0){
         return false;
       }
@@ -60,8 +59,6 @@ export class CreateTripDetailsFormComponent implements OnInit {
   }
 
   confirmClicked(){
-    console.log(this.createTripDetailsForm);
-    console.log( this.validateAllDates());
     if(this.createTripDetailsForm.valid && this.validateAllDates()){
       const destinations = this.sharedVar.createTripModel.tripDetails.destinations;
       destinations.splice(this.staticQn2.value);
