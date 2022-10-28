@@ -1,10 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { BudgetModel } from 'src/app/model/budget.model';
 import { Destinations } from 'src/app/model/destinations.model';
 import { ParticularsModel } from 'src/app/model/particulars.model';
@@ -83,12 +83,30 @@ describe('CreatePreviewFormComponent', () => {
     expect(component.modalService.show).toHaveBeenCalledTimes(1);
   });
 
-  it('when clicked confirm, should call create trip API', () => {
-    spyOn(component.apiService, 'postCreateTrip').and.returnValue(of({"statusCode":0,"resultMessage": ''}));
+  it('when clicked confirm and success status, should call create trip API', fakeAsync(() => {
+    component.confirmClicked();
+    let fakeResult = new Subject<any>();
+    spyOn(component.apiService, 'postCreateTrip').and.returnValue(fakeResult);
+    spyOn(component.modalRef, 'hide');
     spyOn(component.sharedVar, 'changeResponse');
+    spyOn(component, 'navigateToManageTripPage');
     component.confirmTrip();
+    fakeResult.next({"statusCode":0,"resultMessage": ''});
+    tick();
+    fakeResult.complete();
+    expect(component.modalRef.hide).toHaveBeenCalledTimes(1);
+    expect(component.navigateToManageTripPage).toHaveBeenCalledTimes(1);
     expect(component.apiService.postCreateTrip).toHaveBeenCalledTimes(1);
     expect(component.sharedVar.changeResponse).toHaveBeenCalledTimes(1);
+  }));
+
+  it('when clicked confirm and has return response error status, should call create trip API', () => {
+    spyOn(component.apiService, 'postCreateTrip').and.returnValue(of({"statusCode":1,"resultMessage": 'An error has occured!'}));
+    spyOn(component.sharedVar, 'changeException');
+    spyOn(component.router, 'navigate');
+    component.confirmTrip();
+    expect(component.apiService.postCreateTrip).toHaveBeenCalledTimes(1);
+    expect(component.sharedVar.changeException).toHaveBeenCalledTimes(2);
   });
 
   it('navigate to manage trip page test', () => {
@@ -97,7 +115,7 @@ describe('CreatePreviewFormComponent', () => {
     expect(component.router.navigate).toHaveBeenCalledTimes(1);
   });
 
-  it('navigate to create trip details page test', () => {
+  it('navigate back to create trip details page test', () => {
     spyOn(component.router, 'navigate');
     component.backToTripDetailsScreen();
     expect(component.router.navigate).toHaveBeenCalledTimes(1);

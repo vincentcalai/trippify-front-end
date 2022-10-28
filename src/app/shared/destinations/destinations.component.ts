@@ -95,18 +95,6 @@ export class DestinationsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // onChangeDateFrom(index: number){
-  //   const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
-  //   this['dateFrom_error_' + index] = this.validateDate(destination.dateFrom);
-  //   this.getDestinationFormDateFrom(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateFrom);
-  // }
-
-  // onChangeDateTo(index: number){
-  //   const destination = this.sharedVar.createTripModel.tripDetails.destinations[index];
-  //   this['dateTo_error_' + index] = this.validateDate(destination.dateTo);
-  //   this.getDestinationFormDateTo(index).setValue(this.sharedVar.createTripModel.tripDetails.destinations[index].dateTo);
-  // }
-
   validateDate(date: any) {
     if(!date) {
       return 1;

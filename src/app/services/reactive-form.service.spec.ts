@@ -29,24 +29,6 @@ describe('ReactiveFormService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('init destination form group valid - trip date from is not later than date to', () => {
-    let testFormGroup = service.initDestinationFormGrp();
-    testFormGroup.get('ctryName').setValue('SINGAPORE');
-    testFormGroup.get('cityName').setValue('SINGAPORE');
-    testFormGroup.get('dateFrom').setValue('25/10/2022');
-    testFormGroup.get('dateTo').setValue('31/10/2022');
-    expect(testFormGroup.valid).toBe(true);
-  });
-
-  it('init destination form group invalid - trip date from is later than date to', () => {
-    let testFormGroup = service.initDestinationFormGrp();
-    testFormGroup.get('ctryName').setValue('SINGAPORE');
-    testFormGroup.get('cityName').setValue('SINGAPORE');
-    testFormGroup.get('dateFrom').setValue('31/10/2022');
-    testFormGroup.get('dateTo').setValue('30/10/2022');
-    expect(testFormGroup.valid).toBe(false);
-  });
-
   it('displayValidationErrors test cases', () => {
     const mockFormControl = service.fb.control(null);
     const mockFormGroup = service.fb.group({
