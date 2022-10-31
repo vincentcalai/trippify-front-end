@@ -135,24 +135,6 @@ export class ReactiveFormService{
     control.markAsDirty({ onlySelf: true });
   }
 
-  validateDateFromLaterThanDateTo(): ValidationErrors {
-    return (group: FormGroup): ValidationErrors => {
-
-      let dateFrom = group.controls['dateFrom'];
-      let dateTo = group.controls['dateTo'];
-      if (dateFrom.value && dateFrom.valid && dateTo.value && dateTo.valid) {
-        const dateFromValue = this.getMomentDateFormat(dateFrom.value);
-        const dateToValue = this.getMomentDateFormat(dateTo.value);
-        if (dateToValue.isBefore(dateFromValue, 'day')) {
-          dateFrom.setErrors({dateToBeforeDateFromErr: true});
-          dateTo.setErrors({dateToBeforeDateFromErr: true});
-          return { dateToBeforeDateFromErr: true };
-        }
-      }
-      return null;
-    };
-  }
-
   getMomentDateFormat(value: NgbDateStruct | string) {
     if (typeof value == 'object') {
       let date = moment().startOf('day'); // set time to 00:00:00
