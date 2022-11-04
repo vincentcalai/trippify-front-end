@@ -2,9 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { timeout, catchError } from 'rxjs/operators';
+import { timeout, catchError, map } from 'rxjs/operators';
 import { SharedVar } from '../shared-var.service';
 import { ResponseModel } from 'src/app/model/response.model';
+
+export const AUTH_USER = 'authenticateUser';
+export const TOKEN = 'token';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +49,23 @@ export class ApiService {
         timeout(this.timeout),
         catchError(this.handleError)
       );
+  }
+
+  jwtAuthenticate(username, password){
+    return this.http.post<any>( this.servicePrefix + "/authenticate",{
+      username,
+      password
+    })
+    .pipe(
+      map(
+        data => {
+          sessionStorage.setItem(AUTH_USER, username);
+          sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+          console.log(data);
+          return data;
+        }
+      )
+    );
   }
 
   handleError(error){

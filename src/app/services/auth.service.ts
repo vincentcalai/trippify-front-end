@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from './api/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
-  authenticateUser(username: string, password: string): boolean{
-    if(username == 'VINCENT' && password == 'password'){
-      return true;
-    }
-    return false;
+  jwtAuthenticate(username: string, password: string) {
+    return this.apiService.jwtAuthenticate(username, password);
   }
 }

@@ -33,16 +33,6 @@ export class AppComponent implements OnInit {
             this.showError = false;
           }
       }));
-
-    this.subscriptions.add(
-      this.apiService.postDestCodes()
-        .subscribe(resp => {
-          this.sharedVar.changeCodes(resp);
-        },
-          err => {
-            this.sharedVar.changeException(err);
-          }
-        ));
   }
 
 }

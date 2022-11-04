@@ -11,8 +11,7 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
-  errorMsg: string = "";
-  invalidLogin: boolean = false;
+  errorMsg: string = '';
   msgCount: number = 0;
 
   constructor(
@@ -22,35 +21,19 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleLogin(){
-    let isUserLogin = this.authenticateService.authenticateUser(this.username, this.password);
-    if(isUserLogin){
-      console.log("login successful");
-      this.router.navigate(['home'], {skipLocationChange: true});
-    } else{
-      console.log("login fail");
-      this.errorMsg = "Please enter a valid credential. Login failed."
-    }
+  handleJWTAuthLogin(){
+    this.authenticateService.jwtAuthenticate(this.username,this.password)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.router.navigate(['home'], {skipLocationChange: true});
+        console.log("login successful");
+      },
+      error => {
+        console.log("login fail");
+        this.errorMsg = "Please enter a valid credential. Login failed.";
+      }
+    )
   }
-
-  // handleJWTAuthLogin(){
-  //   this.authenticateService.jwtAuthenticate(this.username,this.password)
-  //   .subscribe(
-  //     data => {
-  //       console.log(data);
-  //       this.router.navigate(['home']);
-  //       console.log("login pass");
-  //       this.invalidLogin = false;
-  //       if(!this.invalidLogin){
-  //         this.authenticateService.getLoginUserRoles(this.username);
-  //       }
-  //     },
-  //     error => {
-  //       console.log("login fail");
-  //       this.errorMsg = "Please enter a valid credential. Login failed."
-  //       this.invalidLogin = true;
-  //     }
-  //   )
-  // }
 
 }
