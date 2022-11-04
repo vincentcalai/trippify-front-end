@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   public subscriptions: Subscription = new Subscription();
 
-  constructor(public sharedVar: SharedVar) { }
+  constructor(public sharedVar: SharedVar, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -35,6 +36,10 @@ export class HeaderComponent implements OnInit {
           }
         })
     )
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
 }

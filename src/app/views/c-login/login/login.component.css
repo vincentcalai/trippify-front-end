@@ -24,3 +24,7 @@ body {
 .form-group #authBtn {
   width: 150px;
 }
+
+.btn-login {
+  background-color: #1a5978;
+}

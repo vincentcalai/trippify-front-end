@@ -5,9 +5,7 @@ import { environment } from 'src/environments/environment';
 import { timeout, catchError, map } from 'rxjs/operators';
 import { SharedVar } from '../shared-var.service';
 import { ResponseModel } from 'src/app/model/response.model';
-
-export const AUTH_USER = 'authenticateUser';
-export const TOKEN = 'token';
+import { AUTH_USER, TOKEN } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'

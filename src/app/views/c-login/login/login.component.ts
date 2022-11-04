@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authenticateService.isUserLoggedIn()){
+      this.router.navigate(['home'], {skipLocationChange: true});
+    }
   }
 
   handleJWTAuthLogin(){

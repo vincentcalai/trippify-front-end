@@ -7,3 +7,19 @@
   margin-left: 50%;
   padding-top: 5px;
 }
+
+.nav-link {
+  cursor: pointer;
+}
+
+.title-nav-bar {
+  margin-left: 20px;
+}
+
+.right-navbar {
+  margin-right: 20px;
+}
+
+.nav-item {
+  color: white;
+}
