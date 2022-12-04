@@ -39,4 +39,9 @@ export class LoginComponent implements OnInit {
     )
   }
 
+  createUser(){
+    console.log("create user!");
+    this.router.navigate(['create-user'], {skipLocationChange: true});
+  }
+
 }
