@@ -12,13 +12,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './views/c-login/login/login.component';
+import { CreateUserComponent } from './views/e-user/create-user/create-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
