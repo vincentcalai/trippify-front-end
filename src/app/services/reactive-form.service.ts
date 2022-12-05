@@ -30,10 +30,21 @@ export class ReactiveFormService{
               Validators.pattern(this.ALPHA_NUMERIC),
               Validators.minLength(5),
               Validators.maxLength(20)
-            ]
+            ],
+            updateOn: 'blur'
           }),
-        password: this.getBasicRequiredControl(),
-        cfmPassword: this.getBasicRequiredControl()
+          password: this.fb.control(null, {
+            validators: [
+              Validators.required
+            ],
+            updateOn: 'blur'
+          }),
+          cfmpassword: this.fb.control(null, {
+            validators: [
+              Validators.required
+            ],
+            updateOn: 'blur'
+          })
       }
     )
   }

@@ -26,6 +26,8 @@
                 </label> 
             </div>
 
+            <br>
+
             <div class="form-group form-row required col-md-8 align_cont_center">
                 <label id="PASSWORD_LABEL_1" for="password_0_Label" [ngClass]="{'highlightLabel' : fieldIsInvalid(password)}"
                   class="control-label">
@@ -33,7 +35,12 @@
                   <span class="mandatory-label"></span>&nbsp;
                 </label>
                 <input id="password_0" type="password" class="form-control allCaps" formControlName="password" name="password">
+                <label id="password_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(password)}" class="error-text" for="password_0">
+                    <span *ngIf="password.hasError('required') && !password.value && !password.pristine">This field is required</span>
+                </label> 
             </div>
+
+            <br>
 
             <div class="form-group form-row required col-md-8 align_cont_center">
                 <label id="CFMPASSWORD_LABEL_1" for="cfmpassword_0_Label" [ngClass]="{'highlightLabel' : fieldIsInvalid(cfmpassword)}"
@@ -42,6 +49,9 @@
                   <span class="mandatory-label"></span>&nbsp;
                 </label>
                 <input id="cfmpassword_0" type="password" class="form-control allCaps" formControlName="cfmpassword" name="cfmpassword">
+                <label id="cfmpassword_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(cfmpassword)}" class="error-text" for="cfmpassword_0">
+                    <span *ngIf="cfmpassword.hasError('required') && !cfmpassword.value && !cfmpassword.pristine">This field is required</span>
+                </label> 
             </div>
 
             <div class="text-right">
