@@ -1,1 +1,36 @@
-<p>create-user works!</p>
+<div class="container">
+    <br>
+    <div class="card ">
+        <h1 class="d-inline card-header">Create New User</h1>
+      <div class ="card-body">
+        <div class="container">
+          <form [formGroup]="createUserForm">
+            <div class="form-group form-row required col-md-8 inputFields">
+                <label id="USERNAME_LABEL_1" for="username_0_Label" [ngClass]="{'highlightLabel' : fieldIsInvalid(username)}"
+                  class="control-label">
+                  <span id="USERNAME">User Name</span>
+                  <span class="mandatory-label"></span>&nbsp;
+                </label>
+                <input id="username_0" type="text" class="form-control allCaps" formControlName="username" name="username">
+                <label id="username_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(username)}" class="error-text" for="name_0">
+                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'pattern'">Please enter only alphanumeric characters</span>
+                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'maxlength'">Maximum length is 20 characters</span> 
+                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'minlength'">Minimum length is 5 characters</span> 
+                  <span *ngIf="username.hasError('required') && !username.value && !username.pristine">This field is required</span>
+                </label> 
+            </div>
+
+            <div class="text-right">
+                <button class="button_o button_back btn_text_hover" type="button" (click)="backToHomeScreen()">
+                    <span id="back">Back</span>
+                </button>
+        
+                <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()">
+                    <span id="next">Next</span>
+                </button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

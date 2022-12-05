@@ -7,7 +7,8 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class ReactiveFormService{
-
+  
+  public readonly ALPHA_NUMERIC = new RegExp(/^[A-Z0-9]*$/);
   public readonly ALPHABET_SPACE= new RegExp(/^[A-Za-z][A-Za-z ]*$/);
   public readonly EMAIL = new RegExp(/^[_A-Za-z0-9\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/);
   public readonly NUMBERIC_DEC_REGEX = new RegExp(/^\d*\.?\d*$/);
@@ -19,6 +20,33 @@ export class ReactiveFormService{
     public fb: FormBuilder)
   { }
 
+  initializeCreateUserForm() {
+    return this.fb.group(
+      {
+        username: this.fb.control(null,
+          {
+            validators: [
+              Validators.required,
+              Validators.pattern(this.ALPHABET_SPACE),
+              Validators.minLength(5),
+              Validators.maxLength(20)
+            ]
+          }),
+        password: this.fb.control(null,
+          {
+            validators: [
+              
+            ]
+          }),
+        confirmPassword: this.fb.control(null, 
+          {
+            validators: [
+              
+            ]
+          })
+      }
+    )
+  }
 
   initializeCreateTripParticularForm() {
     return this.fb.group(

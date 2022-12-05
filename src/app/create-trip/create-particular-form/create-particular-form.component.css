@@ -22,10 +22,6 @@
   padding: 19px;
 }
 
-.btn_text_hover:hover {
-  text-decoration: underline;
-}
-
 .form-row {
   margin-top: 0px;
 }

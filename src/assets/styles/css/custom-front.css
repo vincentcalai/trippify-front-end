@@ -81,6 +81,10 @@ h6 {
   width: auto !important;
 }
 
+.btn_text_hover:hover {
+  text-decoration: underline;
+}
+
 form div.text-right {
   text-align: right;
   margin-top: 32px;

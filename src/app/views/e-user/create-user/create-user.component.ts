@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 
 @Component({
   selector: 'app-create-user',
@@ -7,9 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateUserComponent implements OnInit {
 
-  constructor() { }
+  public createUserForm: FormGroup;
+
+  constructor(public reactiveFormService: ReactiveFormService,
+    public router: Router) { }
 
   ngOnInit(): void {
+    this.createUserForm = this.initializeCreateUserForm();
   }
 
+  initializeCreateUserForm(): FormGroup {
+    const rfg =  this.reactiveFormService.initializeCreateUserForm();
+    return rfg;
+  }
+
+  fieldIsInvalid(field: AbstractControl): boolean {
+    return this.reactiveFormService.fieldIsInvalid(field);
+  }
+
+  backToHomeScreen(){
+    this.router.navigate([''], { skipLocationChange: true });
+  }
+
+  confirmClicked(){
+    console.log("create user success!");
+  }
+
+  get username() {
+    return this.createUserForm.get('username');
+  }
 }
