@@ -1,3 +1,11 @@
+.card{
+    background-color: #EAEAEA;
+}
+
+.card-body{
+    background-color: #EAEAEA;
+}
+
 .button_back {
     border-right: 0px;
     margin-right: 10px;
