@@ -44,7 +44,17 @@ export class CreateUserComponent implements OnInit {
     return this.createUserForm.get('password');
   }
 
-  get cfmpassword() {
-    return this.createUserForm.get('cfmpassword');
+  get cfmPassword() {
+    return this.createUserForm.get('cfmPassword');
   }
+
+  get email() {
+    return this.createUserForm.get('email');
+  }
+
+  get contactNo() {
+    return this.createUserForm.get('contactNo');
+  }
+
+
 }

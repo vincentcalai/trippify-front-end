@@ -8,6 +8,7 @@ import * as moment from 'moment';
 })
 export class ReactiveFormService{
   
+  public readonly NUMERIC = new RegExp(/^[0-9]*$/);
   public readonly ALPHA_NUMERIC = new RegExp(/^[A-Za-z0-9]*$/);
   public readonly ALPHABET_SPACE= new RegExp(/^[A-Za-z][A-Za-z ]*$/);
   public readonly EMAIL = new RegExp(/^[_A-Za-z0-9\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/);
@@ -23,28 +24,38 @@ export class ReactiveFormService{
   initializeCreateUserForm() {
     return this.fb.group(
       {
-        username: this.fb.control(null,
-          {
-            validators: [
-              Validators.required,
-              Validators.pattern(this.ALPHA_NUMERIC),
-              Validators.minLength(5),
-              Validators.maxLength(20)
-            ],
-            updateOn: 'blur'
-          }),
-          password: this.fb.control(null, {
-            validators: [
-              Validators.required
-            ],
-            updateOn: 'blur'
-          }),
-          cfmpassword: this.fb.control(null, {
-            validators: [
-              Validators.required
-            ],
-            updateOn: 'blur'
-          })
+        username: this.fb.control(null, {
+          validators: [
+            Validators.required,
+            Validators.pattern(this.ALPHA_NUMERIC),
+            Validators.minLength(5),
+            Validators.maxLength(20)
+          ],
+          updateOn: 'blur'
+        },),
+        password: this.fb.control(null, {
+          validators: [
+            Validators.required
+          ],
+          updateOn: 'blur'
+        }),
+        cfmPassword: this.fb.control(null, {
+          validators: [
+            Validators.required
+          ],
+          updateOn: 'blur'
+        }),
+        email: this.fb.control(null, {
+          validators: this.emailAddrValidators(),
+          updateOn: 'blur'
+        }),
+        contactNo: this.fb.control(null, {
+          validators: [
+            Validators.required,
+            Validators.pattern(this.NUMERIC),
+            Validators.maxLength(30)
+          ]
+        })
       }
     )
   }
