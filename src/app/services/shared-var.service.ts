@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CreateTripModel } from '../model/create-trip.model';
 import { Destinations } from '../model/destinations.model';
 import { ResponseModel } from '../model/response.model';
+import { UserModel } from '../model/user.model';
 import { ViewTripModel } from '../model/view-trip.model';
 
 @Injectable({
@@ -38,7 +39,8 @@ export class SharedVar{
   public readonly STATIC_QN_2_VAL = [1,2,3,4,5,6,7,8,9,10];
 
   public destMap = new Map<string, string[]>();
-  public usernameList: string[];
+  public usernameList: string[] = [];
+  public userModelList: UserModel[] = [];
 
   public createTripModel: CreateTripModel = new CreateTripModel();
   public viewTripModel: ViewTripModel = new ViewTripModel();
@@ -62,7 +64,6 @@ export class SharedVar{
   currentRegUsers = this.usersSource.asObservable();
 
   public destCtryList$ = new BehaviorSubject<string[]>(null);
-  public usernameList$ = new BehaviorSubject<string[]>(null);
 
   constructor() {
     this.changeYnListSource(

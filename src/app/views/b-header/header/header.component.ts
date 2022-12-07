@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { UserModel } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
@@ -40,13 +41,18 @@ export class HeaderComponent implements OnInit {
       this.sharedVar.currentRegUsers
         .subscribe(data => {
           if(data && data.regUsersList){
-            let regUsersArray = [];
+            let regUsersArray: UserModel[] = [];
             data.regUsersList.forEach(
               user => {
-                regUsersArray.push(user.username);
+                this.sharedVar.usernameList.push(user.username);
+                let userObj = new UserModel();
+                userObj.id = user.id;
+                userObj.username = user.username;
+                userObj.email = user.email;
+                userObj.contactNo = user.contactNo;
+                this.sharedVar.userModelList.push(userObj);
               }
             )
-            this.sharedVar.usernameList$.next(regUsersArray);
           }
         })
     )
