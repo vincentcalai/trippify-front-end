@@ -12,6 +12,7 @@ import { AUTH_USER, TOKEN } from '../auth.service';
 })
 export class ApiService {
 
+
   public servicePrefix;
   public timeout = 200000;
 
@@ -43,6 +44,14 @@ export class ApiService {
 
   postDestCodes() {
     return this.http.get(this.servicePrefix + '/code/retrieveDestCode')
+      .pipe(
+        timeout(this.timeout),
+        catchError(this.handleError)
+      );
+  }
+
+  retrieveRegUsers() {
+    return this.http.get(this.servicePrefix + '/user/retrieveUsers')
       .pipe(
         timeout(this.timeout),
         catchError(this.handleError)

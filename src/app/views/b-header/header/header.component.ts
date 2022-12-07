@@ -18,8 +18,7 @@ export class HeaderComponent implements OnInit {
     this.subscriptions.add(
       this.sharedVar.currentGlobalCode
         .subscribe(data => {
-          if(data){
-            let destList = [];
+          if(data && data.result){
             data.result.cdTyp.CD_DEST.forEach(
               destCd => {
                 if(this.sharedVar.destMap.has(destCd.ctry)){
@@ -33,6 +32,21 @@ export class HeaderComponent implements OnInit {
               })
             let ctryList = Array.from( this.sharedVar.destMap.keys() );
             this.sharedVar.destCtryList$.next(ctryList);
+          }
+        })
+    )
+
+    this.subscriptions.add(
+      this.sharedVar.currentRegUsers
+        .subscribe(data => {
+          if(data && data.regUsersList){
+            let regUsersArray = [];
+            data.regUsersList.forEach(
+              user => {
+                regUsersArray.push(user.username);
+              }
+            )
+            this.sharedVar.usernameList$.next(regUsersArray);
           }
         })
     )

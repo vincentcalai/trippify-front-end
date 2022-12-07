@@ -9,8 +9,6 @@ import { ViewTripModel } from '../model/view-trip.model';
   providedIn: 'root'
 })
 export class SharedVar{
-
-
   public readonly QN1_PLACEHOLDER_DESC = "Please Select Option";
   public readonly QN2_PLACEHOLDER_DESC = "Please Select Option";
   public readonly NAME_PLACEHOLDER_DESC = "Please Select A Registered User";
@@ -40,6 +38,7 @@ export class SharedVar{
   public readonly STATIC_QN_2_VAL = [1,2,3,4,5,6,7,8,9,10];
 
   public destMap = new Map<string, string[]>();
+  public usernameList: string[];
 
   public createTripModel: CreateTripModel = new CreateTripModel();
   public viewTripModel: ViewTripModel = new ViewTripModel();
@@ -59,7 +58,11 @@ export class SharedVar{
   public globalCodeSource = new BehaviorSubject<any>(null);
   currentGlobalCode = this.globalCodeSource.asObservable();
 
+  public usersSource = new BehaviorSubject<any>(null);
+  currentRegUsers = this.usersSource.asObservable();
+
   public destCtryList$ = new BehaviorSubject<string[]>(null);
+  public usernameList$ = new BehaviorSubject<string[]>(null);
 
   constructor() {
     this.changeYnListSource(
@@ -88,6 +91,10 @@ export class SharedVar{
 
   changeCodes(codes) {
     this.globalCodeSource.next(codes);
+  }
+
+  changeRegUsers(users) {
+    this.usersSource.next(users);
   }
 
 }
