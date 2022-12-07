@@ -63,7 +63,11 @@ export class CreateParticularFormComponent implements OnInit {
 
   retrieveUserEmail(){
     if(this.name!.value){
-      this.email?.setValue("VINCENTCALAI@GMAIL.COM");
+      this.sharedVar.userModelList.forEach(user => {
+        if(user.username == this.name.value){
+          this.email?.setValue(user.email);
+        }
+      })
     }
   }
 
