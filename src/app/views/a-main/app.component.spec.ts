@@ -42,25 +42,6 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('trippify-front-end');
   });
 
-  it('ngOnInit unit test - post destination codes when launched app', () => {
-    const destCodes = {
-      "result": {
-        "cdTyp": {
-            "CD_DEST": [
-                {"ctry": "SPAIN" , "city": ["MADRID", "BARCELONA"]},
-                {"ctry": "THAILAND", "city": ["BANGKOK", "CHIANG MAI", "PHUKET", "HAT YAI", "KRABI"]},
-                {"ctry": "MALAYSIA", "city": ["KUALA LUMPUR", "JOHOR BAHRU", "PENANG"]}
-            ]
-        }
-      }
-    };
-    spyOn(component.apiService, 'postDestCodes').and.returnValue(of(destCodes));
-    spyOn(component.sharedVar, 'changeCodes');
-    component.ngOnInit();
-    expect(component.apiService.postDestCodes).toHaveBeenCalledTimes(1);
-    expect(component.sharedVar.changeCodes).toHaveBeenCalledTimes(1);
-  });
-
   it('ngOnInit unit test - error to be shown on screen when there is exception', () => {
     component.sharedVar.changeException("This is an error text message for testing.");
     expect(component.showError).toBe(true);

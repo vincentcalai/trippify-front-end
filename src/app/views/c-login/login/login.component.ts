@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   msgCount: number = 0;
 
   constructor(
-    private authenticateService: AuthService,
-    private router: Router) { }
+    public authenticateService: AuthService,
+    public router: Router) { }
 
   ngOnInit(): void {
     if(this.authenticateService.isUserLoggedIn()){
@@ -28,11 +28,13 @@ export class LoginComponent implements OnInit {
     this.authenticateService.jwtAuthenticate(this.username,this.password)
     .subscribe(
       data => {
+        console.log("TESTING OK");
         console.log(data);
         this.router.navigate(['home'], {skipLocationChange: true});
         console.log("login successful");
       },
       error => {
+        console.log("TESTING ERROR");
         console.log("login fail");
         this.errorMsg = "Please enter a valid credential. Login failed.";
       }
