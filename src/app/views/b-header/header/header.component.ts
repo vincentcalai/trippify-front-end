@@ -41,16 +41,17 @@ export class HeaderComponent implements OnInit {
       this.sharedVar.currentRegUsers
         .subscribe(data => {
           if(data && data.regUsersList){
-            let regUsersArray: UserModel[] = [];
             data.regUsersList.forEach(
               user => {
-                this.sharedVar.usernameList.push(user.username);
-                let userObj = new UserModel();
-                userObj.id = user.id;
-                userObj.username = user.username;
-                userObj.email = user.email;
-                userObj.contactNo = user.contactNo;
-                this.sharedVar.userModelList.push(userObj);
+                if(this.sharedVar.usernameList.findIndex(username => username == user.username) < 0){
+                  this.sharedVar.usernameList.push(user.username);
+                  let userObj = new UserModel();
+                  userObj.id = user.id;
+                  userObj.username = user.username;
+                  userObj.email = user.email;
+                  userObj.contactNo = user.contactNo;
+                  this.sharedVar.userModelList.push(userObj);
+                }
               }
             )
           }
