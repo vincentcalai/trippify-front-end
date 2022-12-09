@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { finalize, take } from 'rxjs/operators';
+import { ResponseModel } from 'src/app/model/response.model';
 import { UserModel } from 'src/app/model/user.model';
+import { ApiService } from 'src/app/services/api/api.service';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
@@ -13,11 +17,13 @@ import { SharedVar } from 'src/app/services/shared-var.service';
 })
 export class CreateUserComponent implements OnInit {
 
+  subscriptions: Subscription = new Subscription();
   public createUserForm: FormGroup;
 
   constructor(public sharedVar: SharedVar,
     public sharedMethods: SharedMethods,
     public reactiveFormService: ReactiveFormService,
+    public apiService: ApiService,
     public router: Router) { }
 
   ngOnInit(): void {
@@ -39,15 +45,25 @@ export class CreateUserComponent implements OnInit {
   }
 
   confirmClicked(){
-    console.log("create user success!");
     if(this.createUserForm.valid){
       const createUserInput = this.sharedVar.createUserModel;
       createUserInput.user.username = this.username?.value;
       createUserInput.user.password = this.password?.value;
-      createUserInput.user.cfmPassword = this.cfmPassword?.value;
       createUserInput.user.email = this.email?.value;
       createUserInput.user.contactNo = this.contactNo?.value;
-      this.backToHomeScreen();
+      this.subscriptions.add(
+        this.apiService.postCreateUser().subscribe( (resp: ResponseModel) => {
+          this.sharedVar.changeResponse(resp);
+          if (resp.statusCode != 0) {
+            this.sharedVar.changeException(resp.resultMessage);
+          } else {
+            this.backToHomeScreen();
+          }
+        } ,
+          error => {
+          this.sharedVar.changeException(error);
+        })
+      );
     } else{
       this.reactiveFormService.displayValidationErrors(this.createUserForm);
     }

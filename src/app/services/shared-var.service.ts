@@ -11,6 +11,9 @@ import { ViewTripModel } from '../model/view-trip.model';
   providedIn: 'root'
 })
 export class SharedVar{
+
+  public readonly GENERAL_SYS_DOWN_ERR_MSG = "This system is currently not available. Please try again at a later time.";
+
   public readonly QN1_PLACEHOLDER_DESC = "Please Select Option";
   public readonly QN2_PLACEHOLDER_DESC = "Please Select Option";
   public readonly NAME_PLACEHOLDER_DESC = "Please Select A Registered User";

@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   title = 'trippify-front-end';
 
   public subscriptions: Subscription = new Subscription();
-  public errorMsg: String = "This system is currently not available. Please try again at a later time.";
+  public errorMsg: String = this.sharedVar.GENERAL_SYS_DOWN_ERR_MSG;
   public showError: boolean = false;
 
   constructor(
