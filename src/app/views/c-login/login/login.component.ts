@@ -28,13 +28,11 @@ export class LoginComponent implements OnInit {
     this.authenticateService.jwtAuthenticate(this.username,this.password)
     .subscribe(
       data => {
-        console.log("TESTING OK");
         console.log(data);
         this.router.navigate(['home'], {skipLocationChange: true});
         console.log("login successful");
       },
       error => {
-        console.log("TESTING ERROR");
         console.log("login fail");
         this.errorMsg = "Please enter a valid credential. Login failed.";
       }
@@ -42,7 +40,6 @@ export class LoginComponent implements OnInit {
   }
 
   createUser(){
-    console.log("create user!");
     this.router.navigate(['create-user'], {skipLocationChange: true});
   }
 

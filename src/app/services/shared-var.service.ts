@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CreateTripModel } from '../model/create-trip.model';
+import { CreateUserModel } from '../model/create-user.model';
 import { Destinations } from '../model/destinations.model';
 import { ResponseModel } from '../model/response.model';
 import { UserModel } from '../model/user.model';
@@ -42,6 +43,7 @@ export class SharedVar{
   public usernameList: string[] = [];
   public userModelList: UserModel[] = [];
 
+  public createUserModel: CreateUserModel = new CreateUserModel();
   public createTripModel: CreateTripModel = new CreateTripModel();
   public viewTripModel: ViewTripModel = new ViewTripModel();
 

@@ -20,10 +20,12 @@
                 <input id="username_0" type="text" class="form-control allCaps" formControlName="username" name="username">
                 <label id="username_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(username)}" class="error-text" for="name_0">
                   <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'pattern'">Please enter only alphanumeric characters</span>
-                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'maxlength'">Maximum length is 20 characters</span> 
-                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'minlength'">Minimum length is 5 characters</span> 
+                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'maxlength'">Maximum length is 20
+                    characters</span>
+                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'minlength'">Minimum length is 5
+                    characters</span>
                   <span *ngIf="username.hasError('required') && !username.value && !username.pristine">This field is required</span>
-                </label> 
+                </label>
             </div>
 
             <br>
@@ -37,7 +39,7 @@
                 <input id="password_0" type="password" class="form-control allCaps" formControlName="password" name="password">
                 <label id="password_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(password)}" class="error-text" for="password_0">
                     <span *ngIf="password.hasError('required') && !password.value && !password.pristine">This field is required</span>
-                </label> 
+                </label>
             </div>
 
             <br>
@@ -51,7 +53,7 @@
                 <input id="cfmPassword_0" type="password" class="form-control allCaps" formControlName="cfmPassword" name="cfmPassword">
                 <label id="cfmPassword_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(cfmPassword)}" class="error-text" for="cfmPassword_0">
                     <span *ngIf="cfmPassword.hasError('required') && !cfmPassword.value && !cfmPassword.pristine">This field is required</span>
-                </label> 
+                </label>
             </div>
 
             <br>
@@ -67,7 +69,7 @@
                   <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(email)) == 'pattern'">Please enter a valid email address</span>
                   <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(email)) == 'maxlength'">Maximum length is 100 characters</span>
                   <span *ngIf="email.hasError('required') && !email.value && !email.pristine">This field is required</span>
-              </label> 
+              </label>
             </div>
 
             <br>
@@ -82,8 +84,9 @@
               <label id="contactNo_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(contactNo)}" class="error-text" for="contactNo_0">
                   <span *ngIf="contactNo.hasError('required') && !contactNo.value && !contactNo.pristine">This field is required</span>
                   <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(contactNo)) == 'pattern'">Please enter only numeric characters</span>
-                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(contactNo)) == 'maxlength'">Maximum length is 30 characters</span> 
-              </label> 
+                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(contactNo)) == 'maxlength'">Maximum length is 30
+                    characters</span>
+                  </label>
             </div>
 
 
@@ -92,9 +95,9 @@
                 <button class="button_o button_back btn_text_hover" type="button" (click)="backToHomeScreen()">
                     <span id="back">Back</span>
                 </button>
-        
+
                 <button class="button_o btn_text_hover" type="button" (click)="confirmClicked()">
-                    <span id="next">Next</span>
+                    <span id="cfm">Confirm</span>
                 </button>
             </div>
           </form>

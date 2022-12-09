@@ -27,6 +27,10 @@ describe('ApiService', () => {
     service = TestBed.inject(ApiService);
   });
 
+  afterEach(() => {
+    httpTestingController.verify();
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
