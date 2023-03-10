@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
+import { take, finalize } from 'rxjs/operators';
+import { ResponseModel } from 'src/app/model/response.model';
+import { ApiService } from 'src/app/services/api/api.service';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
+import { SharedVar } from 'src/app/services/shared-var.service';
 
 @Component({
   selector: 'app-create-user',
@@ -12,8 +18,15 @@ export class CreateUserComponent implements OnInit {
 
   public createUserForm: FormGroup;
 
+  subscriptions: Subscription = new Subscription();
+  modalRef: BsModalRef;
+  @ViewChild('confirmInputsModal', { static: true }) confirmInputsModal: TemplateRef<any>;
+
   constructor(public reactiveFormService: ReactiveFormService,
-    public router: Router) { }
+    public sharedVar: SharedVar,
+    public apiService: ApiService,
+    public modalService: BsModalService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createUserForm = this.initializeCreateUserForm();
@@ -33,7 +46,32 @@ export class CreateUserComponent implements OnInit {
   }
 
   confirmClicked(){
-    console.log("create user success!");
+    this.modalRef = this.modalService.show(this.confirmInputsModal, this.sharedVar.sharedModalConfig);
+  }
+
+  confirmCreateUser(){
+    if(this.createUserForm.valid){
+      console.log("create user success!");
+      console.log(this.createUserForm);
+      this.subscriptions.add(
+        this.apiService.postCreateUser().pipe(take(1), finalize(() => {
+          this.modalRef.hide();
+          this.backToHomeScreen();
+        })).subscribe( (resp: ResponseModel) => {
+          this.sharedVar.changeResponse(resp);
+          if (resp.statusCode != 0) {
+            this.sharedVar.changeException(resp.resultMessage);
+          }
+        } ,
+          error => {
+          this.sharedVar.changeException(error);
+        })
+      );
+      
+    } else{
+      console.log("create user failed!");
+      this.reactiveFormService.displayValidationErrors(this.createUserForm);
+    }
   }
 
   get username() {

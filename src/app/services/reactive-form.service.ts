@@ -36,14 +36,12 @@ export class ReactiveFormService{
         password: this.fb.control(null, {
           validators: [
             Validators.required
-          ],
-          updateOn: 'blur'
+          ]
         }),
         cfmPassword: this.fb.control(null, {
           validators: [
             Validators.required
-          ],
-          updateOn: 'blur'
+          ]
         }),
         email: this.fb.control(null, {
           validators: this.emailAddrValidators(),

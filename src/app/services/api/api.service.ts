@@ -49,6 +49,13 @@ export class ApiService {
       );
   }
 
+  postCreateUser(): Observable<ResponseModel> {
+    return this.http.post<ResponseModel>(this.servicePrefix + "/user/createUser", this.sharedVar.createUserModel).pipe(
+      timeout(this.timeout),
+      catchError(this.handleError)
+    );
+  }
+
   jwtAuthenticate(username, password){
     return this.http.post<any>( this.servicePrefix + "/authenticate",{
       username,
