@@ -3,9 +3,11 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { BudgetModel } from '../model/budget.model';
 import { CreateTripModel } from '../model/create-trip.model';
+import { CreateUserModel } from '../model/create-user.model';
 import { ParticularsModel } from '../model/particulars.model';
 import { ResponseModel } from '../model/response.model';
 import { TripDetailsModel } from '../model/trip-details.model';
+import { UserModel } from '../model/user.model';
 import { ViewTripModel } from '../model/view-trip.model';
 import { SharedVar } from './shared-var.service';
 
@@ -13,6 +15,7 @@ import { SharedVar } from './shared-var.service';
   providedIn: 'root'
 })
 export class SharedMethods {
+
 
   constructor(public router: Router, public sharedVar: SharedVar) { }
 
@@ -23,6 +26,11 @@ export class SharedMethods {
     this.sharedVar.createTripModel.budget = new BudgetModel();
     this.sharedVar.createTripModel.tripDetails = new TripDetailsModel();
     this.sharedVar.createTripModel.tripDetails.destinations = [];
+  }
+
+  initializeCreateUserModel() {
+    this.sharedVar.createUserModel = new CreateUserModel();
+    this.sharedVar.createUserModel.user = new UserModel();
   }
 
   initializedViewModel(){

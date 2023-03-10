@@ -38,6 +38,7 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
+
   it('ngOnInit unit test - initialise global codes', () => {
 
     const destCodes = {
@@ -57,5 +58,26 @@ describe('HeaderComponent', () => {
     expect(component.sharedVar.destCtryList$).not.toBeNull();
     expect(value.length).toEqual(3);
     expect(value[0]).toEqual("SPAIN");
+  });
+
+  it('ngOnInit unit test - initialise all registered users', () => {
+    const regUsers = {
+      "regUsersList": [
+        {"id": 1, "username": "TESTUSER1", "email": "TESTING1@GMAIL.COM", "contactNo": "91234567" },
+        {"id": 2, "username": "TESTUSER2", "email": "TESTING2@GMAIL.COM", "contactNo": "91234568" },
+        {"id": 3, "username": "TESTUSER3", "email": "TESTING3@GMAIL.COM", "contactNo": "91234569" }
+      ]
+    }
+    component.sharedVar.changeRegUsers(regUsers);
+    component.ngOnInit();
+    expect(component.sharedVar.userModelList).not.toBeNull();
+    expect(component.sharedVar.userModelList.length).toEqual(3);
+    expect(component.sharedVar.userModelList[0].username).toEqual("TESTUSER1");
+  });
+
+  it('logout unit test', () => {
+    spyOn(component.authService, 'logout');
+    component.logout();
+    expect(component.authService.logout).toHaveBeenCalledTimes(1);
   });
 });

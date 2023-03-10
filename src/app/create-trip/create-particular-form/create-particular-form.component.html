@@ -42,7 +42,7 @@
             *ngIf="!isUserRegistered">
           <div class="col-md-4 col-md-8-offset selectContainer" *ngIf="isUserRegistered">
             <ng-select id="nameInput_0" labelForId="name_0" [clearable]="false"
-              [items]="username" [placeholder]="sharedVar.NAME_PLACEHOLDER_DESC"
+              [items]="sharedVar.usernameList" [placeholder]="sharedVar.NAME_PLACEHOLDER_DESC"
               aria-labelledby="NAME_LABEL_1" formControlName="name">
             </ng-select>
           </div>

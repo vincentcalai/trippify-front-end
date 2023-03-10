@@ -31,6 +31,16 @@ export class HomeComponent implements OnInit {
           }
         ));
 
+    this.subscriptions.add(
+      this.apiService.retrieveRegUsers()
+        .subscribe(resp => {
+          this.sharedVar.changeRegUsers(resp);
+        },
+          err => {
+            this.sharedVar.changeException(err);
+          }
+        ));
+
   }
 
   submitTripClicked(action: string){

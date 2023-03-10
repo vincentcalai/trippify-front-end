@@ -4,6 +4,7 @@ import { CreateTripModel } from '../model/create-trip.model';
 import { CreateUserModel } from '../model/create-user.model';
 import { Destinations } from '../model/destinations.model';
 import { ResponseModel } from '../model/response.model';
+import { UserModel } from '../model/user.model';
 import { ViewTripModel } from '../model/view-trip.model';
 
 @Injectable({
@@ -11,6 +12,7 @@ import { ViewTripModel } from '../model/view-trip.model';
 })
 export class SharedVar{
 
+  public readonly GENERAL_SYS_DOWN_ERR_MSG = "This system is currently not available. Please try again at a later time.";
 
   public readonly QN1_PLACEHOLDER_DESC = "Please Select Option";
   public readonly QN2_PLACEHOLDER_DESC = "Please Select Option";
@@ -41,7 +43,10 @@ export class SharedVar{
   public readonly STATIC_QN_2_VAL = [1,2,3,4,5,6,7,8,9,10];
 
   public destMap = new Map<string, string[]>();
+  public usernameList: string[] = [];
+  public userModelList: UserModel[] = [];
 
+  public createUserModel: CreateUserModel = new CreateUserModel();
   public createTripModel: CreateTripModel = new CreateTripModel();
   public viewTripModel: ViewTripModel = new ViewTripModel();
   public createUserModel: CreateUserModel = new CreateUserModel();
@@ -60,6 +65,9 @@ export class SharedVar{
 
   public globalCodeSource = new BehaviorSubject<any>(null);
   currentGlobalCode = this.globalCodeSource.asObservable();
+
+  public usersSource = new BehaviorSubject<any>(null);
+  currentRegUsers = this.usersSource.asObservable();
 
   public destCtryList$ = new BehaviorSubject<string[]>(null);
 
@@ -90,6 +98,10 @@ export class SharedVar{
 
   changeCodes(codes) {
     this.globalCodeSource.next(codes);
+  }
+
+  changeRegUsers(users) {
+    this.usersSource.next(users);
   }
 
 }

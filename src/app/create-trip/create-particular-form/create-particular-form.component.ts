@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { UserModel } from 'src/app/model/user.model';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
 import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
@@ -16,8 +17,7 @@ export class CreateParticularFormComponent implements OnInit {
   subscriptions = new Subscription();
   public createTripParticularForm: FormGroup;
   public isUserRegistered: any = null;
-  public username = ["VINCENT"];
-
+  public users: UserModel[] = [];
 
   constructor(public reactiveFormService: ReactiveFormService,
     public sharedVar: SharedVar,
@@ -63,7 +63,11 @@ export class CreateParticularFormComponent implements OnInit {
 
   retrieveUserEmail(){
     if(this.name!.value){
-      this.email?.setValue("VINCENTCALAI@GMAIL.COM");
+      this.sharedVar.userModelList.forEach(user => {
+        if(user.username == this.name.value){
+          this.email?.setValue(user.email);
+        }
+      })
     }
   }
 
