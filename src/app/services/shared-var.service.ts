@@ -49,7 +49,6 @@ export class SharedVar{
   public createUserModel: CreateUserModel = new CreateUserModel();
   public createTripModel: CreateTripModel = new CreateTripModel();
   public viewTripModel: ViewTripModel = new ViewTripModel();
-  public createUserModel: CreateUserModel = new CreateUserModel();
 
   public ynListSource = new BehaviorSubject(null);
   ynListSourceList = this.ynListSource.asObservable();
