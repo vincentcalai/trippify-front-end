@@ -193,7 +193,7 @@ export class ReactiveFormService{
       if (cfmPasswordControl.errors && !cfmPasswordControl.errors.passwordMismatch) {
         return;
       }
-      if (passwordControl.value !== cfmPasswordControl.value) {
+      if (passwordControl.value !== cfmPasswordControl.value && cfmPasswordControl.touched && !cfmPasswordControl.pristine) {
         cfmPasswordControl.setErrors({ passwordMismatch: true });
       } else {
         cfmPasswordControl.setErrors(null);
