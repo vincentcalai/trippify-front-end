@@ -7,6 +7,7 @@ import { take, finalize } from 'rxjs/operators';
 import { ResponseModel } from 'src/app/model/response.model';
 import { ApiService } from 'src/app/services/api/api.service';
 import { ReactiveFormService } from 'src/app/services/reactive-form.service';
+import { SharedMethods } from 'src/app/services/shared-methods.service';
 import { SharedVar } from 'src/app/services/shared-var.service';
 
 @Component({
@@ -26,10 +27,12 @@ export class CreateUserComponent implements OnInit {
     public sharedVar: SharedVar,
     public apiService: ApiService,
     public modalService: BsModalService,
+    public sharedMethods: SharedMethods,
     private router: Router) { }
 
   ngOnInit(): void {
     this.createUserForm = this.initializeCreateUserForm();
+    this.sharedMethods.initializeCreateUserModel();
   }
 
   initializeCreateUserForm(): FormGroup {
@@ -51,8 +54,13 @@ export class CreateUserComponent implements OnInit {
 
   confirmCreateUser(){
     if(this.createUserForm.valid){
+      this.sharedVar.createUserModel.username = this.username?.value;
+      this.sharedVar.createUserModel.password = this.password?.value;
+      this.sharedVar.createUserModel.contactNo = this.contactNo?.value;
+      this.sharedVar.createUserModel.email = this.email?.value;
       console.log("create user success!");
       console.log(this.createUserForm);
+      console.log(this.sharedVar.createUserModel);
       this.subscriptions.add(
         this.apiService.postCreateUser().pipe(take(1), finalize(() => {
           this.modalRef.hide();
@@ -67,7 +75,7 @@ export class CreateUserComponent implements OnInit {
           this.sharedVar.changeException(error);
         })
       );
-      
+
     } else{
       console.log("create user failed!");
       this.reactiveFormService.displayValidationErrors(this.createUserForm);
