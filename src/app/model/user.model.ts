@@ -13,5 +13,4 @@ export class UserModel {
     public delInd: string;
     public createdBy: string;
     public createdDt: Date;
-
 }

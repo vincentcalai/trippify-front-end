@@ -54,10 +54,10 @@ export class CreateUserComponent implements OnInit {
 
   confirmCreateUser(){
     if(this.createUserForm.valid){
-      this.sharedVar.createUserModel.username = this.username?.value;
-      this.sharedVar.createUserModel.password = this.password?.value;
-      this.sharedVar.createUserModel.contactNo = this.contactNo?.value;
-      this.sharedVar.createUserModel.email = this.email?.value;
+      this.sharedVar.createUserModel.user.username = this.username?.value;
+      this.sharedVar.createUserModel.user.password = this.password?.value;
+      this.sharedVar.createUserModel.user.contactNo = this.contactNo?.value;
+      this.sharedVar.createUserModel.user.email = this.email?.value;
       console.log("create user success!");
       console.log(this.createUserForm);
       console.log(this.sharedVar.createUserModel);

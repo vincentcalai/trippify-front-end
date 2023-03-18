@@ -1,13 +1,9 @@
 import { Injectable } from "@angular/core";
+import { UserModel } from "./user.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateUserModel {
-
-  public id: number;
-  public username: string;
-  public password: string;
-  public email: string;
-  public contactNo: string;
+  public user: UserModel;
 }
