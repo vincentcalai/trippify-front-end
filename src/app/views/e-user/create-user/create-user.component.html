@@ -1,6 +1,7 @@
 <div class="container">
     <br>
     <div class="card">
+      <div class="alert alert-danger" *ngIf="errorMsg"><b>Fail: </b>{{errorMsg}}</div>
         <h1 class="d-inline card-header">Create New User</h1>
       <div class ="card-body">
         <div class="container">

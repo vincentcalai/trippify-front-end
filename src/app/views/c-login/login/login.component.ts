@@ -25,12 +25,13 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    
+
     this.subscriptions.add(
         this.sharedVar.responseSource
         .subscribe(resp => {
           if(resp){
             this.responseMsg = resp.resultMessage;
+            resp.resultMessage = "";
           }
         }
       )
@@ -58,6 +59,10 @@ export class LoginComponent implements OnInit {
 
   createUser(){
     this.router.navigate(['create-user'], {skipLocationChange: true});
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
 }

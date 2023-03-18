@@ -17,6 +17,7 @@ import { SharedVar } from 'src/app/services/shared-var.service';
 })
 export class CreateUserComponent implements OnInit {
 
+  public errorMsg: string = '';
   public createUserForm: FormGroup;
 
   subscriptions: Subscription = new Subscription();
@@ -59,16 +60,16 @@ export class CreateUserComponent implements OnInit {
       this.sharedVar.createUserModel.user.contactNo = this.contactNo?.value;
       this.sharedVar.createUserModel.user.email = this.email?.value;
       console.log("create user success!");
-      console.log(this.createUserForm);
-      console.log(this.sharedVar.createUserModel);
       this.subscriptions.add(
         this.apiService.postCreateUser().pipe(take(1), finalize(() => {
           this.modalRef.hide();
-          this.backToHomeScreen();
         })).subscribe( (resp: ResponseModel) => {
-          this.sharedVar.changeResponse(resp);
           if (resp.statusCode != 0) {
-            this.sharedVar.changeException(resp.resultMessage);
+            this.errorMsg = resp.resultMessage;
+            resp.resultMessage = "";
+          } else {
+            this.sharedVar.changeResponse(resp);
+            this.backToHomeScreen();
           }
         } ,
           error => {

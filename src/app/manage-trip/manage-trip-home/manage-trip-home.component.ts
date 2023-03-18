@@ -40,6 +40,7 @@ export class ManageTripHomeComponent implements OnInit {
         .subscribe(resp => {
           if(resp){
             this.responseMsg = resp.resultMessage;
+            resp.resultMessage = "";
           }
         }
       )
@@ -83,6 +84,10 @@ export class ManageTripHomeComponent implements OnInit {
       this.retrieveAllTrips(1);
       window.scroll(0,0);
     });
+  }
+
+  ngOnDestroy(){
+    this.subscriptions.unsubscribe();
   }
 
 }
