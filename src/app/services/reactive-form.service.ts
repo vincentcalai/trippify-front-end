@@ -11,6 +11,7 @@ export class ReactiveFormService{
   public readonly NUMERIC = new RegExp(/^[0-9]*$/);
   public readonly ALPHA_NUMERIC = new RegExp(/^[A-Za-z0-9]*$/);
   public readonly ALPHABET_SPACE= new RegExp(/^[A-Za-z][A-Za-z ]*$/);
+  public readonly ALPHABET= new RegExp(/^[A-Za-z]*$/);
   public readonly EMAIL = new RegExp(/^[_A-Za-z0-9\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/);
   public readonly NUMBERIC_DEC_REGEX = new RegExp(/^\d*\.?\d*$/);
   public readonly DATE_YEAR_REGEX = new RegExp(/^\d{4}$/);
@@ -26,7 +27,7 @@ export class ReactiveFormService{
       username: this.fb.control(null, {
         validators: [
           Validators.required,
-          Validators.pattern(this.ALPHA_NUMERIC),
+          Validators.pattern(this.ALPHABET),
           Validators.minLength(5),
           Validators.maxLength(20)
         ],
