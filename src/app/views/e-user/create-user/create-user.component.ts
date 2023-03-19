@@ -55,7 +55,7 @@ export class CreateUserComponent implements OnInit {
 
   confirmCreateUser(){
     if(this.createUserForm.valid){
-      this.sharedVar.createUserModel.user.username = this.username?.value;
+      this.sharedVar.createUserModel.user.username = this.username?.value.toUpperCase();
       this.sharedVar.createUserModel.user.password = this.password?.value;
       this.sharedVar.createUserModel.user.contactNo = this.contactNo?.value;
       this.sharedVar.createUserModel.user.email = this.email?.value;
