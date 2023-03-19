@@ -20,7 +20,7 @@
                 </label>
                 <input id="username_0" type="text" class="form-control allCaps" formControlName="username" name="username">
                 <label id="username_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(username)}" class="error-text" for="name_0">
-                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'pattern'">Please enter only alphanumeric characters</span>
+                  <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'pattern'">Please enter only alphabet characters</span>
                   <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'maxlength'">Maximum length is 20
                     characters</span>
                   <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(username)) == 'minlength'">Minimum length is 5
