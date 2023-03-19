@@ -39,6 +39,10 @@
                 </label>
                 <input id="password_0" type="password" class="form-control allCaps" formControlName="password" name="password">
                 <label id="password_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(password)}" class="error-text" for="password_0">
+                    <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(password)) == 'maxlength'">Maximum length is 20
+                      characters</span>
+                    <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(password)) == 'minlength'">Minimum length is 5
+                      characters</span>
                     <span *ngIf="password.hasError('required') && !password.value && !password.pristine">This field is required</span>
                 </label>
             </div>
@@ -53,6 +57,10 @@
                 </label>
                 <input id="cfmPassword_0" type="password" class="form-control allCaps" formControlName="cfmPassword" name="cfmPassword">
                 <label id="cfmPassword_error_0" [ngClass]="{'highlightLabel' : fieldIsInvalid(cfmPassword)}" class="error-text" for="cfmPassword_0">
+                    <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(cfmPassword)) == 'maxlength'">Maximum length is 20
+                      characters</span>
+                    <span *ngIf="reactiveFormService.fieldErrorPrecedence($any(cfmPassword)) == 'minlength'">Minimum length is 5
+                      characters</span>
                     <span *ngIf="cfmPassword.hasError('required') && !cfmPassword.value && !cfmPassword.pristine">This field is required</span>
                     <span *ngIf="cfmPassword.hasError('passwordMismatch')">Passwords does not match</span>
                 </label>

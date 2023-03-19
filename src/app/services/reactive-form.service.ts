@@ -35,13 +35,19 @@ export class ReactiveFormService{
       }),
       password: this.fb.control(null, {
         validators: [
-          Validators.required
-        ]
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(20)
+        ],
+        updateOn: 'blur'
       }),
       cfmPassword: this.fb.control(null, {
         validators: [
-          Validators.required
-        ]
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(20)
+        ],
+        updateOn: 'blur'
       }),
       email: this.fb.control(null, {
         validators: this.emailAddrValidators(),
@@ -194,7 +200,7 @@ export class ReactiveFormService{
       if (cfmPasswordControl.errors && !cfmPasswordControl.errors.passwordMismatch) {
         return;
       }
-      if (passwordControl.value !== cfmPasswordControl.value && cfmPasswordControl.touched && !cfmPasswordControl.pristine) {
+      if (passwordControl.value !== cfmPasswordControl.value) {
         cfmPasswordControl.setErrors({ passwordMismatch: true });
       } else {
         cfmPasswordControl.setErrors(null);
